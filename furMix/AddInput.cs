@@ -76,7 +76,7 @@ namespace furMix
                 if (FilePhoto.ShowDialog() == DialogResult.OK)
                 {
                     filepath = FilePhoto.FileName;
-                    filepathTxt.Text = filepath;
+                    filepathTxt1.Text = filepath;
                     int count = 0;
                     foreach (string temp in LastList.Items)
                     {
@@ -152,12 +152,18 @@ namespace furMix
 
         private void LastList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            filepathTxt.Text = LastList.SelectedItem.ToString();
+            if (LastList.SelectedItems.Count > 0)
+            {
+                filepathTxt.Text = LastList.SelectedItem.ToString();
+            }
         }
 
         private void LastList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            filepathTxt1.Text = LastList1.SelectedItem.ToString();
+            if (LastList1.SelectedItems.Count > 0)
+            {
+                filepathTxt1.Text = LastList1.SelectedItem.ToString();
+            }
         }
 
         private void ClearBtn_Click(object sender, EventArgs e)

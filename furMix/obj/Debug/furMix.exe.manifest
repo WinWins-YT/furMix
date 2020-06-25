@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>8GxA5jXbDRUI8COVqxQJ4FjPUwmZiizTG0rxFora1bQ=</dsig:DigestValue>
+        <dsig:DigestValue>VwlpC0do5TdYe/6ovoys4D2QeZXxiuVwzILUHA9gpJQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="furMix.exe" size="940448">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="furMix.exe" size="470432">
       <assemblyIdentity name="furMix" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0c+81rAJkXqOQpk08SKkCdLP62Y8lffWqTcn5tnB9AE=</dsig:DigestValue>
+        <dsig:DigestValue>istVRzCRNzi9AAFXXgrrApQtoqNQAd808ei9NxdbpYU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -86,7 +86,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oBwx3iEltqce6cedEnablEN7Q8zllwfJGnYZgCj0gBw=</dsig:DigestValue>
+        <dsig:DigestValue>sArER4aBYrZ9lxnks3ONnpC+A3/2RZ/O56m5bZG0rI0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -96,7 +96,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>QAXPt0Ub4WC1uOp1ahJ0N9IwAmUMUE7hNJkvhWfWHJU=</dsig:DigestValue>
+      <dsig:DigestValue>P5liHCXkLroMzB4ANiTQgtpel1u2RHmJDo17VBf3sIA=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Icon.ico" size="142802">

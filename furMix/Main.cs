@@ -19,7 +19,7 @@ namespace furMix
     public partial class Main : Form
     {
         string filepath;
-        bool full, playing, loop, mute;
+        bool full, playing, playing1, loop, mute;
         int type = 1;
         Play1 pl1 = new Play1();
         Play2 pl2 = new Play2();
@@ -46,21 +46,28 @@ namespace furMix
             {
                 Screen[] sc;
                 sc = Screen.AllScreens;
-                back.Left = sc[1].Bounds.Width;
-                back.Top = sc[1].Bounds.Height;
-                back.Location = sc[1].Bounds.Location;
-                back.WindowState = FormWindowState.Maximized;
-                back.Show();
-                pl1.Left = sc[1].Bounds.Width;
-                pl1.Top = sc[1].Bounds.Height;
-                pl1.Location = sc[1].Bounds.Location;
-                pl1.WindowState = FormWindowState.Maximized;
-                pl1.Show();
-                pl2.Left = sc[1].Bounds.Width;
-                pl2.Top = sc[1].Bounds.Height;
-                pl2.Location = sc[1].Bounds.Location;
-                pl2.WindowState = FormWindowState.Maximized;
-                pl2.Show();
+                if (sc.Length > 1)
+                {
+                    back.Left = sc[1].Bounds.Width;
+                    back.Top = sc[1].Bounds.Height;
+                    back.Location = sc[1].Bounds.Location;
+                    back.WindowState = FormWindowState.Maximized;
+                    back.Show();
+                    pl1.Left = sc[1].Bounds.Width;
+                    pl1.Top = sc[1].Bounds.Height;
+                    pl1.Location = sc[1].Bounds.Location;
+                    pl1.WindowState = FormWindowState.Maximized;
+                    pl1.Show();
+                    pl2.Left = sc[1].Bounds.Width;
+                    pl2.Top = sc[1].Bounds.Height;
+                    pl2.Location = sc[1].Bounds.Location;
+                    pl2.WindowState = FormWindowState.Maximized;
+                    pl2.Show();
+                }
+                else
+                {
+                    throw new Exception("Only 1 monitor was found. To use furMix, you need at least 2 monitors");
+                }
             }
             catch (Exception ex)
             {
@@ -100,11 +107,18 @@ namespace furMix
                 if (type == 1)
                 {
                     playbtn.Visible = true;
+                    timelineShow.Visible = true;
+                    timeShow.Visible = true;
+                    timelineShow.Maximum = Convert.ToInt32(pl1.Video.currentMedia.durationString.Substring(0, 2)) * 60 + Convert.ToInt32(pl1.Video.currentMedia.durationString.Substring(3, 2));
+                    showTimer.Enabled = true;
                 }
                 else
                 {
                     playbtn.Visible = false;
+                    timelineShow.Visible = false;
+                    timeShow.Visible = false;
                 }
+
             }
             catch (Exception ex)
             {
@@ -146,13 +160,16 @@ namespace furMix
             try
             {
                 Screen[] sc = Screen.AllScreens;
-                gr = CreateGraphics();
-                bmp = new Bitmap(sc[1].Bounds.Width, sc[1].Bounds.Height, gr);
-                gr = Graphics.FromImage(bmp);
-                gr.CopyFromScreen(sc[1].Bounds.X, sc[1].Bounds.Y, 0, 0, new Size(sc[1].Bounds.Width, sc[1].Bounds.Height));
-                picture.Image = bmp;
-                //gr.Dispose();
-                //bmp.Dispose();
+                if (sc.Length > 1)
+                {
+                    gr = CreateGraphics();
+                    bmp = new Bitmap(sc[1].Bounds.Width, sc[1].Bounds.Height, gr);
+                    gr = Graphics.FromImage(bmp);
+                    gr.CopyFromScreen(sc[1].Bounds.X, sc[1].Bounds.Y, 0, 0, new Size(sc[1].Bounds.Width, sc[1].Bounds.Height));
+                    picture.Image = bmp;
+                    //gr.Dispose();
+                    //bmp.Dispose();
+                }
             }
             catch (Exception ex)
             {
@@ -166,6 +183,9 @@ namespace furMix
         {
             try
             {
+                Preview.Ctlcontrols.stop();
+                pl1.Video.Ctlcontrols.stop();
+                pl2.Video.Ctlcontrols.stop();
                 Application.Exit();
             }
             catch (Exception ex)
@@ -190,7 +210,7 @@ namespace furMix
                     {
                         pl2.Video.Ctlcontrols.play();
                     }
-                    playbtn.Text = "Play";
+                    playbtn.Text = "Pause";
                     playing = false;
                 }
                 else
@@ -203,7 +223,7 @@ namespace furMix
                     {
                         pl2.Video.Ctlcontrols.pause();
                     }
-                    playbtn.Text = "Pause";
+                    playbtn.Text = "Play";
                     playing = true;
                 }
             }
@@ -322,6 +342,14 @@ namespace furMix
                     filepath = filepath1[listView1.SelectedItems[0].Index];
                     Preview.Visible = true;
                     Preview.URL = filepath;
+                    if (type == 2)
+                    {
+                        Preview.settings.setMode("loop", true);
+                    }
+                    else
+                    {
+                        Preview.settings.setMode("loop", false);
+                    }
                 }
                 else
                 {
@@ -329,6 +357,181 @@ namespace furMix
                     Preview.Visible = false;
                     Preview.Ctlcontrols.stop();
                     pictureBox1.BackColor = color;
+                }
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+            }
+        }
+
+        private void previewTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                timelinePrev.Value = Convert.ToInt32(Preview.Ctlcontrols.currentPosition);
+                PreviewTime.Text = Preview.Ctlcontrols.currentPositionString + "/" + Preview.currentMedia.durationString;
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+            }
+        }
+
+        private void Preview_OpenStateChange(object sender, AxWMPLib._WMPOCXEvents_OpenStateChangeEvent e)
+        {
+            try
+            {
+                if (Preview.openState == WMPLib.WMPOpenState.wmposMediaOpen)
+                {
+                    Preview.settings.mute = true;
+                    if (type == 2)
+                    {
+                        PreviewTime.Visible = false;
+                        timelinePrev.Visible = false;
+                        playbtnprev.Visible = false;
+                    }
+                    else
+                    {
+                        timelinePrev.Visible = true;
+                        PreviewTime.Visible = true;
+                        playbtnprev.Visible = true;
+                        int seconds = Convert.ToInt32(Preview.currentMedia.durationString.Substring(0, 2)) * 60 + Convert.ToInt32(Preview.currentMedia.durationString.Substring(3, 2));
+                        timelinePrev.Maximum = seconds;
+                        Console.WriteLine(seconds);
+                        previewTimer.Enabled = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+            }
+        }
+
+        private void timelinePrev_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                previewTimer.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+            }
+        }
+
+        private void timelinePrev_MouseUp(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                Preview.Ctlcontrols.pause();
+                Preview.Ctlcontrols.currentPosition = timelinePrev.Value;
+                if (playing1)
+                {
+                    Preview.Ctlcontrols.play();
+                    previewTimer.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+            }
+        }
+
+        private void showTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (full)
+                {
+                    if (pl1.Opacity == 1)
+                    {
+                        timeShow.Text = pl1.Video.Ctlcontrols.currentPositionString + "/" + pl1.Video.currentMedia.durationString;
+                        timelineShow.Value = (int)pl1.Video.Ctlcontrols.currentPosition;
+                    }
+                    else if (pl2.Opacity == 1)
+                    {
+                        timeShow.Text = pl2.Video.Ctlcontrols.currentPositionString + "/" + pl2.Video.currentMedia.durationString;
+                        timelineShow.Value = (int)pl2.Video.Ctlcontrols.currentPosition;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+            }
+        }
+
+        private void timelineShow_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                showTimer.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+            }
+        }
+
+        private void timelineShow_MouseUp(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (full)
+                {
+                    if (pl1.Opacity == 1)
+                    {
+                        pl1.Video.Ctlcontrols.currentPosition = timelineShow.Value;
+                    }
+                    else if (pl2.Opacity == 1)
+                    {
+                        pl2.Video.Ctlcontrols.currentPosition = timelineShow.Value;
+                    }
+                    if (playing)
+                    {
+                        showTimer.Enabled = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!playing1)
+                {
+                    Preview.Ctlcontrols.play();
+                    playbtnprev.Text = "Pause";
+                    playing1 = true;
+                }
+                else
+                {
+                    Preview.Ctlcontrols.pause();
+                    playbtnprev.Text = "Play";
+                    playing1 = false;
                 }
             }
             catch (Exception ex)
@@ -436,6 +639,31 @@ namespace furMix
                 else
                 {
                     playbtn.Visible = false;
+                }
+                if (type == 1)
+                {
+                    if (pl1.Opacity == 1)
+                    {
+                        playbtn.Visible = true;
+                        timelineShow.Visible = true;
+                        timeShow.Visible = true;
+                        timelineShow.Maximum = Convert.ToInt32(pl1.Video.currentMedia.durationString.Substring(0, 2)) * 60 + Convert.ToInt32(pl1.Video.currentMedia.durationString.Substring(3, 2));
+                        showTimer.Enabled = true;
+                    }
+                    else if (pl2.Opacity == 1)
+                    {
+                        playbtn.Visible = true;
+                        timelineShow.Visible = true;
+                        timeShow.Visible = true;
+                        timelineShow.Maximum = Convert.ToInt32(pl2.Video.currentMedia.durationString.Substring(0, 2)) * 60 + Convert.ToInt32(pl2.Video.currentMedia.durationString.Substring(3, 2));
+                        showTimer.Enabled = true;
+                    }
+                }
+                else
+                {
+                    playbtn.Visible = false;
+                    timelineShow.Visible = false;
+                    timeShow.Visible = false;
                 }
             }
             catch (Exception ex)

@@ -45,9 +45,18 @@
             this.loopbtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.VerTxt = new System.Windows.Forms.Label();
+            this.playbtnprev = new System.Windows.Forms.Button();
+            this.timelinePrev = new System.Windows.Forms.TrackBar();
+            this.previewTimer = new System.Windows.Forms.Timer(this.components);
+            this.PreviewTime = new System.Windows.Forms.Label();
+            this.timelineShow = new System.Windows.Forms.TrackBar();
+            this.timeShow = new System.Windows.Forms.Label();
+            this.showTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Preview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timelinePrev)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timelineShow)).BeginInit();
             this.SuspendLayout();
             // 
             // cutbtn
@@ -156,8 +165,9 @@
             this.Preview.Location = new System.Drawing.Point(12, 12);
             this.Preview.Name = "Preview";
             this.Preview.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("Preview.OcxState")));
-            this.Preview.Size = new System.Drawing.Size(472, 298);
+            this.Preview.Size = new System.Drawing.Size(472, 256);
             this.Preview.TabIndex = 6;
+            this.Preview.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.Preview_OpenStateChange);
             // 
             // listView1
             // 
@@ -188,7 +198,7 @@
             this.mutebtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.mutebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mutebtn.ForeColor = System.Drawing.Color.White;
-            this.mutebtn.Location = new System.Drawing.Point(881, 274);
+            this.mutebtn.Location = new System.Drawing.Point(631, 274);
             this.mutebtn.Name = "mutebtn";
             this.mutebtn.Size = new System.Drawing.Size(54, 36);
             this.mutebtn.TabIndex = 14;
@@ -202,7 +212,7 @@
             this.loopbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.loopbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loopbtn.ForeColor = System.Drawing.Color.White;
-            this.loopbtn.Location = new System.Drawing.Point(824, 274);
+            this.loopbtn.Location = new System.Drawing.Point(571, 274);
             this.loopbtn.Name = "loopbtn";
             this.loopbtn.Size = new System.Drawing.Size(51, 36);
             this.loopbtn.TabIndex = 15;
@@ -231,12 +241,77 @@
             this.VerTxt.TabIndex = 17;
             this.VerTxt.Text = "furMix 2020. Build 0.4.630. Beta 1.\r\nFor testing purposes only.";
             // 
+            // playbtnprev
+            // 
+            this.playbtnprev.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.playbtnprev.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.playbtnprev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.playbtnprev.ForeColor = System.Drawing.Color.White;
+            this.playbtnprev.Location = new System.Drawing.Point(12, 274);
+            this.playbtnprev.Name = "playbtnprev";
+            this.playbtnprev.Size = new System.Drawing.Size(55, 36);
+            this.playbtnprev.TabIndex = 19;
+            this.playbtnprev.Text = "Play";
+            this.playbtnprev.UseVisualStyleBackColor = false;
+            this.playbtnprev.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // timelinePrev
+            // 
+            this.timelinePrev.Location = new System.Drawing.Point(74, 275);
+            this.timelinePrev.Name = "timelinePrev";
+            this.timelinePrev.Size = new System.Drawing.Size(323, 45);
+            this.timelinePrev.TabIndex = 20;
+            this.timelinePrev.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.timelinePrev.MouseDown += new System.Windows.Forms.MouseEventHandler(this.timelinePrev_MouseDown);
+            this.timelinePrev.MouseUp += new System.Windows.Forms.MouseEventHandler(this.timelinePrev_MouseUp);
+            // 
+            // previewTimer
+            // 
+            this.previewTimer.Tick += new System.EventHandler(this.previewTimer_Tick);
+            // 
+            // PreviewTime
+            // 
+            this.PreviewTime.AutoSize = true;
+            this.PreviewTime.ForeColor = System.Drawing.Color.White;
+            this.PreviewTime.Location = new System.Drawing.Point(404, 275);
+            this.PreviewTime.Name = "PreviewTime";
+            this.PreviewTime.Size = new System.Drawing.Size(0, 13);
+            this.PreviewTime.TabIndex = 21;
+            // 
+            // timelineShow
+            // 
+            this.timelineShow.Location = new System.Drawing.Point(690, 274);
+            this.timelineShow.Name = "timelineShow";
+            this.timelineShow.Size = new System.Drawing.Size(167, 45);
+            this.timelineShow.TabIndex = 22;
+            this.timelineShow.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.timelineShow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.timelineShow_MouseDown);
+            this.timelineShow.MouseUp += new System.Windows.Forms.MouseEventHandler(this.timelineShow_MouseUp);
+            // 
+            // timeShow
+            // 
+            this.timeShow.AutoSize = true;
+            this.timeShow.ForeColor = System.Drawing.Color.White;
+            this.timeShow.Location = new System.Drawing.Point(863, 286);
+            this.timeShow.Name = "timeShow";
+            this.timeShow.Size = new System.Drawing.Size(0, 13);
+            this.timeShow.TabIndex = 23;
+            // 
+            // showTimer
+            // 
+            this.showTimer.Tick += new System.EventHandler(this.showTimer_Tick);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1008, 522);
+            this.Controls.Add(this.timeShow);
+            this.Controls.Add(this.timelineShow);
+            this.Controls.Add(this.PreviewTime);
+            this.Controls.Add(this.timelinePrev);
+            this.Controls.Add(this.playbtnprev);
             this.Controls.Add(this.VerTxt);
             this.Controls.Add(this.loopbtn);
             this.Controls.Add(this.picture);
@@ -258,6 +333,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Preview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timelinePrev)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timelineShow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -279,6 +356,13 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label VerTxt;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Button playbtnprev;
+        private System.Windows.Forms.TrackBar timelinePrev;
+        private System.Windows.Forms.Timer previewTimer;
+        private System.Windows.Forms.Label PreviewTime;
+        private System.Windows.Forms.TrackBar timelineShow;
+        private System.Windows.Forms.Label timeShow;
+        private System.Windows.Forms.Timer showTimer;
     }
 }
 
