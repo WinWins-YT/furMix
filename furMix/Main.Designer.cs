@@ -243,7 +243,6 @@
             // 
             // playbtnprev
             // 
-            this.playbtnprev.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.playbtnprev.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.playbtnprev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.playbtnprev.ForeColor = System.Drawing.Color.White;
@@ -280,6 +279,7 @@
             // 
             // timelineShow
             // 
+            this.timelineShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.timelineShow.Location = new System.Drawing.Point(690, 274);
             this.timelineShow.Name = "timelineShow";
             this.timelineShow.Size = new System.Drawing.Size(167, 45);
@@ -290,6 +290,7 @@
             // 
             // timeShow
             // 
+            this.timeShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.timeShow.AutoSize = true;
             this.timeShow.ForeColor = System.Drawing.Color.White;
             this.timeShow.Location = new System.Drawing.Point(863, 286);

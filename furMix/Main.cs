@@ -33,11 +33,20 @@ namespace furMix
         public Main()
         {
             InitializeComponent();
-            pl1.Opacity = 0;
-            Preview.settings.mute = true;
-            pl1.Video.settings.mute = true;
-            pl2.Video.settings.mute = true;
-            VerTxt.Text = "furMix 2020. Build " + Properties.Settings.Default.Version + ". Beta 1.\n For testing purposes only.";
+            try
+            {
+                pl1.Opacity = 0;
+                Preview.settings.mute = true;
+                pl1.Video.settings.mute = true;
+                pl2.Video.settings.mute = true;
+                VerTxt.Text = "furMix 2020. Build " + Properties.Settings.Default.Version + ". Beta 2.\n For testing purposes only.";
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+            }
         }
 
         private void ShowFurry()
@@ -66,7 +75,7 @@ namespace furMix
                 }
                 else
                 {
-                    throw new Exception("Only 1 monitor was found. To use furMix, you need at least 2 monitors");
+                    throw new MonitorNotFound("Only 1 monitor was found. To use furMix, you need at least 2 monitors");
                 }
             }
             catch (Exception ex)
@@ -239,7 +248,7 @@ namespace furMix
         {
             try
             {
-                MessageBox.Show("This program has been made as alternative to vMix. \n Made by WinWins and odinokoe_4m0 \n Design: WinWins and odinokoe_4m0 \n Judge: Misha Ter \n \n Licensed to " + Properties.Settings.Default.Name + "\n \n Version " + Properties.Settings.Default.Version + " Beta 1 \n (C) 2020 DaniMat Corp.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("This program has been made as alternative to vMix. \n Made by WinWins and odinokoe_4m0 \n Design: WinWins and odinokoe_4m0 \n Judge: Misha Ter \n \n Licensed to " + Properties.Settings.Default.Name + "\n \n Version " + Properties.Settings.Default.Version + " Beta 2 \n (C) 2020 DaniMat Corp.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {

@@ -73,6 +73,16 @@ namespace furMix.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap connecting {
+            get {
+                object obj = ResourceManager.GetObject("connecting", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Licensed {
             get {
                 object obj = ResourceManager.GetObject("Licensed", resourceCulture);
@@ -86,6 +96,16 @@ namespace furMix.Properties {
         internal static System.Drawing.Bitmap Logo {
             get {
                 object obj = ResourceManager.GetObject("Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ter {
+            get {
+                object obj = ResourceManager.GetObject("ter", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

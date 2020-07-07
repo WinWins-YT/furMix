@@ -22,6 +22,9 @@ namespace furMix
         public Activate()
         {
             InitializeComponent();
+            var connect = new Connect();
+            connect.Show();
+            Thread.Sleep(500);
             ftp.Host = "danimat.ddns.net";
             ftp.Credentials = new System.Net.NetworkCredential("furMix", "furMix");
             try
@@ -43,25 +46,33 @@ namespace furMix
                     }
                     catch
                     {
+                        connect.Close();
+                        connect.Dispose();
                         offline = true;
-                        MessageBox.Show("Try enter only offline product key, that you were supplied after buying, without name", "Offline activation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Server error. Try enter only offline product key, that you were supplied after buying, without name", "Offline activation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        textBox1.Enabled = false;
                     }
                 }
             }
             catch
             {
+                connect.Close();
+                connect.Dispose();
                 offline = true;
-                MessageBox.Show("Try enter only offline product key, that you were supplied after buying, without name", "Offline activation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Server error. Try enter only offline product key, that you were supplied after buying, without name", "Offline activation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                textBox1.Enabled = false;
             }
+            connect.Close();
+            connect.Dispose();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (offline)
             {
-                if (textBox2.Text == "gavrilenkosuka")
+                if (textBox2.Text == "hayatov")
                 {
-                    Properties.Settings.Default.Name = "Gavrilenko";
+                    Properties.Settings.Default.Name = "Andrey Hayatov";
                     Properties.Settings.Default.Activated = true;
                     Properties.Settings.Default.Save();
                     File.Delete(Application.StartupPath + @"\config\activation.ini");
@@ -94,6 +105,7 @@ namespace furMix
         {
             offline = true;
             MessageBox.Show("Try enter only offline product key, that you were supplied after buying, without name", "Offline activation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            textBox1.Enabled = false;
         }
     }
 }

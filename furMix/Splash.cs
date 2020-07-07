@@ -17,6 +17,10 @@ namespace furMix
             InitializeComponent();
             label2.Text = Properties.Settings.Default.Version;
             label4.Text = Properties.Settings.Default.Edition;
+            if (label4.Text == "Misha Pidor Edition")
+            {
+                pictureBox2.Visible = true;
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
