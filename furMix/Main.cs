@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using System.Media;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.Integration;
-using System.Windows.Interop;
+using furMix.Utilities;
+//using AForge.Video.FFMPEG;
+//using NetComm;
 
 namespace furMix
 {
     public partial class Main : Form
     {
         string filepath;
-        bool full, playing, playing1, loop, mute;
+        bool full, playing, playing1, loop, mute, net;
         int type = 1;
+        int port;
         Play1 pl1 = new Play1();
         Play2 pl2 = new Play2();
         Background back = new Background();
@@ -30,6 +29,11 @@ namespace furMix
         List<string> filepath1 = new List<string>();
         List<int> type1 = new List<int>();
         List<Color> color1 = new List<Color>();
+        //Host server;
+        public static string pass;
+        Analyzer anal;
+        //VideoFileReader videonet = new VideoFileReader();
+
         public Main()
         {
             InitializeComponent();
@@ -40,12 +44,101 @@ namespace furMix
                 pl1.Video.settings.mute = true;
                 pl2.Video.settings.mute = true;
                 VerTxt.Text = "furMix 2020. Build " + Properties.Settings.Default.Version + ". Beta 2.\n For testing purposes only.";
+                //server = new Host(Properties.Settings.Default.NetPort);
+                //server.onConnection += Server_onConnection;
+                //server.lostConnection += Server_lostConnection;
+                //server.DataReceived += Server_DataReceived;
+                pass = RandomString(6);
+                anal = new Analyzer(volumeLevel);
+                anal.Enable = true;
+                using (SoundPlayer sp = new SoundPlayer())
+                {
+                    sp.Stream = Properties.Resources.hoy;
+                    sp.Play();
+                }
             }
             catch (Exception ex)
             {
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
+            }
+        }
+
+        private void Server_DataReceived(string ID, byte[] Data)
+        {
+            try
+            {
+                MessageBox.Show("ID: " + ID + "\nData: " + Encoding.ASCII.GetString(Data), "Data received", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                if (Encoding.ASCII.GetString(Data).Substring(0, 4) == "Pass")
+                {
+                    if (Encoding.ASCII.GetString(Data).Substring(4, Encoding.ASCII.GetString(Data).Length - 4) == pass)
+                    {
+                        //server.SendData("Password", Encoding.ASCII.GetBytes("OK"));
+                        NetBtn.BackColor = Color.Green;
+                        //NetTimer.Enabled = true;
+                    }
+                    else
+                    {
+                        //server.SendData("Password", Encoding.ASCII.GetBytes("Wrong"));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+                error.Dispose();
+            }
+        }
+
+        private void Server_lostConnection(string id)
+        {
+            
+        }
+
+        private void Server_onConnection(string id)
+        {
+            MessageBox.Show("ID: " + id);
+        }
+
+        public static string RandomString(int length)
+        {
+            try
+            {
+                Random random = new Random();
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                return new string(Enumerable.Repeat(chars, length)
+                  .Select(s => s[random.Next(s.Length)]).ToArray());
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+                error.Dispose();
+                return null;
+            }
+        }
+
+        public void StartServer()
+        {
+            try
+            {
+                //server = new Host(port);
+                //server.StartConnection();
+                NetBtn.BackColor = Color.Red;
+                //while (!server.Listening);
+                NetBtn.BackColor = Color.Orange;
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -83,6 +176,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -127,13 +221,31 @@ namespace furMix
                     timelineShow.Visible = false;
                     timeShow.Visible = false;
                 }
-
+                if (net)
+                {
+                    if (type == 2)
+                    {
+                        NetTimer.Enabled = false;
+                        Bitmap pict = new Bitmap(filepath);
+                        using (var stream = new MemoryStream())
+                        {
+                            pict.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                            //server.SendData("furMixStream", stream.ToArray());
+                        }
+                    }
+                    else if (type == 1)
+                    {
+                        NetTimer.Enabled = true;
+                        //videonet.Open(filepath);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -161,6 +273,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -185,6 +298,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -195,6 +309,7 @@ namespace furMix
                 Preview.Ctlcontrols.stop();
                 pl1.Video.Ctlcontrols.stop();
                 pl2.Video.Ctlcontrols.stop();
+                //server.CloseConnection();
                 Application.Exit();
             }
             catch (Exception ex)
@@ -202,6 +317,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -241,6 +357,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -255,6 +372,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -294,6 +412,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -333,6 +452,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -373,6 +493,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -388,6 +509,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -421,6 +543,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -435,6 +558,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -455,6 +579,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -481,6 +606,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -495,6 +621,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -523,6 +650,82 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
+            }
+        }
+
+        private void SetBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Settings set = new Settings();
+                set.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+                error.Dispose();
+            }
+        }
+
+        private void NetTimer_Tick(object sender, EventArgs e)
+        {
+            //Bitmap frame = videonet.ReadVideoFrame();
+            using (var stream = new MemoryStream())
+            {
+                //frame.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                //server.SendData("furMixStream", stream.ToArray());
+                stream.Dispose();
+            }
+        }
+
+        private void NetBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!net)
+                {
+                    NetSettings nt = new NetSettings();
+                    nt.ShowDialog();
+                    port = Properties.Settings.Default.NetPort;
+                    BackgroundWorker startserv = new BackgroundWorker();
+                    startserv.DoWork += Startserv_DoWork;
+                    //startserv.RunWorkerAsync();
+                    //while (startserv.IsBusy);
+                    StartServer();
+                    net = true;
+                }
+                else
+                {
+                    //server.CloseConnection();
+                    NetBtn.BackColor = Color.FromArgb(100, 100, 100);
+                    net = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+                error.Dispose();
+            }
+        }
+
+        private void Startserv_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                StartServer();
+                while (true);
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -548,6 +751,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -680,6 +884,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -725,6 +930,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
 
@@ -741,6 +947,7 @@ namespace furMix
                 Error error = new Error();
                 error.ShowError(ex);
                 error.ShowDialog();
+                error.Dispose();
             }
         }
     }

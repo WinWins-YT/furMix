@@ -49,7 +49,7 @@ namespace furMix.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.6.813")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.7.1000")]
         public string Version {
             get {
                 return ((string)(this["Version"]));
@@ -68,6 +68,42 @@ namespace furMix.Properties {
             }
             set {
                 this["Edition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Casino {
+            get {
+                return ((bool)(this["Casino"]));
+            }
+            set {
+                this["Casino"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1502")]
+        public int NetPort {
+            get {
+                return ((int)(this["NetPort"]));
+            }
+            set {
+                this["NetPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int PlaybackDevice {
+            get {
+                return ((int)(this["PlaybackDevice"]));
+            }
+            set {
+                this["PlaybackDevice"] = value;
             }
         }
     }

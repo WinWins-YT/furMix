@@ -1,4 +1,5 @@
-﻿using System;
+﻿using furMix.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace furMix
 {
     public partial class Splash : Form
     {
+        List<string> devs = new List<string>();
         public Splash()
         {
             InitializeComponent();
@@ -20,6 +22,15 @@ namespace furMix
             if (label4.Text == "Misha Pidor Edition")
             {
                 pictureBox2.Visible = true;
+            }
+            if (Properties.Settings.Default.PlaybackDevice == 0)
+            {
+                Analyzer anal = new Analyzer();
+                anal.SetPlaybackList(devs);
+                string[] array = devs[0].Split(' ');
+                int devindex = Convert.ToInt32(array[0]);
+                Properties.Settings.Default.PlaybackDevice = devindex;
+                Properties.Settings.Default.Save();
             }
         }
 

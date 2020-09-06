@@ -33,17 +33,14 @@
             this.cutbtn = new System.Windows.Forms.Button();
             this.fullbtn = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.picture = new System.Windows.Forms.PictureBox();
             this.playbtn = new System.Windows.Forms.Button();
             this.infobtn = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.fadebtn = new System.Windows.Forms.Button();
             this.Preview = new AxWMPLib.AxWindowsMediaPlayer();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.mutebtn = new System.Windows.Forms.Button();
             this.loopbtn = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.VerTxt = new System.Windows.Forms.Label();
             this.playbtnprev = new System.Windows.Forms.Button();
             this.timelinePrev = new System.Windows.Forms.TrackBar();
@@ -52,11 +49,17 @@
             this.timelineShow = new System.Windows.Forms.TrackBar();
             this.timeShow = new System.Windows.Forms.Label();
             this.showTimer = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
+            this.SetBtn = new System.Windows.Forms.Button();
+            this.picture = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.NetBtn = new System.Windows.Forms.Button();
+            this.NetTimer = new System.Windows.Forms.Timer(this.components);
+            this.volumeLevel = new furMix.Controls.VolumeLevel();
             ((System.ComponentModel.ISupportInitialize)(this.Preview)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timelinePrev)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timelineShow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // cutbtn
@@ -65,7 +68,7 @@
             this.cutbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.cutbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cutbtn.ForeColor = System.Drawing.Color.White;
-            this.cutbtn.Location = new System.Drawing.Point(490, 96);
+            this.cutbtn.Location = new System.Drawing.Point(580, 96);
             this.cutbtn.Name = "cutbtn";
             this.cutbtn.Size = new System.Drawing.Size(75, 23);
             this.cutbtn.TabIndex = 1;
@@ -79,7 +82,7 @@
             this.fullbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.fullbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fullbtn.ForeColor = System.Drawing.Color.White;
-            this.fullbtn.Location = new System.Drawing.Point(490, 12);
+            this.fullbtn.Location = new System.Drawing.Point(580, 12);
             this.fullbtn.Name = "fullbtn";
             this.fullbtn.Size = new System.Drawing.Size(75, 23);
             this.fullbtn.TabIndex = 3;
@@ -92,24 +95,13 @@
             this.timer1.Interval = 30;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // picture
-            // 
-            this.picture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picture.BackColor = System.Drawing.Color.Black;
-            this.picture.Location = new System.Drawing.Point(571, 12);
-            this.picture.Name = "picture";
-            this.picture.Size = new System.Drawing.Size(425, 256);
-            this.picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picture.TabIndex = 5;
-            this.picture.TabStop = false;
-            // 
             // playbtn
             // 
             this.playbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.playbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.playbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.playbtn.ForeColor = System.Drawing.Color.White;
-            this.playbtn.Location = new System.Drawing.Point(941, 274);
+            this.playbtn.Location = new System.Drawing.Point(1031, 274);
             this.playbtn.Name = "playbtn";
             this.playbtn.Size = new System.Drawing.Size(55, 36);
             this.playbtn.TabIndex = 8;
@@ -123,7 +115,7 @@
             this.infobtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.infobtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.infobtn.ForeColor = System.Drawing.Color.White;
-            this.infobtn.Location = new System.Drawing.Point(921, 479);
+            this.infobtn.Location = new System.Drawing.Point(1011, 502);
             this.infobtn.Name = "infobtn";
             this.infobtn.Size = new System.Drawing.Size(75, 31);
             this.infobtn.TabIndex = 10;
@@ -137,7 +129,7 @@
             this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(12, 479);
+            this.button6.Location = new System.Drawing.Point(12, 502);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 31);
             this.button6.TabIndex = 11;
@@ -151,7 +143,7 @@
             this.fadebtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.fadebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fadebtn.ForeColor = System.Drawing.Color.White;
-            this.fadebtn.Location = new System.Drawing.Point(490, 125);
+            this.fadebtn.Location = new System.Drawing.Point(580, 125);
             this.fadebtn.Name = "fadebtn";
             this.fadebtn.Size = new System.Drawing.Size(75, 23);
             this.fadebtn.TabIndex = 12;
@@ -177,20 +169,13 @@
             this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.listView1.ForeColor = System.Drawing.Color.White;
             this.listView1.HideSelection = false;
-            this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(12, 328);
+            this.listView1.Location = new System.Drawing.Point(12, 335);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(984, 141);
+            this.listView1.Size = new System.Drawing.Size(1074, 157);
             this.listView1.TabIndex = 13;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // mutebtn
             // 
@@ -198,7 +183,7 @@
             this.mutebtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.mutebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mutebtn.ForeColor = System.Drawing.Color.White;
-            this.mutebtn.Location = new System.Drawing.Point(631, 274);
+            this.mutebtn.Location = new System.Drawing.Point(721, 274);
             this.mutebtn.Name = "mutebtn";
             this.mutebtn.Size = new System.Drawing.Size(54, 36);
             this.mutebtn.TabIndex = 14;
@@ -212,7 +197,7 @@
             this.loopbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.loopbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loopbtn.ForeColor = System.Drawing.Color.White;
-            this.loopbtn.Location = new System.Drawing.Point(571, 274);
+            this.loopbtn.Location = new System.Drawing.Point(661, 274);
             this.loopbtn.Name = "loopbtn";
             this.loopbtn.Size = new System.Drawing.Size(51, 36);
             this.loopbtn.TabIndex = 15;
@@ -220,21 +205,13 @@
             this.loopbtn.UseVisualStyleBackColor = false;
             this.loopbtn.Click += new System.EventHandler(this.loopbtn_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(472, 256);
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
-            // 
             // VerTxt
             // 
             this.VerTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.VerTxt.AutoSize = true;
             this.VerTxt.BackColor = System.Drawing.Color.Transparent;
             this.VerTxt.ForeColor = System.Drawing.Color.White;
-            this.VerTxt.Location = new System.Drawing.Point(745, 484);
+            this.VerTxt.Location = new System.Drawing.Point(754, 505);
             this.VerTxt.Name = "VerTxt";
             this.VerTxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.VerTxt.Size = new System.Drawing.Size(170, 26);
@@ -280,7 +257,7 @@
             // timelineShow
             // 
             this.timelineShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.timelineShow.Location = new System.Drawing.Point(690, 274);
+            this.timelineShow.Location = new System.Drawing.Point(780, 274);
             this.timelineShow.Name = "timelineShow";
             this.timelineShow.Size = new System.Drawing.Size(167, 45);
             this.timelineShow.TabIndex = 22;
@@ -293,7 +270,7 @@
             this.timeShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.timeShow.AutoSize = true;
             this.timeShow.ForeColor = System.Drawing.Color.White;
-            this.timeShow.Location = new System.Drawing.Point(863, 286);
+            this.timeShow.Location = new System.Drawing.Point(953, 286);
             this.timeShow.Name = "timeShow";
             this.timeShow.Size = new System.Drawing.Size(0, 13);
             this.timeShow.TabIndex = 23;
@@ -302,12 +279,77 @@
             // 
             this.showTimer.Tick += new System.EventHandler(this.showTimer_Tick);
             // 
+            // SetBtn
+            // 
+            this.SetBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SetBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.SetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SetBtn.ForeColor = System.Drawing.Color.White;
+            this.SetBtn.Location = new System.Drawing.Point(930, 502);
+            this.SetBtn.Name = "SetBtn";
+            this.SetBtn.Size = new System.Drawing.Size(75, 31);
+            this.SetBtn.TabIndex = 24;
+            this.SetBtn.Text = "Settings";
+            this.SetBtn.UseVisualStyleBackColor = false;
+            this.SetBtn.Click += new System.EventHandler(this.SetBtn_Click);
+            // 
+            // picture
+            // 
+            this.picture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picture.BackColor = System.Drawing.Color.Black;
+            this.picture.Location = new System.Drawing.Point(661, 12);
+            this.picture.Name = "picture";
+            this.picture.Size = new System.Drawing.Size(425, 256);
+            this.picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picture.TabIndex = 5;
+            this.picture.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(472, 256);
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
+            // NetBtn
+            // 
+            this.NetBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.NetBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.NetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.NetBtn.ForeColor = System.Drawing.Color.White;
+            this.NetBtn.Location = new System.Drawing.Point(580, 41);
+            this.NetBtn.Name = "NetBtn";
+            this.NetBtn.Size = new System.Drawing.Size(75, 23);
+            this.NetBtn.TabIndex = 25;
+            this.NetBtn.Text = "Network";
+            this.NetBtn.UseVisualStyleBackColor = false;
+            this.NetBtn.Click += new System.EventHandler(this.NetBtn_Click);
+            // 
+            // NetTimer
+            // 
+            this.NetTimer.Interval = 30;
+            this.NetTimer.Tick += new System.EventHandler(this.NetTimer_Tick);
+            // 
+            // volumeLevel
+            // 
+            this.volumeLevel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.volumeLevel.BackColor = System.Drawing.Color.Transparent;
+            this.volumeLevel.LeftCh = 0;
+            this.volumeLevel.Location = new System.Drawing.Point(489, 12);
+            this.volumeLevel.Name = "volumeLevel";
+            this.volumeLevel.RightCh = 0;
+            this.volumeLevel.Size = new System.Drawing.Size(85, 317);
+            this.volumeLevel.TabIndex = 26;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(1008, 522);
+            this.ClientSize = new System.Drawing.Size(1098, 545);
+            this.Controls.Add(this.volumeLevel);
+            this.Controls.Add(this.SetBtn);
             this.Controls.Add(this.timeShow);
             this.Controls.Add(this.timelineShow);
             this.Controls.Add(this.PreviewTime);
@@ -327,15 +369,15 @@
             this.Controls.Add(this.mutebtn);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1024, 518);
+            this.MinimumSize = new System.Drawing.Size(1114, 584);
             this.Name = "Main";
             this.Text = "furMix";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.picture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Preview)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.timelinePrev)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.timelineShow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -356,7 +398,6 @@
         private System.Windows.Forms.Button loopbtn;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label VerTxt;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button playbtnprev;
         private System.Windows.Forms.TrackBar timelinePrev;
         private System.Windows.Forms.Timer previewTimer;
@@ -364,6 +405,10 @@
         private System.Windows.Forms.TrackBar timelineShow;
         private System.Windows.Forms.Label timeShow;
         private System.Windows.Forms.Timer showTimer;
+        private System.Windows.Forms.Button SetBtn;
+        private System.Windows.Forms.Button NetBtn;
+        private System.Windows.Forms.Timer NetTimer;
+        private Controls.VolumeLevel volumeLevel;
     }
 }
 

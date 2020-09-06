@@ -9,10 +9,19 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0.6.813</Value>
+      <Value Profile="(Default)">0.7.1000</Value>
     </Setting>
     <Setting Name="Edition" Type="System.String" Scope="User">
       <Value Profile="(Default)">Basic Edition</Value>
+    </Setting>
+    <Setting Name="Casino" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="NetPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1502</Value>
+    </Setting>
+    <Setting Name="PlaybackDevice" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

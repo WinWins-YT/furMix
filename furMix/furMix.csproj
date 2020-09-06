@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>furMix</RootNamespace>
     <AssemblyName>furMix</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -28,6 +28,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,6 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,6 +50,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>014915F1349C339B695A52F0D6AB01D5C0F25CC5</ManifestCertificateThumbprint>
@@ -63,7 +67,30 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bass.Net">
+      <HintPath>..\packages\Bass.NET\Bass.Net.dll</HintPath>
+    </Reference>
     <Reference Include="FluentFTP, Version=32.4.3.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentFTP.32.4.3\lib\net45\FluentFTP.dll</HintPath>
     </Reference>
@@ -88,34 +115,35 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activate.cs">
+    <Compile Include="Analyzer.cs" />
+    <Compile Include="DialogBoxes\Activate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Activate.Designer.cs">
+    <Compile Include="DialogBoxes\Activate.Designer.cs">
       <DependentUpon>Activate.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddInput.cs">
+    <Compile Include="DialogBoxes\AddInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddInput.Designer.cs">
+    <Compile Include="DialogBoxes\AddInput.Designer.cs">
       <DependentUpon>AddInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Background.cs">
+    <Compile Include="Player\Background.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Background.Designer.cs">
+    <Compile Include="Player\Background.Designer.cs">
       <DependentUpon>Background.cs</DependentUpon>
     </Compile>
-    <Compile Include="Connect.cs">
+    <Compile Include="DialogBoxes\Connect.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Connect.Designer.cs">
+    <Compile Include="DialogBoxes\Connect.Designer.cs">
       <DependentUpon>Connect.cs</DependentUpon>
     </Compile>
-    <Compile Include="Error.cs">
+    <Compile Include="DialogBoxes\Error.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Error.Designer.cs">
+    <Compile Include="DialogBoxes\Error.Designer.cs">
       <DependentUpon>Error.cs</DependentUpon>
     </Compile>
     <Compile Include="IniFile.cs" />
@@ -126,48 +154,69 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="MonitorNotFound.cs" />
-    <Compile Include="Play1.cs">
+    <Compile Include="DialogBoxes\NetSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Play1.Designer.cs">
+    <Compile Include="DialogBoxes\NetSettings.Designer.cs">
+      <DependentUpon>NetSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Player\Play1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Player\Play1.Designer.cs">
       <DependentUpon>Play1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Play2.cs">
+    <Compile Include="Player\Play2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Play2.Designer.cs">
+    <Compile Include="Player\Play2.Designer.cs">
       <DependentUpon>Play2.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DialogBoxes\Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Splash.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Splash.Designer.cs">
       <DependentUpon>Splash.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Activate.resx">
+    <Compile Include="VolumeLevel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VolumeLevel.Designer.cs">
+      <DependentUpon>VolumeLevel.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="DialogBoxes\Activate.resx">
       <DependentUpon>Activate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddInput.resx">
+    <EmbeddedResource Include="DialogBoxes\AddInput.resx">
       <DependentUpon>AddInput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Background.resx">
+    <EmbeddedResource Include="Player\Background.resx">
       <DependentUpon>Background.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Connect.resx">
+    <EmbeddedResource Include="DialogBoxes\Connect.resx">
       <DependentUpon>Connect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Error.resx">
+    <EmbeddedResource Include="DialogBoxes\Error.resx">
       <DependentUpon>Error.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Play1.resx">
+    <EmbeddedResource Include="DialogBoxes\NetSettings.resx">
+      <DependentUpon>NetSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Player\Play1.resx">
       <DependentUpon>Play1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Play2.resx">
+    <EmbeddedResource Include="Player\Play2.resx">
       <DependentUpon>Play2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -180,8 +229,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="DialogBoxes\Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Splash.resx">
       <DependentUpon>Splash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VolumeLevel.resx">
+      <DependentUpon>VolumeLevel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="furMix_TemporaryKey.pfx" />
     <None Include="packages.config" />
@@ -238,7 +293,15 @@
     <None Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bass.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="basswasapi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
+    <None Include="Resources\Penek.png" />
+    <Content Include="Sounds\hoy.wav" />
     <None Include="Resources\connecting.gif" />
     <None Include="Resources\ter.png" />
     <None Include="Resources\Licensed.png" />
