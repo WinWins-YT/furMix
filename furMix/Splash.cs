@@ -1,12 +1,6 @@
 ﻿using furMix.Utilities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace furMix
@@ -14,6 +8,9 @@ namespace furMix
     public partial class Splash : Form
     {
         List<string> devs = new List<string>();
+        public static int daysleft;
+        public static bool trial;
+        public static string name;
         public Splash()
         {
             InitializeComponent();
@@ -36,12 +33,35 @@ namespace furMix
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.Activated)
+            name = Properties.Settings.Default.Name;
+            if (Properties.Settings.Default.Activated && !Properties.Settings.Default.Trial)
             {
+                trial = false;
                 timer1.Dispose();
                 Main main = new Main();
                 main.Show();
                 this.Hide();
+            }
+            else if (Properties.Settings.Default.Activated && Properties.Settings.Default.Trial)
+            {
+                DateTime install = Properties.Settings.Default.TrialDate;
+                TimeSpan days = DateTime.Now - install;
+                if (days.Days > 30)
+                {
+                    Properties.Settings.Default.Activated = false;
+                    Properties.Settings.Default.Save();
+                    MessageBox.Show("Your trial period has been expired. Activate furMix now", "License expired", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Application.Restart();
+                }
+                else
+                {
+                    daysleft = 30 - days.Days;
+                    trial = true;
+                    timer1.Dispose();
+                    Main main = new Main();
+                    main.Show();
+                    this.Hide();
+                }
             }
             else
             {

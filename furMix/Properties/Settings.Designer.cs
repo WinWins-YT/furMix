@@ -49,7 +49,7 @@ namespace furMix.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.7.1000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.7.1120")]
         public string Version {
             get {
                 return ((string)(this["Version"]));
@@ -104,6 +104,41 @@ namespace furMix.Properties {
             }
             set {
                 this["PlaybackDevice"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int Screen {
+            get {
+                return ((int)(this["Screen"]));
+            }
+            set {
+                this["Screen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Trial {
+            get {
+                return ((bool)(this["Trial"]));
+            }
+            set {
+                this["Trial"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime TrialDate {
+            get {
+                return ((global::System.DateTime)(this["TrialDate"]));
+            }
+            set {
+                this["TrialDate"] = value;
             }
         }
     }

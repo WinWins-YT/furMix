@@ -1,14 +1,8 @@
 ﻿using FluentFTP;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace furMix
@@ -18,13 +12,13 @@ namespace furMix
         FtpClient ftp = new FtpClient();
         bool offline;
         bool connected;
+        bool trial = false;
         IniFile myIni;
         public Activate()
         {
             InitializeComponent();
             var connect = new Connect();
             connect.Show();
-            Thread.Sleep(500);
             ftp.Host = "danimat.ddns.net";
             ftp.Credentials = new System.Net.NetworkCredential("furMix", "furMix");
             try
@@ -40,9 +34,9 @@ namespace furMix
                     connected = true;
                     try
                     {
-                        ftp.DownloadFileAsync(Application.StartupPath + @"\config\activation.ini", "/activation.ini", FtpLocalExists.Overwrite);
+                        ftp.DownloadFileAsync(Path.GetTempPath() + @"\activation.ini", "/activation.ini", FtpLocalExists.Overwrite);
                         Thread.Sleep(2000);
-                        myIni = new IniFile(Application.StartupPath + @"\config\activation.ini");
+                        myIni = new IniFile(Path.GetTempPath() + @"\activation.ini");
                     }
                     catch
                     {
@@ -64,6 +58,11 @@ namespace furMix
             }
             connect.Close();
             connect.Dispose();
+            if (Properties.Settings.Default.Trial)
+            {
+                label5.ForeColor = Color.Gray;
+                label5.Cursor = Cursors.Default;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -74,14 +73,30 @@ namespace furMix
                 {
                     Properties.Settings.Default.Name = "Andrey Hayatov";
                     Properties.Settings.Default.Activated = true;
+                    Properties.Settings.Default.Trial = false;
                     Properties.Settings.Default.Edition = "Basic Edition";
                     Properties.Settings.Default.Save();
-                    File.Delete(Application.StartupPath + @"\config\activation.ini");
+                    File.Delete(Path.GetTempPath() + @"\activation.ini");
                     Close();
                 }
                 else
                 {
                     MessageBox.Show("This product key is not valid. Try again.", "Activation error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (trial)
+            {
+                if (textBox1.Text == "")
+                {
+                    MessageBox.Show("Name could not be empty");
+                }
+                else
+                {
+                    Properties.Settings.Default.Name = textBox1.Text;
+                    Properties.Settings.Default.Activated = true;
+                    Properties.Settings.Default.Edition = "Basic Edition";
+                    Properties.Settings.Default.Save();
+                    Application.Restart();
                 }
             }
             else if (connected)
@@ -90,9 +105,10 @@ namespace furMix
                 {
                     Properties.Settings.Default.Name = textBox1.Text;
                     Properties.Settings.Default.Activated = true;
+                    Properties.Settings.Default.Trial = false;
                     Properties.Settings.Default.Edition = myIni.Read("Edition", textBox1.Text);
                     Properties.Settings.Default.Save();
-                    File.Delete(Application.StartupPath + @"\config\activation.ini");
+                    File.Delete(Path.GetTempPath() + @"\activation.ini");
                     Close();
                 }
                 else
@@ -107,6 +123,19 @@ namespace furMix
             offline = true;
             MessageBox.Show("Try enter only offline product key, that you were supplied after buying, without name", "Offline activation", MessageBoxButtons.OK, MessageBoxIcon.Information);
             textBox1.Enabled = false;
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            if (!Properties.Settings.Default.Trial)
+            {
+                trial = true;
+                Properties.Settings.Default.Trial = true;
+                Properties.Settings.Default.TrialDate = DateTime.Now;
+                Properties.Settings.Default.Save();
+                textBox2.Enabled = false;
+                MessageBox.Show("Enter your name in textbox above and click Activate", "Trial period", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
         }
     }
 }

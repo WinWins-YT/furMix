@@ -32,6 +32,8 @@
             this.SaveBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.devlist = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.scrlist = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // CasinoChk
@@ -46,7 +48,7 @@
             // 
             // SaveBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(212, 66);
+            this.SaveBtn.Location = new System.Drawing.Point(212, 93);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(90, 23);
             this.SaveBtn.TabIndex = 1;
@@ -72,11 +74,31 @@
             this.devlist.Size = new System.Drawing.Size(197, 21);
             this.devlist.TabIndex = 3;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 69);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Screen to show:";
+            // 
+            // scrlist
+            // 
+            this.scrlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.scrlist.FormattingEnabled = true;
+            this.scrlist.Location = new System.Drawing.Point(105, 66);
+            this.scrlist.Name = "scrlist";
+            this.scrlist.Size = new System.Drawing.Size(197, 21);
+            this.scrlist.TabIndex = 5;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 97);
+            this.ClientSize = new System.Drawing.Size(314, 125);
+            this.Controls.Add(this.scrlist);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.devlist);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SaveBtn);
@@ -98,5 +120,7 @@
         private System.Windows.Forms.Button SaveBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox devlist;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox scrlist;
     }
 }

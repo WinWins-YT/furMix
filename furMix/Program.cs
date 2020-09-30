@@ -14,9 +14,19 @@ namespace furMix
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Splash());
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Splash());
+            }
+            catch (Exception ex)
+            {
+                Error error = new Error();
+                error.ShowError(ex);
+                error.ShowDialog();
+                error.Dispose();
+            }
         }
     }
 }

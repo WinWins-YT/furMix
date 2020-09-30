@@ -19,6 +19,13 @@ namespace furMix
                 devlist.Items.Add(devs[i]);
             }
             devlist.SelectedIndex = 0;
+            Screen[] scr = Screen.AllScreens;
+            for (int i = 0; i < scr.Length; i++)
+            {
+                Screen sc = scr[i];
+                scrlist.Items.Add(string.Format("{0} - {1}", i, sc.DeviceName));
+            }
+            scrlist.SelectedIndex = scr.Length - 1;
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
@@ -33,8 +40,12 @@ namespace furMix
             }
             string[] array = (devlist.Items[devlist.SelectedIndex] as string).Split(' ');
             int devindex = Convert.ToInt32(array[0]);
+            array = (scrlist.Items[scrlist.SelectedIndex] as string).Split(' ');
+            int scrindex = Convert.ToInt32(array[0]);
             Properties.Settings.Default.PlaybackDevice = devindex;
+            Properties.Settings.Default.Screen = scrindex;
             Properties.Settings.Default.Save();
+            MessageBox.Show("Restart application to save settings", "Settings saved", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             Close();
         }
     }

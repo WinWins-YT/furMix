@@ -92,7 +92,6 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 30;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // playbtn
@@ -208,15 +207,16 @@
             // VerTxt
             // 
             this.VerTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.VerTxt.AutoSize = true;
             this.VerTxt.BackColor = System.Drawing.Color.Transparent;
+            this.VerTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VerTxt.ForeColor = System.Drawing.Color.White;
-            this.VerTxt.Location = new System.Drawing.Point(754, 505);
+            this.VerTxt.Location = new System.Drawing.Point(681, 505);
             this.VerTxt.Name = "VerTxt";
             this.VerTxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.VerTxt.Size = new System.Drawing.Size(170, 26);
+            this.VerTxt.Size = new System.Drawing.Size(243, 26);
             this.VerTxt.TabIndex = 17;
             this.VerTxt.Text = "furMix 2020. Build 0.4.630. Beta 1.\r\nFor testing purposes only.";
+            this.VerTxt.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // playbtnprev
             // 

@@ -35,10 +35,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -82,7 +79,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(164, 46);
             this.label3.TabIndex = 2;
-            this.label3.Text = "BETA 2";
+            this.label3.Text = "BETA 3";
             this.label3.UseWaitCursor = true;
             // 
             // label4
@@ -111,37 +108,12 @@
             this.pictureBox2.UseWaitCursor = true;
             this.pictureBox2.Visible = false;
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox3.Image = global::furMix.Properties.Resources.Penek;
-            this.pictureBox3.Location = new System.Drawing.Point(299, 205);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(124, 93);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 6;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.UseWaitCursor = true;
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label5.Location = new System.Drawing.Point(197, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(166, 79);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Anniversary one thousand build!\r\nBuild button was clicked 1000 times from the beg" +
-    "inning of development (8 May 2020)\r\nThanks to everyone for using!";
-            // 
             // Splash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::furMix.Properties.Resources.Logo;
             this.ClientSize = new System.Drawing.Size(424, 293);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -154,7 +126,6 @@
             this.Text = "Splash";
             this.UseWaitCursor = true;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -168,7 +139,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Label label5;
     }
 }

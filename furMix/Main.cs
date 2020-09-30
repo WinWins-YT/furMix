@@ -19,12 +19,12 @@ namespace furMix
         string filepath;
         bool full, playing, playing1, loop, mute, net;
         int type = 1;
-        int port;
+        int port, scrindex;
         Play1 pl1 = new Play1();
         Play2 pl2 = new Play2();
         Background back = new Background();
-        Bitmap bmp;
-        Graphics gr;
+        //Graphics gr;
+        //Bitmap bmp;
         Color color;
         List<string> filepath1 = new List<string>();
         List<int> type1 = new List<int>();
@@ -32,6 +32,8 @@ namespace furMix
         //Host server;
         public static string pass;
         Analyzer anal;
+        Graphics gr;
+        Bitmap bmp;
         //VideoFileReader videonet = new VideoFileReader();
 
         public Main()
@@ -43,7 +45,14 @@ namespace furMix
                 Preview.settings.mute = true;
                 pl1.Video.settings.mute = true;
                 pl2.Video.settings.mute = true;
-                VerTxt.Text = "furMix 2020. Build " + Properties.Settings.Default.Version + ". Beta 2.\n For testing purposes only.";
+                if (!Splash.trial)
+                {
+                    VerTxt.Text = "furMix 2020. Build " + Properties.Settings.Default.Version + ". Beta 3.\n For testing purposes only.";
+                }
+                else
+                {
+                    VerTxt.Text = "furMix 2020 Trial. Build " + Properties.Settings.Default.Version + ". Beta 3.\n For testing purposes only.";
+                }
                 //server = new Host(Properties.Settings.Default.NetPort);
                 //server.onConnection += Server_onConnection;
                 //server.lostConnection += Server_lostConnection;
@@ -51,6 +60,10 @@ namespace furMix
                 pass = RandomString(6);
                 anal = new Analyzer(volumeLevel);
                 anal.Enable = true;
+                scrindex = Properties.Settings.Default.Screen;
+                Screen[] sc = Screen.AllScreens;
+                gr = CreateGraphics();
+                bmp = new Bitmap(sc[scrindex].Bounds.Width, sc[scrindex].Bounds.Height, gr);
                 using (SoundPlayer sp = new SoundPlayer())
                 {
                     sp.Stream = Properties.Resources.hoy;
@@ -150,19 +163,19 @@ namespace furMix
                 sc = Screen.AllScreens;
                 if (sc.Length > 1)
                 {
-                    back.Left = sc[1].Bounds.Width;
-                    back.Top = sc[1].Bounds.Height;
-                    back.Location = sc[1].Bounds.Location;
+                    back.Left = sc[scrindex].Bounds.Width;
+                    back.Top = sc[scrindex].Bounds.Height;
+                    back.Location = sc[scrindex].Bounds.Location;
                     back.WindowState = FormWindowState.Maximized;
                     back.Show();
-                    pl1.Left = sc[1].Bounds.Width;
-                    pl1.Top = sc[1].Bounds.Height;
-                    pl1.Location = sc[1].Bounds.Location;
+                    pl1.Left = sc[scrindex].Bounds.Width;
+                    pl1.Top = sc[scrindex].Bounds.Height;
+                    pl1.Location = sc[scrindex].Bounds.Location;
                     pl1.WindowState = FormWindowState.Maximized;
                     pl1.Show();
-                    pl2.Left = sc[1].Bounds.Width;
-                    pl2.Top = sc[1].Bounds.Height;
-                    pl2.Location = sc[1].Bounds.Location;
+                    pl2.Left = sc[scrindex].Bounds.Width;
+                    pl2.Top = sc[scrindex].Bounds.Height;
+                    pl2.Location = sc[scrindex].Bounds.Location;
                     pl2.WindowState = FormWindowState.Maximized;
                     pl2.Show();
                 }
@@ -284,10 +297,10 @@ namespace furMix
                 Screen[] sc = Screen.AllScreens;
                 if (sc.Length > 1)
                 {
-                    gr = CreateGraphics();
-                    bmp = new Bitmap(sc[1].Bounds.Width, sc[1].Bounds.Height, gr);
+                    //Graphics gr = CreateGraphics();
+                    //Bitmap bmp = new Bitmap(sc[scrindex].Bounds.Width, sc[scrindex].Bounds.Height, gr);
                     gr = Graphics.FromImage(bmp);
-                    gr.CopyFromScreen(sc[1].Bounds.X, sc[1].Bounds.Y, 0, 0, new Size(sc[1].Bounds.Width, sc[1].Bounds.Height));
+                    gr.CopyFromScreen(sc[scrindex].Bounds.X, sc[scrindex].Bounds.Y, 0, 0, new Size(sc[scrindex].Bounds.Width, sc[scrindex].Bounds.Height));
                     picture.Image = bmp;
                     //gr.Dispose();
                     //bmp.Dispose();
@@ -365,7 +378,14 @@ namespace furMix
         {
             try
             {
-                MessageBox.Show("This program has been made as alternative to vMix. \n Made by WinWins and odinokoe_4m0 \n Design: WinWins and odinokoe_4m0 \n Judge: Misha Ter \n \n Licensed to " + Properties.Settings.Default.Name + "\n \n Version " + Properties.Settings.Default.Version + " Beta 2 \n (C) 2020 DaniMat Corp.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!Splash.trial)
+                {
+                    MessageBox.Show("This program has been made as alternative to vMix. \n Made by WinWins and odinokoe_4m0 \n Design: WinWins and odinokoe_4m0 \n Judge: Misha Ter \n \n Licensed to " + Splash.name + "\n \n Version " + Properties.Settings.Default.Version + " Beta 3 \n (C) 2020 DaniMat Corp.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("This program has been made as alternative to vMix. \n Made by WinWins and odinokoe_4m0 \n Design: WinWins and odinokoe_4m0 \n Judge: Misha Ter \n \n Licensed to " + Splash.name + "\n" + "TRIAL VERSION" + "\n" + Splash.daysleft.ToString() + " days left until expired" + "\n \n Version " + Properties.Settings.Default.Version + " Beta 3 \n (C) 2020 DaniMat Corp.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
