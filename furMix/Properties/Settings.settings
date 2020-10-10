@@ -9,12 +9,12 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0.7.1120</Value>
+      <Value Profile="(Default)">0.8.1372</Value>
     </Setting>
     <Setting Name="Edition" Type="System.String" Scope="User">
       <Value Profile="(Default)">Basic Edition</Value>
     </Setting>
-    <Setting Name="Casino" Type="System.Boolean" Scope="User">
+    <Setting Name="VideoError" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="NetPort" Type="System.Int32" Scope="User">
@@ -31,6 +31,9 @@
     </Setting>
     <Setting Name="TrialDate" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Welcome" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -1,4 +1,5 @@
 ﻿using furMix.Controls;
+using furMix.DialogBoxes;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -23,6 +24,7 @@ namespace furMix.Utilities
         private bool _initialized;                                  //initialized flag
         private int devindex;                                       //used device index
         private VolumeLevel _vl;                                    //volume display
+        private int _lines = 15;                                    // number of spectrum lines
 
         //ctor
         public Analyzer(VolumeLevel vl)
@@ -43,8 +45,11 @@ namespace furMix.Utilities
 
         public Analyzer()
         {
-            
+
         }
+
+        // Spectrum monitor
+        public SpectrumLevel spectrumLevel { get; set; }
 
         // Serial port for arduino output
         public SerialPort Serial { get; set; }
@@ -123,6 +128,7 @@ namespace furMix.Utilities
         {
             try
             {
+                BassNet.Registration("winwins@danimat.ddns.net", "2X322928249318");
                 bool result = false;
                 Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_UPDATETHREADS, false);
                 result = Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero);
@@ -142,6 +148,30 @@ namespace furMix.Utilities
         {
             try
             {
+                int ret = BassWasapi.BASS_WASAPI_GetData(_fft, (int)BASSData.BASS_DATA_FFT2048); //get channel fft data
+                if (ret < -1) return;
+                int x, y;
+                int b0 = 0;
+
+                //computes the spectrum data, the code is taken from a bass_wasapi sample.
+                for (x = 0; x < _lines; x++)
+                {
+                    float peak = 0;
+                    int b1 = (int)Math.Pow(2, x * 10.0 / (_lines - 1));
+                    if (b1 > 1023) b1 = 1023;
+                    if (b1 <= b0) b1 = b0 + 1;
+                    for (; b0 < b1; b0++)
+                    {
+                        if (peak < _fft[1 + b0]) peak = _fft[1 + b0];
+                    }
+                    y = (int)(Math.Sqrt(peak) * 3 * 255 - 4);
+                    if (y > 255) y = 255;
+                    if (y < 0) y = 0;
+                    _spectrumdata.Add((byte)y);
+                }
+                if (DisplayEnable) { spectrumLevel.Set(_spectrumdata); }
+                _spectrumdata.Clear();
+
                 int level = BassWasapi.BASS_WASAPI_GetLevel();
                 _vl.LeftCh = Utils.LowWord32(level);
                 _vl.RightCh = Utils.HighWord32(level);

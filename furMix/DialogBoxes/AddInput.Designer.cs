@@ -30,13 +30,20 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Video = new System.Windows.Forms.TabPage();
+            this.ClearBtn = new System.Windows.Forms.Button();
             this.LastList = new System.Windows.Forms.ListBox();
             this.BrowBtn = new System.Windows.Forms.Button();
             this.filepathTxt = new System.Windows.Forms.TextBox();
             this.Photo = new System.Windows.Forms.TabPage();
+            this.ClearBtn1 = new System.Windows.Forms.Button();
             this.LastList1 = new System.Windows.Forms.ListBox();
             this.BrowBtn1 = new System.Windows.Forms.Button();
             this.filepathTxt1 = new System.Windows.Forms.TextBox();
+            this.Photos = new System.Windows.Forms.TabPage();
+            this.ClearBtn2 = new System.Windows.Forms.Button();
+            this.LastList2 = new System.Windows.Forms.ListBox();
+            this.BrowBtn2 = new System.Windows.Forms.Button();
+            this.filepathTxt2 = new System.Windows.Forms.TextBox();
             this.Color = new System.Windows.Forms.TabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ColorBtn = new System.Windows.Forms.Button();
@@ -46,20 +53,29 @@
             this.CancelBtn = new System.Windows.Forms.Button();
             this.FileVideo = new System.Windows.Forms.OpenFileDialog();
             this.FilePhoto = new System.Windows.Forms.OpenFileDialog();
-            this.ClearBtn1 = new System.Windows.Forms.Button();
-            this.ClearBtn = new System.Windows.Forms.Button();
+            this.FolderPhotos = new System.Windows.Forms.FolderBrowserDialog();
+            this.Presentation = new System.Windows.Forms.TabPage();
+            this.ClearBtn3 = new System.Windows.Forms.Button();
+            this.LastList3 = new System.Windows.Forms.ListBox();
+            this.BrowBtn3 = new System.Windows.Forms.Button();
+            this.filepathTxt3 = new System.Windows.Forms.TextBox();
+            this.FilePres = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.Video.SuspendLayout();
             this.Photo.SuspendLayout();
+            this.Photos.SuspendLayout();
             this.Color.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.Presentation.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.Video);
             this.tabControl1.Controls.Add(this.Photo);
+            this.tabControl1.Controls.Add(this.Photos);
             this.tabControl1.Controls.Add(this.Color);
+            this.tabControl1.Controls.Add(this.Presentation);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -80,6 +96,16 @@
             this.Video.TabIndex = 0;
             this.Video.Text = "Video";
             this.Video.UseVisualStyleBackColor = true;
+            // 
+            // ClearBtn
+            // 
+            this.ClearBtn.Location = new System.Drawing.Point(364, 184);
+            this.ClearBtn.Name = "ClearBtn";
+            this.ClearBtn.Size = new System.Drawing.Size(75, 23);
+            this.ClearBtn.TabIndex = 3;
+            this.ClearBtn.Text = "Clear";
+            this.ClearBtn.UseVisualStyleBackColor = true;
+            this.ClearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
             // 
             // LastList
             // 
@@ -121,10 +147,20 @@
             this.Photo.Text = "Photo";
             this.Photo.UseVisualStyleBackColor = true;
             // 
+            // ClearBtn1
+            // 
+            this.ClearBtn1.Location = new System.Drawing.Point(364, 184);
+            this.ClearBtn1.Name = "ClearBtn1";
+            this.ClearBtn1.Size = new System.Drawing.Size(75, 23);
+            this.ClearBtn1.TabIndex = 6;
+            this.ClearBtn1.Text = "Clear";
+            this.ClearBtn1.UseVisualStyleBackColor = true;
+            this.ClearBtn1.Click += new System.EventHandler(this.ClearBtn1_Click);
+            // 
             // LastList1
             // 
             this.LastList1.FormattingEnabled = true;
-            this.LastList1.Location = new System.Drawing.Point(6, 33);
+            this.LastList1.Location = new System.Drawing.Point(6, 32);
             this.LastList1.Name = "LastList1";
             this.LastList1.Size = new System.Drawing.Size(433, 147);
             this.LastList1.TabIndex = 5;
@@ -132,7 +168,7 @@
             // 
             // BrowBtn1
             // 
-            this.BrowBtn1.Location = new System.Drawing.Point(364, 5);
+            this.BrowBtn1.Location = new System.Drawing.Point(364, 4);
             this.BrowBtn1.Name = "BrowBtn1";
             this.BrowBtn1.Size = new System.Drawing.Size(75, 23);
             this.BrowBtn1.TabIndex = 4;
@@ -142,10 +178,59 @@
             // 
             // filepathTxt1
             // 
-            this.filepathTxt1.Location = new System.Drawing.Point(6, 7);
+            this.filepathTxt1.Location = new System.Drawing.Point(6, 6);
             this.filepathTxt1.Name = "filepathTxt1";
             this.filepathTxt1.Size = new System.Drawing.Size(352, 20);
             this.filepathTxt1.TabIndex = 3;
+            // 
+            // Photos
+            // 
+            this.Photos.Controls.Add(this.ClearBtn2);
+            this.Photos.Controls.Add(this.LastList2);
+            this.Photos.Controls.Add(this.BrowBtn2);
+            this.Photos.Controls.Add(this.filepathTxt2);
+            this.Photos.Location = new System.Drawing.Point(4, 22);
+            this.Photos.Name = "Photos";
+            this.Photos.Size = new System.Drawing.Size(445, 210);
+            this.Photos.TabIndex = 3;
+            this.Photos.Text = "Photos collection";
+            this.Photos.UseVisualStyleBackColor = true;
+            // 
+            // ClearBtn2
+            // 
+            this.ClearBtn2.Location = new System.Drawing.Point(364, 184);
+            this.ClearBtn2.Name = "ClearBtn2";
+            this.ClearBtn2.Size = new System.Drawing.Size(75, 23);
+            this.ClearBtn2.TabIndex = 10;
+            this.ClearBtn2.Text = "Clear";
+            this.ClearBtn2.UseVisualStyleBackColor = true;
+            this.ClearBtn2.Click += new System.EventHandler(this.ClearBtn2_Click);
+            // 
+            // LastList2
+            // 
+            this.LastList2.FormattingEnabled = true;
+            this.LastList2.Location = new System.Drawing.Point(6, 32);
+            this.LastList2.Name = "LastList2";
+            this.LastList2.Size = new System.Drawing.Size(433, 147);
+            this.LastList2.TabIndex = 9;
+            this.LastList2.SelectedIndexChanged += new System.EventHandler(this.LastList2_SelectedIndexChanged);
+            // 
+            // BrowBtn2
+            // 
+            this.BrowBtn2.Location = new System.Drawing.Point(344, 4);
+            this.BrowBtn2.Name = "BrowBtn2";
+            this.BrowBtn2.Size = new System.Drawing.Size(95, 23);
+            this.BrowBtn2.TabIndex = 8;
+            this.BrowBtn2.Text = "Select folder...";
+            this.BrowBtn2.UseVisualStyleBackColor = true;
+            this.BrowBtn2.Click += new System.EventHandler(this.BrowBtn2_Click);
+            // 
+            // filepathTxt2
+            // 
+            this.filepathTxt2.Location = new System.Drawing.Point(6, 6);
+            this.filepathTxt2.Name = "filepathTxt2";
+            this.filepathTxt2.Size = new System.Drawing.Size(332, 20);
+            this.filepathTxt2.TabIndex = 7;
             // 
             // Color
             // 
@@ -222,25 +307,63 @@
             // 
             this.FilePhoto.Filter = "Photo|*.jpg;*.png;*.bmp";
             // 
-            // ClearBtn1
+            // FolderPhotos
             // 
-            this.ClearBtn1.Location = new System.Drawing.Point(364, 184);
-            this.ClearBtn1.Name = "ClearBtn1";
-            this.ClearBtn1.Size = new System.Drawing.Size(75, 23);
-            this.ClearBtn1.TabIndex = 6;
-            this.ClearBtn1.Text = "Clear";
-            this.ClearBtn1.UseVisualStyleBackColor = true;
-            this.ClearBtn1.Click += new System.EventHandler(this.ClearBtn1_Click);
+            this.FolderPhotos.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            this.FolderPhotos.ShowNewFolderButton = false;
             // 
-            // ClearBtn
+            // Presentation
             // 
-            this.ClearBtn.Location = new System.Drawing.Point(364, 184);
-            this.ClearBtn.Name = "ClearBtn";
-            this.ClearBtn.Size = new System.Drawing.Size(75, 23);
-            this.ClearBtn.TabIndex = 3;
-            this.ClearBtn.Text = "Clear";
-            this.ClearBtn.UseVisualStyleBackColor = true;
-            this.ClearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
+            this.Presentation.Controls.Add(this.ClearBtn3);
+            this.Presentation.Controls.Add(this.LastList3);
+            this.Presentation.Controls.Add(this.BrowBtn3);
+            this.Presentation.Controls.Add(this.filepathTxt3);
+            this.Presentation.Location = new System.Drawing.Point(4, 22);
+            this.Presentation.Name = "Presentation";
+            this.Presentation.Size = new System.Drawing.Size(445, 210);
+            this.Presentation.TabIndex = 4;
+            this.Presentation.Text = "Presentation";
+            this.Presentation.UseVisualStyleBackColor = true;
+            // 
+            // ClearBtn3
+            // 
+            this.ClearBtn3.Location = new System.Drawing.Point(364, 184);
+            this.ClearBtn3.Name = "ClearBtn3";
+            this.ClearBtn3.Size = new System.Drawing.Size(75, 23);
+            this.ClearBtn3.TabIndex = 10;
+            this.ClearBtn3.Text = "Clear";
+            this.ClearBtn3.UseVisualStyleBackColor = true;
+            this.ClearBtn3.Click += new System.EventHandler(this.ClearBtn3_Click);
+            // 
+            // LastList3
+            // 
+            this.LastList3.FormattingEnabled = true;
+            this.LastList3.Location = new System.Drawing.Point(6, 32);
+            this.LastList3.Name = "LastList3";
+            this.LastList3.Size = new System.Drawing.Size(433, 147);
+            this.LastList3.TabIndex = 9;
+            this.LastList3.SelectedIndexChanged += new System.EventHandler(this.LastList3_SelectedIndexChanged);
+            // 
+            // BrowBtn3
+            // 
+            this.BrowBtn3.Location = new System.Drawing.Point(364, 4);
+            this.BrowBtn3.Name = "BrowBtn3";
+            this.BrowBtn3.Size = new System.Drawing.Size(75, 23);
+            this.BrowBtn3.TabIndex = 8;
+            this.BrowBtn3.Text = "Browse...";
+            this.BrowBtn3.UseVisualStyleBackColor = true;
+            this.BrowBtn3.Click += new System.EventHandler(this.BrowBtn3_Click);
+            // 
+            // filepathTxt3
+            // 
+            this.filepathTxt3.Location = new System.Drawing.Point(6, 6);
+            this.filepathTxt3.Name = "filepathTxt3";
+            this.filepathTxt3.Size = new System.Drawing.Size(352, 20);
+            this.filepathTxt3.TabIndex = 7;
+            // 
+            // FilePres
+            // 
+            this.FilePres.Filter = "Presentation|*.ppt;*.pptx";
             // 
             // AddInput
             // 
@@ -261,9 +384,13 @@
             this.Video.PerformLayout();
             this.Photo.ResumeLayout(false);
             this.Photo.PerformLayout();
+            this.Photos.ResumeLayout(false);
+            this.Photos.PerformLayout();
             this.Color.ResumeLayout(false);
             this.Color.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Presentation.ResumeLayout(false);
+            this.Presentation.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -290,5 +417,17 @@
         private System.Windows.Forms.OpenFileDialog FilePhoto;
         private System.Windows.Forms.Button ClearBtn;
         private System.Windows.Forms.Button ClearBtn1;
+        private System.Windows.Forms.TabPage Photos;
+        private System.Windows.Forms.Button ClearBtn2;
+        private System.Windows.Forms.ListBox LastList2;
+        private System.Windows.Forms.Button BrowBtn2;
+        private System.Windows.Forms.TextBox filepathTxt2;
+        private System.Windows.Forms.FolderBrowserDialog FolderPhotos;
+        private System.Windows.Forms.TabPage Presentation;
+        private System.Windows.Forms.Button ClearBtn3;
+        private System.Windows.Forms.ListBox LastList3;
+        private System.Windows.Forms.Button BrowBtn3;
+        private System.Windows.Forms.TextBox filepathTxt3;
+        private System.Windows.Forms.OpenFileDialog FilePres;
     }
 }

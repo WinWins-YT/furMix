@@ -92,6 +92,16 @@ namespace furMix.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Icon {
+            get {
+                object obj = ResourceManager.GetObject("Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Licensed {
             get {
                 object obj = ResourceManager.GetObject("Licensed", resourceCulture);
@@ -112,9 +122,29 @@ namespace furMix.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MessagePopup {
+            get {
+                object obj = ResourceManager.GetObject("MessagePopup", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Penek {
             get {
                 object obj = ResourceManager.GetObject("Penek", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sandclock {
+            get {
+                object obj = ResourceManager.GetObject("sandclock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

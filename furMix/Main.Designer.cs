@@ -50,14 +50,18 @@
             this.timeShow = new System.Windows.Forms.Label();
             this.showTimer = new System.Windows.Forms.Timer(this.components);
             this.SetBtn = new System.Windows.Forms.Button();
-            this.picture = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.NetBtn = new System.Windows.Forms.Button();
             this.NetTimer = new System.Windows.Forms.Timer(this.components);
             this.volumeLevel = new furMix.Controls.VolumeLevel();
+            this.TipBack = new System.Windows.Forms.PictureBox();
+            this.picture = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.TipTitle = new System.Windows.Forms.Label();
+            this.TipText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Preview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timelinePrev)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timelineShow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TipBack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -118,7 +122,7 @@
             this.infobtn.Name = "infobtn";
             this.infobtn.Size = new System.Drawing.Size(75, 31);
             this.infobtn.TabIndex = 10;
-            this.infobtn.Text = "Info";
+            this.infobtn.Text = "About...";
             this.infobtn.UseVisualStyleBackColor = false;
             this.infobtn.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -293,25 +297,6 @@
             this.SetBtn.UseVisualStyleBackColor = false;
             this.SetBtn.Click += new System.EventHandler(this.SetBtn_Click);
             // 
-            // picture
-            // 
-            this.picture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picture.BackColor = System.Drawing.Color.Black;
-            this.picture.Location = new System.Drawing.Point(661, 12);
-            this.picture.Name = "picture";
-            this.picture.Size = new System.Drawing.Size(425, 256);
-            this.picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picture.TabIndex = 5;
-            this.picture.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(472, 256);
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
-            // 
             // NetBtn
             // 
             this.NetBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -341,6 +326,61 @@
             this.volumeLevel.RightCh = 0;
             this.volumeLevel.Size = new System.Drawing.Size(85, 317);
             this.volumeLevel.TabIndex = 26;
+            this.volumeLevel.DoubleClick += new System.EventHandler(this.volumeLevel_DoubleClick);
+            // 
+            // TipBack
+            // 
+            this.TipBack.BackColor = System.Drawing.Color.Transparent;
+            this.TipBack.Image = global::furMix.Properties.Resources.MessagePopup;
+            this.TipBack.Location = new System.Drawing.Point(517, 421);
+            this.TipBack.Name = "TipBack";
+            this.TipBack.Size = new System.Drawing.Size(220, 110);
+            this.TipBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.TipBack.TabIndex = 27;
+            this.TipBack.TabStop = false;
+            this.TipBack.Click += new System.EventHandler(this.TipBack_Click);
+            // 
+            // picture
+            // 
+            this.picture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picture.BackColor = System.Drawing.Color.Black;
+            this.picture.Location = new System.Drawing.Point(661, 12);
+            this.picture.Name = "picture";
+            this.picture.Size = new System.Drawing.Size(425, 256);
+            this.picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picture.TabIndex = 5;
+            this.picture.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(472, 256);
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
+            // TipTitle
+            // 
+            this.TipTitle.AutoSize = true;
+            this.TipTitle.BackColor = System.Drawing.Color.White;
+            this.TipTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TipTitle.Location = new System.Drawing.Point(534, 442);
+            this.TipTitle.Name = "TipTitle";
+            this.TipTitle.Size = new System.Drawing.Size(184, 24);
+            this.TipTitle.TabIndex = 28;
+            this.TipTitle.Text = "Welcome to furMix";
+            this.TipTitle.Click += new System.EventHandler(this.TipTitle_Click);
+            // 
+            // TipText
+            // 
+            this.TipText.BackColor = System.Drawing.Color.White;
+            this.TipText.Location = new System.Drawing.Point(535, 466);
+            this.TipText.Name = "TipText";
+            this.TipText.Size = new System.Drawing.Size(183, 52);
+            this.TipText.TabIndex = 29;
+            this.TipText.Text = "This short guide will show you some moments for quick start. Click here to begin." +
+    "";
+            this.TipText.Click += new System.EventHandler(this.TipText_Click);
             // 
             // Main
             // 
@@ -376,6 +416,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Preview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.timelinePrev)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.timelineShow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TipBack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -409,6 +450,9 @@
         private System.Windows.Forms.Button NetBtn;
         private System.Windows.Forms.Timer NetTimer;
         private Controls.VolumeLevel volumeLevel;
+        private System.Windows.Forms.PictureBox TipBack;
+        private System.Windows.Forms.Label TipTitle;
+        private System.Windows.Forms.Label TipText;
     }
 }
 

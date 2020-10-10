@@ -17,7 +17,7 @@ namespace furMix
         public Error()
         {
             InitializeComponent();
-            if (Properties.Settings.Default.Casino)
+            if (Properties.Settings.Default.VideoError)
             {
                 try
                 {
@@ -34,7 +34,7 @@ namespace furMix
         public void ShowError(Exception ex)
         {
             ErrorInfo.Text = ex.ToString();
-            if (Properties.Settings.Default.Casino)
+            if (Properties.Settings.Default.VideoError)
             {
                 ErrorVideo.Ctlcontrols.play();
             }

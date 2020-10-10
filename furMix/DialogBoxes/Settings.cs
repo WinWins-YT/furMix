@@ -11,7 +11,7 @@ namespace furMix
         public Settings()
         {
             InitializeComponent();
-            CasinoChk.Checked = !Properties.Settings.Default.Casino;
+            VideoChk.Checked = !Properties.Settings.Default.VideoError;
             Analyzer anal = new Analyzer();
             anal.SetPlaybackList(devs);
             for (int i = 0; i < devs.Count; i++)
@@ -30,13 +30,13 @@ namespace furMix
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            if (CasinoChk.Checked)
+            if (VideoChk.Checked)
             {
-                Properties.Settings.Default.Casino = false;
+                Properties.Settings.Default.VideoError = false;
             }
             else
             {
-                Properties.Settings.Default.Casino = true;
+                Properties.Settings.Default.VideoError = true;
             }
             string[] array = (devlist.Items[devlist.SelectedIndex] as string).Split(' ');
             int devindex = Convert.ToInt32(array[0]);

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.CasinoChk = new System.Windows.Forms.CheckBox();
+            this.VideoChk = new System.Windows.Forms.CheckBox();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.devlist = new System.Windows.Forms.ComboBox();
@@ -36,15 +36,15 @@
             this.scrlist = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // CasinoChk
+            // VideoChk
             // 
-            this.CasinoChk.AutoSize = true;
-            this.CasinoChk.Location = new System.Drawing.Point(13, 13);
-            this.CasinoChk.Name = "CasinoChk";
-            this.CasinoChk.Size = new System.Drawing.Size(121, 17);
-            this.CasinoChk.TabIndex = 0;
-            this.CasinoChk.Text = "Turn off casino error";
-            this.CasinoChk.UseVisualStyleBackColor = true;
+            this.VideoChk.AutoSize = true;
+            this.VideoChk.Location = new System.Drawing.Point(13, 13);
+            this.VideoChk.Name = "VideoChk";
+            this.VideoChk.Size = new System.Drawing.Size(116, 17);
+            this.VideoChk.TabIndex = 0;
+            this.VideoChk.Text = "Turn off video error";
+            this.VideoChk.UseVisualStyleBackColor = true;
             // 
             // SaveBtn
             // 
@@ -102,7 +102,7 @@
             this.Controls.Add(this.devlist);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SaveBtn);
-            this.Controls.Add(this.CasinoChk);
+            this.Controls.Add(this.VideoChk);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Settings";
             this.ShowIcon = false;
@@ -116,7 +116,7 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckBox CasinoChk;
+        private System.Windows.Forms.CheckBox VideoChk;
         private System.Windows.Forms.Button SaveBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox devlist;

@@ -49,7 +49,7 @@ namespace furMix.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.7.1120")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.8.1372")]
         public string Version {
             get {
                 return ((string)(this["Version"]));
@@ -74,12 +74,12 @@ namespace furMix.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool Casino {
+        public bool VideoError {
             get {
-                return ((bool)(this["Casino"]));
+                return ((bool)(this["VideoError"]));
             }
             set {
-                this["Casino"] = value;
+                this["VideoError"] = value;
             }
         }
         
@@ -139,6 +139,18 @@ namespace furMix.Properties {
             }
             set {
                 this["TrialDate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Welcome {
+            get {
+                return ((bool)(this["Welcome"]));
+            }
+            set {
+                this["Welcome"] = value;
             }
         }
     }

@@ -94,6 +94,13 @@
     <Reference Include="FluentFTP, Version=32.4.5.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentFTP.32.4.5\lib\net45\FluentFTP.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.PowerPoint.15.0.4420.1017\lib\net20\Microsoft.Office.Interop.PowerPoint.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -116,6 +123,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyzer.cs" />
+    <Compile Include="ConvertPresentation.cs" />
+    <Compile Include="DialogBoxes\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
     <Compile Include="DialogBoxes\Activate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +141,18 @@
     </Compile>
     <Compile Include="DialogBoxes\AddInput.Designer.cs">
       <DependentUpon>AddInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\Loading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\Loading.Designer.cs">
+      <DependentUpon>Loading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogBoxes\SpectrumLevel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\SpectrumLevel.Designer.cs">
+      <DependentUpon>SpectrumLevel.cs</DependentUpon>
     </Compile>
     <Compile Include="Player\Background.cs">
       <SubType>Form</SubType>
@@ -180,6 +206,12 @@
     <Compile Include="DialogBoxes\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="SpectrumBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpectrumBar.Designer.cs">
+      <DependentUpon>SpectrumBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Splash.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,11 +224,17 @@
     <Compile Include="VolumeLevel.Designer.cs">
       <DependentUpon>VolumeLevel.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DialogBoxes\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DialogBoxes\Activate.resx">
       <DependentUpon>Activate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DialogBoxes\AddInput.resx">
       <DependentUpon>AddInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\SpectrumLevel.resx">
+      <DependentUpon>SpectrumLevel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Player\Background.resx">
       <DependentUpon>Background.cs</DependentUpon>
@@ -231,6 +269,9 @@
     </Compile>
     <EmbeddedResource Include="DialogBoxes\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpectrumBar.resx">
+      <DependentUpon>SpectrumBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Splash.resx">
       <DependentUpon>Splash.cs</DependentUpon>
@@ -301,6 +342,9 @@
     </Content>
     <Content Include="Icon.ico" />
     <None Include="Resources\Penek.png" />
+    <None Include="Resources\Icon.png" />
+    <None Include="Resources\MessagePopup.png" />
+    <None Include="Resources\sandclock.jpg" />
     <Content Include="Sounds\hoy.wav" />
     <None Include="Resources\connecting.gif" />
     <None Include="Resources\ter.png" />
