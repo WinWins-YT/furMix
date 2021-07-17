@@ -9,7 +9,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0.8.1372</Value>
+      <Value Profile="(Default)">0.9.1921</Value>
     </Setting>
     <Setting Name="Edition" Type="System.String" Scope="User">
       <Value Profile="(Default)">Basic Edition</Value>
@@ -18,7 +18,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="NetPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1502</Value>
+      <Value Profile="(Default)">8080</Value>
     </Setting>
     <Setting Name="PlaybackDevice" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -34,6 +34,9 @@
     </Setting>
     <Setting Name="Welcome" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">en-US</Value>
     </Setting>
   </Settings>
 </SettingsFile>

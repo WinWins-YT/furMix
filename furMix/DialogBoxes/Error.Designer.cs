@@ -32,6 +32,7 @@
             this.ErrorVideo = new AxWMPLib.AxWindowsMediaPlayer();
             this.button1 = new System.Windows.Forms.Button();
             this.ErrorInfo = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorVideo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,12 +70,26 @@
             this.ErrorInfo.Size = new System.Drawing.Size(440, 93);
             this.ErrorInfo.TabIndex = 2;
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(12, 344);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(105, 32);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Send bug report";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Error
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(464, 388);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.ErrorInfo);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ErrorVideo);
@@ -93,5 +108,6 @@
         private AxWMPLib.AxWindowsMediaPlayer ErrorVideo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox ErrorInfo;
+        private System.Windows.Forms.Button button2;
     }
 }

@@ -8,11 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>furMix</RootNamespace>
     <AssemblyName>furMix</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -22,14 +24,15 @@
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
+    <TargetPlatformVersion>10.0</TargetPlatformVersion>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,7 +56,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>014915F1349C339B695A52F0D6AB01D5C0F25CC5</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>4B23FBF407614209D3942A484DA2E307EB8D4F86</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>furMix_TemporaryKey.pfx</ManifestKeyFile>
@@ -88,15 +91,51 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accord, Version=3.8.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.3.8.0\lib\net462\Accord.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.Math, Version=3.8.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.Math.3.8.0\lib\net462\Accord.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.Math.Core, Version=3.8.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.Math.3.8.0\lib\net462\Accord.Math.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Bass.Net, Version=2.4.10.3, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL">
       <HintPath>..\packages\Bass.Net.1.0.0\lib\Bass.Net.dll</HintPath>
     </Reference>
-    <Reference Include="FluentFTP, Version=32.4.5.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentFTP.32.4.5\lib\net45\FluentFTP.dll</HintPath>
+    <Reference Include="FluentFTP, Version=34.0.0.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentFTP.34.0.0\lib\net45\FluentFTP.dll</HintPath>
+    </Reference>
+    <Reference Include="furMix.Streaming.Network">
+      <HintPath>C:\Users\winwi\Downloads\rtaVideoStreamer-src\rtaVideoStreamer\rtaNetworking.Streaming\bin\Release\furMix.Streaming.Network.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.PowerPoint.15.0.4420.1017\lib\net20\Microsoft.Office.Interop.PowerPoint.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Registry.4.7.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio, Version=2.0.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.2.0.1\lib\netstandard2.0\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Asio, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Asio.2.0.0\lib\netstandard2.0\NAudio.Asio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Core.2.0.0\lib\netstandard2.0\NAudio.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Midi, Version=2.0.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Midi.2.0.1\lib\netstandard2.0\NAudio.Midi.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Wasapi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Wasapi.2.0.0\lib\netstandard2.0\NAudio.Wasapi.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WinForms, Version=2.0.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.WinForms.2.0.1\lib\net472\NAudio.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WinMM, Version=2.0.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.WinMM.2.0.1\lib\netstandard2.0\NAudio.WinMM.dll</HintPath>
     </Reference>
     <Reference Include="office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -104,8 +143,16 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -118,12 +165,21 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="UIAutomationProvider" />
+    <Reference Include="Windows.Foundation" />
+    <Reference Include="Windows.Storage" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analyzer.cs" />
-    <Compile Include="ConvertPresentation.cs" />
+    <Compile Include="DialogBoxes\SendBug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\SendBug.Designer.cs">
+      <DependentUpon>SendBug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\Analyzer.cs" />
+    <Compile Include="Utilities\Capture.cs" />
+    <Compile Include="Utilities\ConvertPresentation.cs" />
     <Compile Include="DialogBoxes\About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,11 +210,8 @@
     <Compile Include="DialogBoxes\SpectrumLevel.Designer.cs">
       <DependentUpon>SpectrumLevel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Player\Background.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Player\Background.Designer.cs">
-      <DependentUpon>Background.cs</DependentUpon>
+    <Compile Include="Controls\MenuButton.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="DialogBoxes\Connect.cs">
       <SubType>Form</SubType>
@@ -172,7 +225,8 @@
     <Compile Include="DialogBoxes\Error.Designer.cs">
       <DependentUpon>Error.cs</DependentUpon>
     </Compile>
-    <Compile Include="IniFile.cs" />
+    <Compile Include="Utilities\Gdi32.cs" />
+    <Compile Include="Utilities\IniFile.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,17 +240,11 @@
     <Compile Include="DialogBoxes\NetSettings.Designer.cs">
       <DependentUpon>NetSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Player\Play1.cs">
+    <Compile Include="Player\Player.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Player\Play1.Designer.cs">
-      <DependentUpon>Play1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Player\Play2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Player\Play2.Designer.cs">
-      <DependentUpon>Play2.cs</DependentUpon>
+    <Compile Include="Player\Player.Designer.cs">
+      <DependentUpon>Player.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,10 +254,10 @@
     <Compile Include="DialogBoxes\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="SpectrumBar.cs">
+    <Compile Include="Controls\SpectrumBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SpectrumBar.Designer.cs">
+    <Compile Include="Controls\SpectrumBar.Designer.cs">
       <DependentUpon>SpectrumBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Splash.cs">
@@ -218,12 +266,17 @@
     <Compile Include="Splash.Designer.cs">
       <DependentUpon>Splash.cs</DependentUpon>
     </Compile>
-    <Compile Include="VolumeLevel.cs">
+    <Compile Include="Controls\VolumeLevel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="VolumeLevel.Designer.cs">
+    <Compile Include="Controls\VolumeLevel.Designer.cs">
       <DependentUpon>VolumeLevel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Log.cs" />
+    <Compile Include="Utilities\User32.cs" />
+    <EmbeddedResource Include="Controls\MenuButton.resx">
+      <DependentUpon>MenuButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DialogBoxes\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
@@ -233,11 +286,11 @@
     <EmbeddedResource Include="DialogBoxes\AddInput.resx">
       <DependentUpon>AddInput.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\SendBug.resx">
+      <DependentUpon>SendBug.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DialogBoxes\SpectrumLevel.resx">
       <DependentUpon>SpectrumLevel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Player\Background.resx">
-      <DependentUpon>Background.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DialogBoxes\Connect.resx">
       <DependentUpon>Connect.cs</DependentUpon>
@@ -251,11 +304,8 @@
     <EmbeddedResource Include="DialogBoxes\NetSettings.resx">
       <DependentUpon>NetSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Player\Play1.resx">
-      <DependentUpon>Play1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Player\Play2.resx">
-      <DependentUpon>Play2.cs</DependentUpon>
+    <EmbeddedResource Include="Player\Player.resx">
+      <DependentUpon>Player.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -270,13 +320,13 @@
     <EmbeddedResource Include="DialogBoxes\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SpectrumBar.resx">
+    <EmbeddedResource Include="Controls\SpectrumBar.resx">
       <DependentUpon>SpectrumBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Splash.resx">
       <DependentUpon>Splash.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VolumeLevel.resx">
+    <EmbeddedResource Include="Controls\VolumeLevel.resx">
       <DependentUpon>VolumeLevel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="furMix_TemporaryKey.pfx" />
@@ -334,17 +384,13 @@
     <None Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bass.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="basswasapi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Icon.ico" />
     <None Include="Resources\Penek.png" />
     <None Include="Resources\Icon.png" />
     <None Include="Resources\MessagePopup.png" />
     <None Include="Resources\sandclock.jpg" />
+    <Content Include="Resources\error.mp4" />
+    <Content Include="Resources\USSR.png" />
     <Content Include="Sounds\hoy.wav" />
     <None Include="Resources\connecting.gif" />
     <None Include="Resources\ter.png" />
@@ -352,4 +398,11 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Accord.3.8.0\build\Accord.targets" Condition="Exists('..\packages\Accord.3.8.0\build\Accord.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Accord.3.8.0\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Accord.3.8.0\build\Accord.targets'))" />
+  </Target>
 </Project>

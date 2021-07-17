@@ -39,6 +39,8 @@
             this.fadebtn = new System.Windows.Forms.Button();
             this.Preview = new AxWMPLib.AxWindowsMediaPlayer();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.ContentListContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.DeleteContext = new System.Windows.Forms.ToolStripMenuItem();
             this.mutebtn = new System.Windows.Forms.Button();
             this.loopbtn = new System.Windows.Forms.Button();
             this.VerTxt = new System.Windows.Forms.Label();
@@ -52,195 +54,160 @@
             this.SetBtn = new System.Windows.Forms.Button();
             this.NetBtn = new System.Windows.Forms.Button();
             this.NetTimer = new System.Windows.Forms.Timer(this.components);
-            this.volumeLevel = new furMix.Controls.VolumeLevel();
             this.TipBack = new System.Windows.Forms.PictureBox();
-            this.picture = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.TipTitle = new System.Windows.Forms.Label();
             this.TipText = new System.Windows.Forms.Label();
+            this.FileContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NetworkBtn = new System.Windows.Forms.Button();
+            this.ClientNum = new System.Windows.Forms.Label();
+            this.LivePic = new System.Windows.Forms.PictureBox();
+            this.button1 = new furMix.Controls.MenuButton();
+            this.volumeLevel = new furMix.Controls.VolumeLevel();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Preview)).BeginInit();
+            this.ContentListContext.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timelinePrev)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timelineShow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TipBack)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.FileContext.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LivePic)).BeginInit();
             this.SuspendLayout();
             // 
             // cutbtn
             // 
-            this.cutbtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            resources.ApplyResources(this.cutbtn, "cutbtn");
             this.cutbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.cutbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cutbtn.ForeColor = System.Drawing.Color.White;
-            this.cutbtn.Location = new System.Drawing.Point(580, 96);
             this.cutbtn.Name = "cutbtn";
-            this.cutbtn.Size = new System.Drawing.Size(75, 23);
-            this.cutbtn.TabIndex = 1;
-            this.cutbtn.Text = "Cut";
             this.cutbtn.UseVisualStyleBackColor = false;
             this.cutbtn.Click += new System.EventHandler(this.button2_Click);
             // 
             // fullbtn
             // 
-            this.fullbtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            resources.ApplyResources(this.fullbtn, "fullbtn");
             this.fullbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.fullbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fullbtn.ForeColor = System.Drawing.Color.White;
-            this.fullbtn.Location = new System.Drawing.Point(580, 12);
             this.fullbtn.Name = "fullbtn";
-            this.fullbtn.Size = new System.Drawing.Size(75, 23);
-            this.fullbtn.TabIndex = 3;
-            this.fullbtn.Text = "Fullscreen";
             this.fullbtn.UseVisualStyleBackColor = false;
             this.fullbtn.Click += new System.EventHandler(this.button3_Click);
             // 
             // timer1
             // 
+            this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // playbtn
             // 
-            this.playbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.playbtn, "playbtn");
             this.playbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.playbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.playbtn.ForeColor = System.Drawing.Color.White;
-            this.playbtn.Location = new System.Drawing.Point(1031, 274);
             this.playbtn.Name = "playbtn";
-            this.playbtn.Size = new System.Drawing.Size(55, 36);
-            this.playbtn.TabIndex = 8;
-            this.playbtn.Text = "Play";
             this.playbtn.UseVisualStyleBackColor = false;
             this.playbtn.Click += new System.EventHandler(this.button4_Click);
             // 
             // infobtn
             // 
-            this.infobtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.infobtn, "infobtn");
             this.infobtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.infobtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.infobtn.ForeColor = System.Drawing.Color.White;
-            this.infobtn.Location = new System.Drawing.Point(1011, 502);
             this.infobtn.Name = "infobtn";
-            this.infobtn.Size = new System.Drawing.Size(75, 31);
-            this.infobtn.TabIndex = 10;
-            this.infobtn.Text = "About...";
             this.infobtn.UseVisualStyleBackColor = false;
             this.infobtn.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            resources.ApplyResources(this.button6, "button6");
             this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(12, 502);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 31);
-            this.button6.TabIndex = 11;
-            this.button6.Text = "Add input";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // fadebtn
             // 
-            this.fadebtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            resources.ApplyResources(this.fadebtn, "fadebtn");
             this.fadebtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.fadebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fadebtn.ForeColor = System.Drawing.Color.White;
-            this.fadebtn.Location = new System.Drawing.Point(580, 125);
             this.fadebtn.Name = "fadebtn";
-            this.fadebtn.Size = new System.Drawing.Size(75, 23);
-            this.fadebtn.TabIndex = 12;
-            this.fadebtn.Text = "Fade";
             this.fadebtn.UseVisualStyleBackColor = false;
             this.fadebtn.Click += new System.EventHandler(this.button7_Click);
             // 
             // Preview
             // 
-            this.Preview.Enabled = true;
-            this.Preview.Location = new System.Drawing.Point(12, 12);
+            resources.ApplyResources(this.Preview, "Preview");
             this.Preview.Name = "Preview";
             this.Preview.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("Preview.OcxState")));
-            this.Preview.Size = new System.Drawing.Size(472, 256);
-            this.Preview.TabIndex = 6;
             this.Preview.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.Preview_OpenStateChange);
             // 
             // listView1
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.listView1, "listView1");
             this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.listView1.ContextMenuStrip = this.ContentListContext;
             this.listView1.ForeColor = System.Drawing.Color.White;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(12, 335);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1074, 157);
-            this.listView1.TabIndex = 13;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
+            // ContentListContext
+            // 
+            this.ContentListContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DeleteContext});
+            this.ContentListContext.Name = "ContentListContext";
+            resources.ApplyResources(this.ContentListContext, "ContentListContext");
+            this.ContentListContext.Opening += new System.ComponentModel.CancelEventHandler(this.ContentListContext_Opening);
+            // 
+            // DeleteContext
+            // 
+            this.DeleteContext.Name = "DeleteContext";
+            resources.ApplyResources(this.DeleteContext, "DeleteContext");
+            this.DeleteContext.Click += new System.EventHandler(this.DeleteContext_Click);
+            // 
             // mutebtn
             // 
-            this.mutebtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.mutebtn, "mutebtn");
             this.mutebtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.mutebtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mutebtn.ForeColor = System.Drawing.Color.White;
-            this.mutebtn.Location = new System.Drawing.Point(721, 274);
             this.mutebtn.Name = "mutebtn";
-            this.mutebtn.Size = new System.Drawing.Size(54, 36);
-            this.mutebtn.TabIndex = 14;
-            this.mutebtn.Text = "Mute";
             this.mutebtn.UseVisualStyleBackColor = false;
             this.mutebtn.Click += new System.EventHandler(this.button8_Click);
             // 
             // loopbtn
             // 
-            this.loopbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.loopbtn, "loopbtn");
             this.loopbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.loopbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loopbtn.ForeColor = System.Drawing.Color.White;
-            this.loopbtn.Location = new System.Drawing.Point(661, 274);
             this.loopbtn.Name = "loopbtn";
-            this.loopbtn.Size = new System.Drawing.Size(51, 36);
-            this.loopbtn.TabIndex = 15;
-            this.loopbtn.Text = "Loop";
             this.loopbtn.UseVisualStyleBackColor = false;
             this.loopbtn.Click += new System.EventHandler(this.loopbtn_Click);
             // 
             // VerTxt
             // 
-            this.VerTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.VerTxt, "VerTxt");
             this.VerTxt.BackColor = System.Drawing.Color.Transparent;
-            this.VerTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VerTxt.ForeColor = System.Drawing.Color.White;
-            this.VerTxt.Location = new System.Drawing.Point(681, 505);
             this.VerTxt.Name = "VerTxt";
-            this.VerTxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.VerTxt.Size = new System.Drawing.Size(243, 26);
-            this.VerTxt.TabIndex = 17;
-            this.VerTxt.Text = "furMix 2020. Build 0.4.630. Beta 1.\r\nFor testing purposes only.";
-            this.VerTxt.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // playbtnprev
             // 
             this.playbtnprev.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.playbtnprev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.playbtnprev, "playbtnprev");
             this.playbtnprev.ForeColor = System.Drawing.Color.White;
-            this.playbtnprev.Location = new System.Drawing.Point(12, 274);
             this.playbtnprev.Name = "playbtnprev";
-            this.playbtnprev.Size = new System.Drawing.Size(55, 36);
-            this.playbtnprev.TabIndex = 19;
-            this.playbtnprev.Text = "Play";
             this.playbtnprev.UseVisualStyleBackColor = false;
             this.playbtnprev.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // timelinePrev
             // 
-            this.timelinePrev.Location = new System.Drawing.Point(74, 275);
+            resources.ApplyResources(this.timelinePrev, "timelinePrev");
             this.timelinePrev.Name = "timelinePrev";
-            this.timelinePrev.Size = new System.Drawing.Size(323, 45);
-            this.timelinePrev.TabIndex = 20;
             this.timelinePrev.TickStyle = System.Windows.Forms.TickStyle.None;
             this.timelinePrev.MouseDown += new System.Windows.Forms.MouseEventHandler(this.timelinePrev_MouseDown);
             this.timelinePrev.MouseUp += new System.Windows.Forms.MouseEventHandler(this.timelinePrev_MouseUp);
@@ -251,33 +218,23 @@
             // 
             // PreviewTime
             // 
-            this.PreviewTime.AutoSize = true;
+            resources.ApplyResources(this.PreviewTime, "PreviewTime");
             this.PreviewTime.ForeColor = System.Drawing.Color.White;
-            this.PreviewTime.Location = new System.Drawing.Point(404, 275);
             this.PreviewTime.Name = "PreviewTime";
-            this.PreviewTime.Size = new System.Drawing.Size(0, 13);
-            this.PreviewTime.TabIndex = 21;
             // 
             // timelineShow
             // 
-            this.timelineShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.timelineShow.Location = new System.Drawing.Point(780, 274);
+            resources.ApplyResources(this.timelineShow, "timelineShow");
             this.timelineShow.Name = "timelineShow";
-            this.timelineShow.Size = new System.Drawing.Size(167, 45);
-            this.timelineShow.TabIndex = 22;
             this.timelineShow.TickStyle = System.Windows.Forms.TickStyle.None;
             this.timelineShow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.timelineShow_MouseDown);
             this.timelineShow.MouseUp += new System.Windows.Forms.MouseEventHandler(this.timelineShow_MouseUp);
             // 
             // timeShow
             // 
-            this.timeShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.timeShow.AutoSize = true;
+            resources.ApplyResources(this.timeShow, "timeShow");
             this.timeShow.ForeColor = System.Drawing.Color.White;
-            this.timeShow.Location = new System.Drawing.Point(953, 286);
             this.timeShow.Name = "timeShow";
-            this.timeShow.Size = new System.Drawing.Size(0, 13);
-            this.timeShow.TabIndex = 23;
             // 
             // showTimer
             // 
@@ -285,109 +242,142 @@
             // 
             // SetBtn
             // 
-            this.SetBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.SetBtn, "SetBtn");
             this.SetBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.SetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SetBtn.ForeColor = System.Drawing.Color.White;
-            this.SetBtn.Location = new System.Drawing.Point(930, 502);
             this.SetBtn.Name = "SetBtn";
-            this.SetBtn.Size = new System.Drawing.Size(75, 31);
-            this.SetBtn.TabIndex = 24;
-            this.SetBtn.Text = "Settings";
             this.SetBtn.UseVisualStyleBackColor = false;
             this.SetBtn.Click += new System.EventHandler(this.SetBtn_Click);
             // 
             // NetBtn
             // 
-            this.NetBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            resources.ApplyResources(this.NetBtn, "NetBtn");
             this.NetBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.NetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.NetBtn.ForeColor = System.Drawing.Color.White;
-            this.NetBtn.Location = new System.Drawing.Point(580, 41);
             this.NetBtn.Name = "NetBtn";
-            this.NetBtn.Size = new System.Drawing.Size(75, 23);
-            this.NetBtn.TabIndex = 25;
-            this.NetBtn.Text = "Network";
             this.NetBtn.UseVisualStyleBackColor = false;
             this.NetBtn.Click += new System.EventHandler(this.NetBtn_Click);
             // 
             // NetTimer
             // 
-            this.NetTimer.Interval = 30;
+            this.NetTimer.Interval = 1000;
             this.NetTimer.Tick += new System.EventHandler(this.NetTimer_Tick);
-            // 
-            // volumeLevel
-            // 
-            this.volumeLevel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.volumeLevel.BackColor = System.Drawing.Color.Transparent;
-            this.volumeLevel.LeftCh = 0;
-            this.volumeLevel.Location = new System.Drawing.Point(489, 12);
-            this.volumeLevel.Name = "volumeLevel";
-            this.volumeLevel.RightCh = 0;
-            this.volumeLevel.Size = new System.Drawing.Size(85, 317);
-            this.volumeLevel.TabIndex = 26;
-            this.volumeLevel.DoubleClick += new System.EventHandler(this.volumeLevel_DoubleClick);
             // 
             // TipBack
             // 
             this.TipBack.BackColor = System.Drawing.Color.Transparent;
             this.TipBack.Image = global::furMix.Properties.Resources.MessagePopup;
-            this.TipBack.Location = new System.Drawing.Point(517, 421);
+            resources.ApplyResources(this.TipBack, "TipBack");
             this.TipBack.Name = "TipBack";
-            this.TipBack.Size = new System.Drawing.Size(220, 110);
-            this.TipBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.TipBack.TabIndex = 27;
             this.TipBack.TabStop = false;
             this.TipBack.Click += new System.EventHandler(this.TipBack_Click);
             // 
-            // picture
-            // 
-            this.picture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picture.BackColor = System.Drawing.Color.Black;
-            this.picture.Location = new System.Drawing.Point(661, 12);
-            this.picture.Name = "picture";
-            this.picture.Size = new System.Drawing.Size(425, 256);
-            this.picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picture.TabIndex = 5;
-            this.picture.TabStop = false;
-            // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(472, 256);
-            this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             // 
             // TipTitle
             // 
-            this.TipTitle.AutoSize = true;
+            resources.ApplyResources(this.TipTitle, "TipTitle");
             this.TipTitle.BackColor = System.Drawing.Color.White;
-            this.TipTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TipTitle.Location = new System.Drawing.Point(534, 442);
             this.TipTitle.Name = "TipTitle";
-            this.TipTitle.Size = new System.Drawing.Size(184, 24);
-            this.TipTitle.TabIndex = 28;
-            this.TipTitle.Text = "Welcome to furMix";
             this.TipTitle.Click += new System.EventHandler(this.TipTitle_Click);
             // 
             // TipText
             // 
             this.TipText.BackColor = System.Drawing.Color.White;
-            this.TipText.Location = new System.Drawing.Point(535, 466);
+            resources.ApplyResources(this.TipText, "TipText");
             this.TipText.Name = "TipText";
-            this.TipText.Size = new System.Drawing.Size(183, 52);
-            this.TipText.TabIndex = 29;
-            this.TipText.Text = "This short guide will show you some moments for quick start. Click here to begin." +
-    "";
             this.TipText.Click += new System.EventHandler(this.TipText_Click);
+            // 
+            // FileContext
+            // 
+            this.FileContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem});
+            this.FileContext.Name = "FileContext";
+            resources.ApplyResources(this.FileContext, "FileContext");
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            resources.ApplyResources(this.newToolStripMenuItem, "newToolStripMenuItem");
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            resources.ApplyResources(this.openToolStripMenuItem, "openToolStripMenuItem");
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            resources.ApplyResources(this.saveToolStripMenuItem, "saveToolStripMenuItem");
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // NetworkBtn
+            // 
+            resources.ApplyResources(this.NetworkBtn, "NetworkBtn");
+            this.NetworkBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.NetworkBtn.ForeColor = System.Drawing.Color.White;
+            this.NetworkBtn.Name = "NetworkBtn";
+            this.NetworkBtn.UseVisualStyleBackColor = false;
+            this.NetworkBtn.Click += new System.EventHandler(this.NetworkBtn_Click);
+            // 
+            // ClientNum
+            // 
+            resources.ApplyResources(this.ClientNum, "ClientNum");
+            this.ClientNum.ForeColor = System.Drawing.Color.White;
+            this.ClientNum.Name = "ClientNum";
+            // 
+            // LivePic
+            // 
+            this.LivePic.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.LivePic, "LivePic");
+            this.LivePic.Name = "LivePic";
+            this.LivePic.TabStop = false;
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Menu = this.FileContext;
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // volumeLevel
+            // 
+            resources.ApplyResources(this.volumeLevel, "volumeLevel");
+            this.volumeLevel.BackColor = System.Drawing.Color.Transparent;
+            this.volumeLevel.LeftCh = 0;
+            this.volumeLevel.Name = "volumeLevel";
+            this.volumeLevel.RightCh = 0;
+            this.volumeLevel.DoubleClick += new System.EventHandler(this.volumeLevel_DoubleClick);
+            // 
+            // button2
+            // 
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click_2);
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(1098, 545);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.LivePic);
+            this.Controls.Add(this.ClientNum);
+            this.Controls.Add(this.NetworkBtn);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.volumeLevel);
             this.Controls.Add(this.SetBtn);
             this.Controls.Add(this.timeShow);
@@ -397,7 +387,6 @@
             this.Controls.Add(this.playbtnprev);
             this.Controls.Add(this.VerTxt);
             this.Controls.Add(this.loopbtn);
-            this.Controls.Add(this.picture);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.fadebtn);
             this.Controls.Add(this.button6);
@@ -408,17 +397,17 @@
             this.Controls.Add(this.cutbtn);
             this.Controls.Add(this.mutebtn);
             this.Controls.Add(this.pictureBox1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1114, 584);
             this.Name = "Main";
-            this.Text = "furMix";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.Preview)).EndInit();
+            this.ContentListContext.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.timelinePrev)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.timelineShow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TipBack)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.FileContext.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.LivePic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -428,7 +417,6 @@
         private System.Windows.Forms.Button cutbtn;
         private System.Windows.Forms.Button fullbtn;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.PictureBox picture;
         private AxWMPLib.AxWindowsMediaPlayer Preview;
         private System.Windows.Forms.Button playbtn;
         private System.Windows.Forms.Button infobtn;
@@ -453,6 +441,17 @@
         private System.Windows.Forms.PictureBox TipBack;
         private System.Windows.Forms.Label TipTitle;
         private System.Windows.Forms.Label TipText;
+        private System.Windows.Forms.ContextMenuStrip ContentListContext;
+        private System.Windows.Forms.ToolStripMenuItem DeleteContext;
+        private furMix.Controls.MenuButton button1;
+        private System.Windows.Forms.ContextMenuStrip FileContext;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.Button NetworkBtn;
+        private System.Windows.Forms.Label ClientNum;
+        private System.Windows.Forms.PictureBox LivePic;
+        private System.Windows.Forms.Button button2;
     }
 }
 

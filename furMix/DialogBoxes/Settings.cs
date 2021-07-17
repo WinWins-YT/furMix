@@ -26,6 +26,13 @@ namespace furMix
                 scrlist.Items.Add(string.Format("{0} - {1}", i, sc.DeviceName));
             }
             scrlist.SelectedIndex = scr.Length - 1;
+            if (Properties.Settings.Default.Edition == "Professional Edition" || Properties.Settings.Default.Edition == "Misha Ter Edition" || Properties.Settings.Default.Edition == "Misha Pidor Edition")
+            {
+                NetLabel.Visible = true;
+                NetPortTxt.Visible = true;
+                NetPortTxt.Text = Properties.Settings.Default.NetPort.ToString();
+            }
+            Log.LogEvent("Settings dialog opened");
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
@@ -44,6 +51,15 @@ namespace furMix
             int scrindex = Convert.ToInt32(array[0]);
             Properties.Settings.Default.PlaybackDevice = devindex;
             Properties.Settings.Default.Screen = scrindex;
+            if (Properties.Settings.Default.Edition == "Professional Edition" || Properties.Settings.Default.Edition == "Misha Ter Edition" || Properties.Settings.Default.Edition == "Misha Pidor Edition")
+            {
+                if (!int.TryParse(NetPortTxt.Text, out int port))
+                {
+                    MessageBox.Show("Network port is invalid", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                Properties.Settings.Default.NetPort = int.Parse(NetPortTxt.Text);
+            }
             Properties.Settings.Default.Save();
             MessageBox.Show("Restart application to save settings", "Settings saved", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             Close();

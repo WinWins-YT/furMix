@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using furMix.Utilities;
 
 namespace furMix
 {
@@ -18,29 +19,39 @@ namespace furMix
         public static int type;
         public static Color color;
         public static bool canceled;
+        private string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DaniMat Corp.\furMix";
 
         public AddInput()
         {
             try
             {
                 InitializeComponent();
-                foreach (string temp in File.ReadLines(Application.StartupPath + @"\config\lastvideo.lst"))
+                if (!Directory.Exists(FolderPath + @"\config"))
+                {
+                    Directory.CreateDirectory(FolderPath + @"\config");
+                    File.CreateText(FolderPath + @"\config\lastphoto.lst");
+                    File.CreateText(FolderPath + @"\config\lastvideo.lst");
+                    File.CreateText(FolderPath + @"\config\lastphotos.lst");
+                    File.CreateText(FolderPath + @"\config\lastpres.lst");
+                }
+                foreach (string temp in File.ReadLines(FolderPath + @"\config\lastvideo.lst"))
                 {
                     LastList.Items.Add(temp);
                 }
-                foreach (string temp in File.ReadLines(Application.StartupPath + @"\config\lastphoto.lst"))
+                foreach (string temp in File.ReadLines(FolderPath + @"\config\lastphoto.lst"))
                 {
                     LastList1.Items.Add(temp);
                 }
-                foreach (string temp in File.ReadLines(Application.StartupPath + @"\config\lastphotos.lst"))
+                foreach (string temp in File.ReadLines(FolderPath + @"\config\lastphotos.lst"))
                 {
                     LastList2.Items.Add(temp);
                 }
-                foreach (string temp in File.ReadLines(Application.StartupPath + @"\config\lastpres.lst"))
+                foreach (string temp in File.ReadLines(FolderPath + @"\config\lastpres.lst"))
                 {
                     LastList3.Items.Add(temp);
                 }
                 filepath = "";
+                Log.LogEvent("Add input dialog opened");
             }
             catch (Exception ex)
             {
@@ -75,7 +86,7 @@ namespace furMix
                         {
                             temp1.Add(temp);
                         }
-                        File.WriteAllLines(Application.StartupPath + @"\config\lastvideo.lst", temp1);
+                        File.WriteAllLines(FolderPath + @"\config\lastvideo.lst", temp1);
                     }
                     type = 1;
                 }
@@ -113,7 +124,7 @@ namespace furMix
                         {
                             temp1.Add(temp);
                         }
-                        File.WriteAllLines(Application.StartupPath + @"\config\lastphoto.lst", temp1);
+                        File.WriteAllLines(FolderPath + @"\config\lastphoto.lst", temp1);
                     }
                     type = 2;
                 }
@@ -243,8 +254,8 @@ namespace furMix
             try
             {
                 LastList.Items.Clear();
-                File.Delete(Application.StartupPath + @"\config\lastvideo.lst");
-                File.Create(Application.StartupPath + @"\config\lastvideo.lst");
+                File.Delete(FolderPath + @"\config\lastvideo.lst");
+                File.Create(FolderPath + @"\config\lastvideo.lst");
             }
             catch (Exception ex)
             {
@@ -260,8 +271,8 @@ namespace furMix
             try
             {
                 LastList1.Items.Clear();
-                File.Delete(Application.StartupPath + @"\config\lastphoto.lst");
-                File.Create(Application.StartupPath + @"\config\lastphoto.lst");
+                File.Delete(FolderPath + @"\config\lastphoto.lst");
+                File.Create(FolderPath + @"\config\lastphoto.lst");
             }
             catch (Exception ex)
             {
@@ -304,7 +315,7 @@ namespace furMix
                             {
                                 temp1.Add(temp);
                             }
-                            File.WriteAllLines(Application.StartupPath + @"\config\lastphotos.lst", temp1);
+                            File.WriteAllLines(FolderPath + @"\config\lastphotos.lst", temp1);
                         }
                         type = 3;
                     }
@@ -328,8 +339,8 @@ namespace furMix
             try
             {
                 LastList2.Items.Clear();
-                File.Delete(Application.StartupPath + @"\config\lastphotos.lst");
-                File.Create(Application.StartupPath + @"\config\lastphotos.lst");
+                File.Delete(FolderPath + @"\config\lastphotos.lst");
+                File.Create(FolderPath + @"\config\lastphotos.lst");
             }
             catch (Exception ex)
             {
@@ -382,7 +393,7 @@ namespace furMix
                         {
                             temp1.Add(temp);
                         }
-                        File.WriteAllLines(Application.StartupPath + @"\config\lastpres.lst", temp1);
+                        File.WriteAllLines(FolderPath + @"\config\lastpres.lst", temp1);
                     }
                     type = 4;
                 }
@@ -419,8 +430,8 @@ namespace furMix
             try
             {
                 LastList3.Items.Clear();
-                File.Delete(Application.StartupPath + @"\config\lastpres.lst");
-                File.Create(Application.StartupPath + @"\config\lastpres.lst");
+                File.Delete(FolderPath + @"\config\lastpres.lst");
+                File.Create(FolderPath + @"\config\lastpres.lst");
             }
             catch (Exception ex)
             {

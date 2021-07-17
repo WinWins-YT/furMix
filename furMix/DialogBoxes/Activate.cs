@@ -1,4 +1,5 @@
 ﻿using FluentFTP;
+using furMix.Utilities;
 using System;
 using System.Drawing;
 using System.IO;
@@ -17,6 +18,7 @@ namespace furMix
         public Activate()
         {
             InitializeComponent();
+            Log.LogEvent("Activate dialog opened");
             var connect = new Connect();
             connect.Show();
             ftp.Host = "danimat.ddns.net";
@@ -40,6 +42,7 @@ namespace furMix
                     }
                     catch
                     {
+                        Log.LogEvent("Connection error");
                         connect.Close();
                         connect.Dispose();
                         offline = true;
@@ -50,6 +53,7 @@ namespace furMix
             }
             catch
             {
+                Log.LogEvent("Connection error");
                 connect.Close();
                 connect.Dispose();
                 offline = true;
@@ -63,6 +67,7 @@ namespace furMix
                 label5.ForeColor = Color.Gray;
                 label5.Cursor = Cursors.Default;
             }
+            Log.LogEvent("Connected to server");
         }
 
         private void button1_Click(object sender, EventArgs e)

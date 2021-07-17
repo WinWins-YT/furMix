@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using furMix.Utilities;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace furMix.DialogBoxes
@@ -8,9 +10,10 @@ namespace furMix.DialogBoxes
         public SpectrumLevel()
         {
             InitializeComponent();
+            Log.LogEvent("Advanced spectrum analyzer opened");
         }
 
-        public void Set(List<byte> spectrum)
+        public void Set(int[] spectrum)
         {
             spectrumBar1.Level = spectrum[0];
             spectrumBar2.Level = spectrum[1];
@@ -27,6 +30,8 @@ namespace furMix.DialogBoxes
             spectrumBar13.Level = spectrum[12];
             spectrumBar14.Level = spectrum[13];
             spectrumBar15.Level = spectrum[14];
+            spectrumBar16.Level = spectrum[15];
+            spectrumBar17.Level = spectrum[16];
         }
 
         private void SpectrumLevel_FormClosed(object sender, FormClosedEventArgs e)

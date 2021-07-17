@@ -34,6 +34,8 @@
             this.devlist = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.scrlist = new System.Windows.Forms.ComboBox();
+            this.NetLabel = new System.Windows.Forms.Label();
+            this.NetPortTxt = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // VideoChk
@@ -48,7 +50,8 @@
             // 
             // SaveBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(212, 93);
+            this.SaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SaveBtn.Location = new System.Drawing.Point(212, 119);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(90, 23);
             this.SaveBtn.TabIndex = 1;
@@ -92,11 +95,31 @@
             this.scrlist.Size = new System.Drawing.Size(197, 21);
             this.scrlist.TabIndex = 5;
             // 
+            // NetLabel
+            // 
+            this.NetLabel.AutoSize = true;
+            this.NetLabel.Location = new System.Drawing.Point(12, 96);
+            this.NetLabel.Name = "NetLabel";
+            this.NetLabel.Size = new System.Drawing.Size(74, 13);
+            this.NetLabel.TabIndex = 6;
+            this.NetLabel.Text = "Network port: ";
+            this.NetLabel.Visible = false;
+            // 
+            // NetPortTxt
+            // 
+            this.NetPortTxt.Location = new System.Drawing.Point(105, 93);
+            this.NetPortTxt.Name = "NetPortTxt";
+            this.NetPortTxt.Size = new System.Drawing.Size(197, 20);
+            this.NetPortTxt.TabIndex = 7;
+            this.NetPortTxt.Visible = false;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 125);
+            this.ClientSize = new System.Drawing.Size(314, 154);
+            this.Controls.Add(this.NetPortTxt);
+            this.Controls.Add(this.NetLabel);
             this.Controls.Add(this.scrlist);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.devlist);
@@ -122,5 +145,7 @@
         private System.Windows.Forms.ComboBox devlist;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox scrlist;
+        private System.Windows.Forms.Label NetLabel;
+        private System.Windows.Forms.TextBox NetPortTxt;
     }
 }

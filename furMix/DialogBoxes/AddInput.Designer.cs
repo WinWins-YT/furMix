@@ -48,17 +48,17 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ColorBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.Presentation = new System.Windows.Forms.TabPage();
+            this.ClearBtn3 = new System.Windows.Forms.Button();
+            this.LastList3 = new System.Windows.Forms.ListBox();
+            this.BrowBtn3 = new System.Windows.Forms.Button();
+            this.filepathTxt3 = new System.Windows.Forms.TextBox();
             this.OKbtn = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.FileVideo = new System.Windows.Forms.OpenFileDialog();
             this.FilePhoto = new System.Windows.Forms.OpenFileDialog();
             this.FolderPhotos = new System.Windows.Forms.FolderBrowserDialog();
-            this.Presentation = new System.Windows.Forms.TabPage();
-            this.ClearBtn3 = new System.Windows.Forms.Button();
-            this.LastList3 = new System.Windows.Forms.ListBox();
-            this.BrowBtn3 = new System.Windows.Forms.Button();
-            this.filepathTxt3 = new System.Windows.Forms.TextBox();
             this.FilePres = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.Video.SuspendLayout();
@@ -272,46 +272,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Select color:";
             // 
-            // OKbtn
-            // 
-            this.OKbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.OKbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.OKbtn.ForeColor = System.Drawing.Color.White;
-            this.OKbtn.Location = new System.Drawing.Point(391, 254);
-            this.OKbtn.Name = "OKbtn";
-            this.OKbtn.Size = new System.Drawing.Size(75, 31);
-            this.OKbtn.TabIndex = 1;
-            this.OKbtn.Text = "OK";
-            this.OKbtn.UseVisualStyleBackColor = false;
-            this.OKbtn.Click += new System.EventHandler(this.OKbtn_Click);
-            // 
-            // CancelBtn
-            // 
-            this.CancelBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CancelBtn.ForeColor = System.Drawing.Color.White;
-            this.CancelBtn.Location = new System.Drawing.Point(307, 254);
-            this.CancelBtn.Name = "CancelBtn";
-            this.CancelBtn.Size = new System.Drawing.Size(78, 31);
-            this.CancelBtn.TabIndex = 2;
-            this.CancelBtn.Text = "Cancel";
-            this.CancelBtn.UseVisualStyleBackColor = false;
-            this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
-            // 
-            // FileVideo
-            // 
-            this.FileVideo.Filter = "Video files|*.avi;*.mp4";
-            // 
-            // FilePhoto
-            // 
-            this.FilePhoto.Filter = "Photo|*.jpg;*.png;*.bmp";
-            // 
-            // FolderPhotos
-            // 
-            this.FolderPhotos.RootFolder = System.Environment.SpecialFolder.MyComputer;
-            this.FolderPhotos.ShowNewFolderButton = false;
-            // 
             // Presentation
             // 
             this.Presentation.Controls.Add(this.ClearBtn3);
@@ -361,6 +321,46 @@
             this.filepathTxt3.Size = new System.Drawing.Size(352, 20);
             this.filepathTxt3.TabIndex = 7;
             // 
+            // OKbtn
+            // 
+            this.OKbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.OKbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.OKbtn.ForeColor = System.Drawing.Color.White;
+            this.OKbtn.Location = new System.Drawing.Point(391, 254);
+            this.OKbtn.Name = "OKbtn";
+            this.OKbtn.Size = new System.Drawing.Size(75, 31);
+            this.OKbtn.TabIndex = 1;
+            this.OKbtn.Text = "OK";
+            this.OKbtn.UseVisualStyleBackColor = false;
+            this.OKbtn.Click += new System.EventHandler(this.OKbtn_Click);
+            // 
+            // CancelBtn
+            // 
+            this.CancelBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.CancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CancelBtn.ForeColor = System.Drawing.Color.White;
+            this.CancelBtn.Location = new System.Drawing.Point(307, 254);
+            this.CancelBtn.Name = "CancelBtn";
+            this.CancelBtn.Size = new System.Drawing.Size(78, 31);
+            this.CancelBtn.TabIndex = 2;
+            this.CancelBtn.Text = "Cancel";
+            this.CancelBtn.UseVisualStyleBackColor = false;
+            this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
+            // 
+            // FileVideo
+            // 
+            this.FileVideo.Filter = "Video files|*.avi;*.mp4";
+            // 
+            // FilePhoto
+            // 
+            this.FilePhoto.Filter = "Photo|*.jpg;*.png;*.bmp";
+            // 
+            // FolderPhotos
+            // 
+            this.FolderPhotos.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            this.FolderPhotos.ShowNewFolderButton = false;
+            // 
             // FilePres
             // 
             this.FilePres.Filter = "Presentation|*.ppt;*.pptx";
@@ -378,7 +378,7 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AddInput";
-            this.Text = "Add Input";
+            this.Text = "Add media";
             this.tabControl1.ResumeLayout(false);
             this.Video.ResumeLayout(false);
             this.Video.PerformLayout();

@@ -1,6 +1,8 @@
 ﻿using furMix.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Windows.Forms;
 
 namespace furMix
@@ -11,16 +13,27 @@ namespace furMix
         public static int daysleft;
         public static bool trial;
         public static string name;
+
         public Splash()
         {
             InitializeComponent();
+            Log.CreateLog();
+            Log.LogEvent("Starting furMix...");
+            Log.LogEvent("Setting edition...");
+            Properties.Settings.Default.Edition = "Professional Edition";
+            Log.LogEvent("Setting name...");
+            Properties.Settings.Default.Name = Environment.UserName;
+            Log.LogEvent("Activating...");
+            Properties.Settings.Default.Activated = true;
+            Log.LogEvent("Saving configuration...");
+            Properties.Settings.Default.Save();
             label2.Text = Properties.Settings.Default.Version;
             label4.Text = Properties.Settings.Default.Edition;
-            if (label4.Text == "Misha Pidor Edition")
+            if (label4.Text == "Misha Pidor Edition" || label4.Text == "Misha Ter Edition")
             {
                 pictureBox2.Visible = true;
             }
-            if (Properties.Settings.Default.PlaybackDevice == 0)
+            /*if (Properties.Settings.Default.PlaybackDevice == 0)
             {
                 Analyzer anal = new Analyzer();
                 anal.SetPlaybackList(devs);
@@ -28,7 +41,8 @@ namespace furMix
                 int devindex = Convert.ToInt32(array[0]);
                 Properties.Settings.Default.PlaybackDevice = devindex;
                 Properties.Settings.Default.Save();
-            }
+            }*/
+            Log.LogEvent("Loading assemblies...");
         }
 
         private void timer1_Tick(object sender, EventArgs e)

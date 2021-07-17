@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows.Forms;
+using furMix.Utilities;
 
 namespace furMix.DialogBoxes
 {
@@ -9,13 +10,8 @@ namespace furMix.DialogBoxes
         {
             InitializeComponent();
             VerTxt.Text = "Version " + Properties.Settings.Default.Version;
-            if (Splash.trial)
-            {
-                TrialTxt.Visible = true;
-                TrialLeftTxt.Text = "Trial period ends in " + Splash.daysleft + " days";
-                TrialLeftTxt.Visible = true;
-            }
             LicensedTxt.Text = "This product is licensed to " + Splash.name;
+            Log.LogEvent("About dialog opened");
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

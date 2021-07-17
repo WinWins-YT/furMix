@@ -18,7 +18,13 @@ namespace furMix
         public static string GetLocalIPAddress()
         {
             string hostName = Dns.GetHostName();
-            string myIP = Dns.GetHostEntry(hostName).AddressList[2].ToString();
+            var myIPs = Dns.GetHostEntry(hostName).AddressList;
+            string myIP = "";
+            foreach (IPAddress IP in myIPs)
+            {
+                if (IP.ToString().Contains("192.168")) myIP = IP.ToString();
+            }
+            if (myIP == "") myIP = myIPs[0].ToString();
             return myIP;
         }
 

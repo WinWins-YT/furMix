@@ -1,4 +1,5 @@
-﻿using System;
+﻿using furMix.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,18 +22,22 @@ namespace furMix
             {
                 try
                 {
-                    ZipFile.ExtractToDirectory(Application.StartupPath + @"\system\error.cfg", Application.StartupPath + @"\system");
+                    //ZipFile.ExtractToDirectory(Application.StartupPath + @"\system\error.cfg", Path.GetTempPath());
+                    File.WriteAllBytes(Path.GetTempPath() + @"\error.mp4", Properties.Resources.error);
                 }
                 catch
                 {
 
                 }
-                ErrorVideo.URL = Application.StartupPath + @"\system\error.mp4";
+                ErrorVideo.URL = Path.GetTempPath() + @"\error.mp4";
             }
+            if (!Log.isCreated) Log.CreateLog();
+            Log.LogEvent("Error thrown");
         }
 
         public void ShowError(Exception ex)
         {
+            Log.LogEvent(ex.ToString());
             ErrorInfo.Text = ex.ToString();
             if (Properties.Settings.Default.VideoError)
             {
@@ -42,29 +47,37 @@ namespace furMix
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Log.LogEvent("Error dialog closing");
             try
             {
-                File.Delete(Application.StartupPath + @"\system\error.mp4");
+                File.Delete(Path.GetTempPath() + @"\error.mp4");
             }
             catch
             {
 
             }
-            File.Delete(Application.StartupPath + @"\system\error.mp4");
+            File.Delete(Path.GetTempPath() + @"\error.mp4");
             this.Close();
         }
 
         private void Error_FormClosed(object sender, FormClosingEventArgs e)
         {
+            Log.LogEvent("Error dialog closing");
             try
             {
-                File.Delete(Application.StartupPath + @"\system\error.mp4");
+                File.Delete(Path.GetTempPath() + @"\error.mp4");
                 //this.Close();
             }
             catch
             {
 
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Log.SendBug();
+            Close();
         }
     }
 }
