@@ -34,21 +34,24 @@ namespace furMix
                     File.CreateText(FolderPath + @"\config\lastphotos.lst");
                     File.CreateText(FolderPath + @"\config\lastpres.lst");
                 }
-                foreach (string temp in File.ReadLines(FolderPath + @"\config\lastvideo.lst"))
+                else
                 {
-                    LastList.Items.Add(temp);
-                }
-                foreach (string temp in File.ReadLines(FolderPath + @"\config\lastphoto.lst"))
-                {
-                    LastList1.Items.Add(temp);
-                }
-                foreach (string temp in File.ReadLines(FolderPath + @"\config\lastphotos.lst"))
-                {
-                    LastList2.Items.Add(temp);
-                }
-                foreach (string temp in File.ReadLines(FolderPath + @"\config\lastpres.lst"))
-                {
-                    LastList3.Items.Add(temp);
+                    foreach (string temp in File.ReadLines(FolderPath + @"\config\lastvideo.lst"))
+                    {
+                        LastList.Items.Add(temp);
+                    }
+                    foreach (string temp in File.ReadLines(FolderPath + @"\config\lastphoto.lst"))
+                    {
+                        LastList1.Items.Add(temp);
+                    }
+                    foreach (string temp in File.ReadLines(FolderPath + @"\config\lastphotos.lst"))
+                    {
+                        LastList2.Items.Add(temp);
+                    }
+                    foreach (string temp in File.ReadLines(FolderPath + @"\config\lastpres.lst"))
+                    {
+                        LastList3.Items.Add(temp);
+                    }
                 }
                 filepath = "";
                 Log.LogEvent("Add input dialog opened");
@@ -184,7 +187,9 @@ namespace furMix
                 else if (tabControl1.SelectedIndex == 4)
                 {
                     type = 4;
-                    filepath = filepathTxt3.Text;
+                    var pres = new ConvertPresentation(filepathTxt3.Text);
+                    pres.Convert();
+                    filepath = pres.FolderName;
                 }
                 Close();
             }

@@ -117,17 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="textBox1.Text" xml:space="preserve">
-    <value>NAudio by Mark Health - for audio spectrum and processing
-
-FluentFTP by Robin Rodricks - for server connections
-
-rtaNetworking.Streaming - for Network function
-
-Accord.Math by Accord.NET - for FFT calculations
-
-SimpleHTTP - for remote control
-
-SharpAvi by Vasili Maslov - for recording</value>
-  </data>
 </root>

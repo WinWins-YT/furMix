@@ -12,7 +12,7 @@ using Accord.Math;
 namespace furMix.Utilities
 {
 
-    internal class Analyzer
+    public class Analyzer
     {
         private MMDevice device;
         private List<string> devicelist = new List<string>();
@@ -28,6 +28,8 @@ namespace furMix.Utilities
         public bool DisplayEnable { get; set; }
 
         public SpectrumLevel spectrumLevel { get; set; }
+
+        public BufferedWaveProvider BufferedData { get => bwp; }
 
         public Analyzer()
         {

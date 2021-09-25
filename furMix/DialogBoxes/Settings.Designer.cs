@@ -36,6 +36,12 @@
             this.scrlist = new System.Windows.Forms.ComboBox();
             this.NetLabel = new System.Windows.Forms.Label();
             this.NetPortTxt = new System.Windows.Forms.TextBox();
+            this.WebPortTxt = new System.Windows.Forms.TextBox();
+            this.WebPortLabel = new System.Windows.Forms.Label();
+            this.WebAPIPortTxt = new System.Windows.Forms.TextBox();
+            this.WebAPIPortLabel = new System.Windows.Forms.Label();
+            this.WebInterfaceChk = new System.Windows.Forms.CheckBox();
+            this.UpdateCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // VideoChk
@@ -51,7 +57,7 @@
             // SaveBtn
             // 
             this.SaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveBtn.Location = new System.Drawing.Point(212, 119);
+            this.SaveBtn.Location = new System.Drawing.Point(265, 197);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(90, 23);
             this.SaveBtn.TabIndex = 1;
@@ -70,11 +76,13 @@
             // 
             // devlist
             // 
+            this.devlist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.devlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.devlist.FormattingEnabled = true;
-            this.devlist.Location = new System.Drawing.Point(105, 39);
+            this.devlist.Location = new System.Drawing.Point(119, 39);
             this.devlist.Name = "devlist";
-            this.devlist.Size = new System.Drawing.Size(197, 21);
+            this.devlist.Size = new System.Drawing.Size(236, 21);
             this.devlist.TabIndex = 3;
             // 
             // label2
@@ -88,11 +96,13 @@
             // 
             // scrlist
             // 
+            this.scrlist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.scrlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.scrlist.FormattingEnabled = true;
-            this.scrlist.Location = new System.Drawing.Point(105, 66);
+            this.scrlist.Location = new System.Drawing.Point(119, 66);
             this.scrlist.Name = "scrlist";
-            this.scrlist.Size = new System.Drawing.Size(197, 21);
+            this.scrlist.Size = new System.Drawing.Size(236, 21);
             this.scrlist.TabIndex = 5;
             // 
             // NetLabel
@@ -100,24 +110,93 @@
             this.NetLabel.AutoSize = true;
             this.NetLabel.Location = new System.Drawing.Point(12, 96);
             this.NetLabel.Name = "NetLabel";
-            this.NetLabel.Size = new System.Drawing.Size(74, 13);
+            this.NetLabel.Size = new System.Drawing.Size(72, 13);
             this.NetLabel.TabIndex = 6;
-            this.NetLabel.Text = "Network port: ";
+            this.NetLabel.Text = "Browser port: ";
             this.NetLabel.Visible = false;
             // 
             // NetPortTxt
             // 
-            this.NetPortTxt.Location = new System.Drawing.Point(105, 93);
+            this.NetPortTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NetPortTxt.Location = new System.Drawing.Point(119, 93);
             this.NetPortTxt.Name = "NetPortTxt";
-            this.NetPortTxt.Size = new System.Drawing.Size(197, 20);
+            this.NetPortTxt.Size = new System.Drawing.Size(236, 20);
             this.NetPortTxt.TabIndex = 7;
             this.NetPortTxt.Visible = false;
+            // 
+            // WebPortTxt
+            // 
+            this.WebPortTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.WebPortTxt.Location = new System.Drawing.Point(119, 141);
+            this.WebPortTxt.Name = "WebPortTxt";
+            this.WebPortTxt.Size = new System.Drawing.Size(236, 20);
+            this.WebPortTxt.TabIndex = 9;
+            this.WebPortTxt.Visible = false;
+            // 
+            // WebPortLabel
+            // 
+            this.WebPortLabel.AutoSize = true;
+            this.WebPortLabel.Location = new System.Drawing.Point(12, 144);
+            this.WebPortLabel.Name = "WebPortLabel";
+            this.WebPortLabel.Size = new System.Drawing.Size(101, 13);
+            this.WebPortLabel.TabIndex = 8;
+            this.WebPortLabel.Text = "Web interface port: ";
+            this.WebPortLabel.Visible = false;
+            // 
+            // WebAPIPortTxt
+            // 
+            this.WebAPIPortTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.WebAPIPortTxt.Location = new System.Drawing.Point(119, 167);
+            this.WebAPIPortTxt.Name = "WebAPIPortTxt";
+            this.WebAPIPortTxt.Size = new System.Drawing.Size(236, 20);
+            this.WebAPIPortTxt.TabIndex = 11;
+            this.WebAPIPortTxt.Visible = false;
+            // 
+            // WebAPIPortLabel
+            // 
+            this.WebAPIPortLabel.AutoSize = true;
+            this.WebAPIPortLabel.Location = new System.Drawing.Point(12, 170);
+            this.WebAPIPortLabel.Name = "WebAPIPortLabel";
+            this.WebAPIPortLabel.Size = new System.Drawing.Size(77, 13);
+            this.WebAPIPortLabel.TabIndex = 10;
+            this.WebAPIPortLabel.Text = "Web API port: ";
+            this.WebAPIPortLabel.Visible = false;
+            // 
+            // WebInterfaceChk
+            // 
+            this.WebInterfaceChk.AutoSize = true;
+            this.WebInterfaceChk.Location = new System.Drawing.Point(15, 119);
+            this.WebInterfaceChk.Name = "WebInterfaceChk";
+            this.WebInterfaceChk.Size = new System.Drawing.Size(126, 17);
+            this.WebInterfaceChk.TabIndex = 12;
+            this.WebInterfaceChk.Text = "Enable web interface";
+            this.WebInterfaceChk.UseVisualStyleBackColor = true;
+            this.WebInterfaceChk.Visible = false;
+            // 
+            // UpdateCheck
+            // 
+            this.UpdateCheck.AutoSize = true;
+            this.UpdateCheck.Location = new System.Drawing.Point(135, 13);
+            this.UpdateCheck.Name = "UpdateCheck";
+            this.UpdateCheck.Size = new System.Drawing.Size(160, 17);
+            this.UpdateCheck.TabIndex = 13;
+            this.UpdateCheck.Text = "Check for updates at startup";
+            this.UpdateCheck.UseVisualStyleBackColor = true;
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 154);
+            this.ClientSize = new System.Drawing.Size(367, 232);
+            this.Controls.Add(this.UpdateCheck);
+            this.Controls.Add(this.WebInterfaceChk);
+            this.Controls.Add(this.WebAPIPortTxt);
+            this.Controls.Add(this.WebAPIPortLabel);
+            this.Controls.Add(this.WebPortTxt);
+            this.Controls.Add(this.WebPortLabel);
             this.Controls.Add(this.NetPortTxt);
             this.Controls.Add(this.NetLabel);
             this.Controls.Add(this.scrlist);
@@ -147,5 +226,11 @@
         private System.Windows.Forms.ComboBox scrlist;
         private System.Windows.Forms.Label NetLabel;
         private System.Windows.Forms.TextBox NetPortTxt;
+        private System.Windows.Forms.TextBox WebPortTxt;
+        private System.Windows.Forms.Label WebPortLabel;
+        private System.Windows.Forms.TextBox WebAPIPortTxt;
+        private System.Windows.Forms.Label WebAPIPortLabel;
+        private System.Windows.Forms.CheckBox WebInterfaceChk;
+        private System.Windows.Forms.CheckBox UpdateCheck;
     }
 }

@@ -9,6 +9,8 @@ namespace furMix.DialogBoxes
         public About()
         {
             InitializeComponent();
+            if (Splash.Store) label6.Visible = true;
+            else label6.Visible = false;
             VerTxt.Text = "Version " + Properties.Settings.Default.Version;
             LicensedTxt.Text = "This product is licensed to " + Splash.name;
             Log.LogEvent("About dialog opened");

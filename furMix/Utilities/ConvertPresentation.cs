@@ -19,6 +19,8 @@ namespace furMix.Utilities
             folder = Path.GetTempPath() + @"\" + fileinfo.Name;
         }
 
+        public string FolderName { get => folder; }
+
         public List<string> Convert()
         {
             List<string> slides = new List<string>();
@@ -37,6 +39,7 @@ namespace furMix.Utilities
             }
             load.Close();
             load.Dispose();
+            ppt.Quit();
             return slides;
         }
     }

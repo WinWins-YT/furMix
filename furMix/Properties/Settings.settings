@@ -9,7 +9,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0.9.1921</Value>
+      <Value Profile="(Default)">0.10.2000</Value>
     </Setting>
     <Setting Name="Edition" Type="System.String" Scope="User">
       <Value Profile="(Default)">Basic Edition</Value>
@@ -37,6 +37,18 @@
     </Setting>
     <Setting Name="Language" Type="System.String" Scope="User">
       <Value Profile="(Default)">en-US</Value>
+    </Setting>
+    <Setting Name="WebPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1551</Value>
+    </Setting>
+    <Setting Name="WebAPIPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1552</Value>
+    </Setting>
+    <Setting Name="WebServer" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CheckUpdates" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

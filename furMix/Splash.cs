@@ -13,20 +13,24 @@ namespace furMix
         public static int daysleft;
         public static bool trial;
         public static string name;
+        public static bool Store = false;
 
         public Splash()
         {
             InitializeComponent();
             Log.CreateLog();
             Log.LogEvent("Starting furMix...");
-            Log.LogEvent("Setting edition...");
-            Properties.Settings.Default.Edition = "Professional Edition";
-            Log.LogEvent("Setting name...");
-            Properties.Settings.Default.Name = Environment.UserName;
-            Log.LogEvent("Activating...");
-            Properties.Settings.Default.Activated = true;
-            Log.LogEvent("Saving configuration...");
-            Properties.Settings.Default.Save();
+            if (Store)
+            {
+                Log.LogEvent("Setting edition...");
+                Properties.Settings.Default.Edition = "Professional Edition";
+                Log.LogEvent("Setting name...");
+                Properties.Settings.Default.Name = Environment.UserName;
+                Log.LogEvent("Activating...");
+                Properties.Settings.Default.Activated = true;
+                Log.LogEvent("Saving configuration...");
+                Properties.Settings.Default.Save();
+            }
             label2.Text = Properties.Settings.Default.Version;
             label4.Text = Properties.Settings.Default.Edition;
             if (label4.Text == "Misha Pidor Edition" || label4.Text == "Misha Ter Edition")

@@ -1,4 +1,5 @@
-﻿using furMix.Utilities;
+﻿using furMix.Network.WebInterface;
+using furMix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -12,6 +13,7 @@ namespace furMix
         {
             InitializeComponent();
             VideoChk.Checked = !Properties.Settings.Default.VideoError;
+            UpdateCheck.Checked = Properties.Settings.Default.CheckUpdates;
             Analyzer anal = new Analyzer();
             anal.SetPlaybackList(devs);
             for (int i = 0; i < devs.Count; i++)
@@ -30,21 +32,23 @@ namespace furMix
             {
                 NetLabel.Visible = true;
                 NetPortTxt.Visible = true;
+                WebAPIPortTxt.Visible = true;
+                WebAPIPortLabel.Visible = true;
+                WebPortLabel.Visible = true;
+                WebPortTxt.Visible = true;
+                WebInterfaceChk.Visible = true;
                 NetPortTxt.Text = Properties.Settings.Default.NetPort.ToString();
+                WebPortTxt.Text = Properties.Settings.Default.WebPort.ToString();
+                WebAPIPortTxt.Text = Properties.Settings.Default.WebAPIPort.ToString();
+                WebInterfaceChk.Checked = Properties.Settings.Default.WebServer;
             }
             Log.LogEvent("Settings dialog opened");
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            if (VideoChk.Checked)
-            {
-                Properties.Settings.Default.VideoError = false;
-            }
-            else
-            {
-                Properties.Settings.Default.VideoError = true;
-            }
+            Properties.Settings.Default.VideoError = !VideoChk.Checked;
+            Properties.Settings.Default.CheckUpdates = UpdateCheck.Checked;
             string[] array = (devlist.Items[devlist.SelectedIndex] as string).Split(' ');
             int devindex = Convert.ToInt32(array[0]);
             array = (scrlist.Items[scrlist.SelectedIndex] as string).Split(' ');
@@ -58,7 +62,35 @@ namespace furMix
                     MessageBox.Show("Network port is invalid", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-                Properties.Settings.Default.NetPort = int.Parse(NetPortTxt.Text);
+                if (!int.TryParse(WebPortTxt.Text, out int webport))
+                {
+                    MessageBox.Show("Web interface port is invalid", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                if (!int.TryParse(WebAPIPortTxt.Text, out int webapiport))
+                {
+                    MessageBox.Show("Web API port is invalid", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                if (port == webport || webport == webapiport || port == webapiport)
+                {
+                    MessageBox.Show("Port numbers cannot be equal", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                if (webport != Properties.Settings.Default.WebPort)
+                {
+                    WebServer.ClosePort(Properties.Settings.Default.WebPort);
+                    WebServer.OpenPort(webport);
+                }
+                if (webapiport != Properties.Settings.Default.WebAPIPort)
+                {
+                    WebServer.ClosePort(Properties.Settings.Default.WebAPIPort);
+                    WebServer.OpenPort(webapiport);
+                }
+                Properties.Settings.Default.NetPort = port;
+                Properties.Settings.Default.WebPort = webport;
+                Properties.Settings.Default.WebAPIPort = webapiport;
+                Properties.Settings.Default.WebServer = WebInterfaceChk.Checked;
             }
             Properties.Settings.Default.Save();
             MessageBox.Show("Restart application to save settings", "Settings saved", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);

@@ -121,6 +121,10 @@
   <data name="cutbtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cutbtn.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="cutbtn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -134,12 +138,11 @@
   <data name="cutbtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cutbtn.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="cutbtn.Text" xml:space="preserve">
-    <value>Cut</value>
+    <value>Show</value>
   </data>
   <data name="&gt;&gt;cutbtn.Name" xml:space="preserve">
     <value>cutbtn</value>
@@ -151,7 +154,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cutbtn.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>25</value>
   </data>
   <data name="fullbtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -187,7 +190,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;fullbtn.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>24</value>
   </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>15, 12</value>
@@ -223,7 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;playbtn.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>22</value>
   </data>
   <data name="infobtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -235,7 +238,7 @@
     <value>NoControl</value>
   </data>
   <data name="infobtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1011, 502</value>
+    <value>1011, 503</value>
   </data>
   <data name="infobtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 31</value>
@@ -256,7 +259,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;infobtn.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>21</value>
   </data>
   <data name="button6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -268,7 +271,7 @@
     <value>NoControl</value>
   </data>
   <data name="button6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 502</value>
+    <value>12, 503</value>
   </data>
   <data name="button6.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 31</value>
@@ -289,7 +292,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button6.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>20</value>
   </data>
   <data name="fadebtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -325,7 +328,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;fadebtn.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>19</value>
   </data>
   <data name="Preview.Enabled" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -360,7 +363,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Preview.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>23</value>
   </data>
   <data name="listView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -368,12 +371,6 @@
   <metadata name="ContentListContext.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>439, 13</value>
   </metadata>
-  <data name="DeleteContext.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 22</value>
-  </data>
-  <data name="DeleteContext.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
   <data name="ContentListContext.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 26</value>
   </data>
@@ -387,7 +384,7 @@
     <value>12, 335</value>
   </data>
   <data name="listView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1074, 157</value>
+    <value>1074, 158</value>
   </data>
   <data name="listView1.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -402,7 +399,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;listView1.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
+  </data>
+  <data name="DeleteContext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 22</value>
+  </data>
+  <data name="DeleteContext.Text" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="mutebtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -435,7 +438,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mutebtn.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>26</value>
   </data>
   <data name="loopbtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -468,7 +471,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;loopbtn.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="VerTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -480,7 +483,7 @@
     <value>NoControl</value>
   </data>
   <data name="VerTxt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>597, 505</value>
+    <value>597, 506</value>
   </data>
   <data name="VerTxt.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
@@ -508,7 +511,7 @@ For testing purposes only.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;VerTxt.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="playbtnprev.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -538,7 +541,7 @@ For testing purposes only.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;playbtnprev.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="timelinePrev.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -562,7 +565,7 @@ For testing purposes only.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;timelinePrev.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <metadata name="previewTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>101, 13</value>
@@ -592,7 +595,7 @@ For testing purposes only.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PreviewTime.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="timelineShow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -619,7 +622,7 @@ For testing purposes only.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;timelineShow.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="timeShow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -649,7 +652,7 @@ For testing purposes only.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;timeShow.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <metadata name="showTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>226, 13</value>
@@ -664,7 +667,7 @@ For testing purposes only.</value>
     <value>NoControl</value>
   </data>
   <data name="SetBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>930, 502</value>
+    <value>930, 503</value>
   </data>
   <data name="SetBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 31</value>
@@ -685,7 +688,7 @@ For testing purposes only.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;SetBtn.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="NetBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -760,7 +763,7 @@ For testing purposes only.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>27</value>
   </data>
   <data name="TipTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -813,6 +816,15 @@ For testing purposes only.</value>
   <metadata name="FileContext.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>595, 13</value>
   </metadata>
+  <data name="FileContext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 70</value>
+  </data>
+  <data name="&gt;&gt;FileContext.Name" xml:space="preserve">
+    <value>FileContext</value>
+  </data>
+  <data name="&gt;&gt;FileContext.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 22</value>
   </data>
@@ -830,15 +842,6 @@ For testing purposes only.</value>
   </data>
   <data name="saveToolStripMenuItem.Text" xml:space="preserve">
     <value>Save...</value>
-  </data>
-  <data name="FileContext.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 70</value>
-  </data>
-  <data name="&gt;&gt;FileContext.Name" xml:space="preserve">
-    <value>FileContext</value>
-  </data>
-  <data name="&gt;&gt;FileContext.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="NetworkBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -862,7 +865,7 @@ For testing purposes only.</value>
     <value>28</value>
   </data>
   <data name="NetworkBtn.Text" xml:space="preserve">
-    <value>Network</value>
+    <value>Browser</value>
   </data>
   <data name="NetworkBtn.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -877,7 +880,7 @@ For testing purposes only.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;NetworkBtn.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="ClientNum.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -910,7 +913,10 @@ For testing purposes only.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ClientNum.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
+  </data>
+  <data name="LivePic.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="LivePic.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -937,8 +943,80 @@ For testing purposes only.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LivePic.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="EnableBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="EnableBtn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="EnableBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="EnableBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>580, 12</value>
+  </data>
+  <data name="EnableBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="EnableBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="EnableBtn.Text" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="&gt;&gt;EnableBtn.Name" xml:space="preserve">
+    <value>EnableBtn</value>
+  </data>
+  <data name="&gt;&gt;EnableBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EnableBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;EnableBtn.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="recBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="recBtn.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="recBtn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="recBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="recBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>580, 202</value>
+  </data>
+  <data name="recBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="recBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="recBtn.Text" xml:space="preserve">
+    <value>Record</value>
+  </data>
+  <data name="&gt;&gt;recBtn.Name" xml:space="preserve">
+    <value>recBtn</value>
+  </data>
+  <data name="&gt;&gt;recBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;recBtn.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;recBtn.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <metadata name="recTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>707, 13</value>
+  </metadata>
   <data name="button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -949,7 +1027,7 @@ For testing purposes only.</value>
     <value>NoControl</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>846, 502</value>
+    <value>846, 503</value>
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 31</value>
@@ -964,13 +1042,13 @@ For testing purposes only.</value>
     <value>button1</value>
   </data>
   <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>furMix.Controls.MenuButton, furMix, Version=0.9.1589.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>furMix.Controls.MenuButton, furMix, Version=0.9.1921.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;button1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="volumeLevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -988,46 +1066,46 @@ For testing purposes only.</value>
     <value>volumeLevel</value>
   </data>
   <data name="&gt;&gt;volumeLevel.Type" xml:space="preserve">
-    <value>furMix.Controls.VolumeLevel, furMix, Version=0.9.1589.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>furMix.Controls.VolumeLevel, furMix, Version=0.9.1921.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;volumeLevel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;volumeLevel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
-  <data name="button2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="recTimeTxt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="button2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
+  <data name="recTimeTxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>580, 228</value>
   </data>
-  <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>580, 12</value>
-  </data>
-  <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="recTimeTxt.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="button2.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
+  <data name="recTimeTxt.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
   </data>
-  <data name="button2.Text" xml:space="preserve">
-    <value>Enable</value>
+  <data name="recTimeTxt.Text" xml:space="preserve">
+    <value>00:00:00</value>
   </data>
-  <data name="&gt;&gt;button2.Name" xml:space="preserve">
-    <value>button2</value>
+  <data name="recTimeTxt.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;button2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="recTimeTxt.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;recTimeTxt.Name" xml:space="preserve">
+    <value>recTimeTxt</value>
+  </data>
+  <data name="&gt;&gt;recTimeTxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;recTimeTxt.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;recTimeTxt.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1039,7 +1117,7 @@ For testing purposes only.</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1098, 545</value>
+    <value>1098, 546</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3479,6 +3557,12 @@ For testing purposes only.</value>
   </data>
   <data name="&gt;&gt;saveToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;recTimer.Name" xml:space="preserve">
+    <value>recTimer</value>
+  </data>
+  <data name="&gt;&gt;recTimer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Main</value>

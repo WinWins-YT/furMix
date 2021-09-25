@@ -7,24 +7,28 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Runtime.InteropServices;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using furMix.DialogBoxes;
 using furMix.Utilities;
-using furMix.Streaming.Network;
+using furMix.Network.Streaming.Browser;
+using furMix.Network.WebInterface;
 
 namespace furMix
 {
     public partial class Main : Form
     {
         string filepath;
-        bool full, playing, playing1, loop, mute, net, enabled;
-        int type = 1;
+        bool full, playing, playing1, loop, mute, net, enabled, recording;
+        int type;
         int port, scrindex, tip = 0;
+        int webport, webapiport;
         int typeshow;
+        int selected;
+        DateTime recStart;
         Player pl1 = new Player();
         Color color;
         List<string> filepath1 = new List<string>();
@@ -40,6 +44,8 @@ namespace furMix
         Graphics gr;
         Bitmap bmp;
         ImageStreamingServer server;
+        WebServer webServer;
+        Recorder recorder;
 
         public Main()
         {
@@ -56,15 +62,38 @@ namespace furMix
                 {
                     VerTxt.Text = "furMix 2021 Trial. Build " + Properties.Settings.Default.Version + ". Beta 3.\n For testing purposes only.";
                 }
-                //server = new Host(Properties.Settings.Default.NetPort);
-                //server.onConnection += Server_onConnection;
-                //server.lostConnection += Server_lostConnection;
-                //server.DataReceived += Server_DataReceived;
+                if (!Splash.Store && Properties.Settings.Default.CheckUpdates)
+                {
+                    Log.LogEvent("Checking for updates...");
+                    string version = new StreamReader(WebRequest.Create("https://danimat.ddns.net/furMix/version.txt").GetResponse().GetResponseStream()).ReadToEnd();
+                    System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+                    FileVersionInfo fileVer = FileVersionInfo.GetVersionInfo(executingAssembly.Location);
+                    Version oldVer = Version.Parse(fileVer.FileVersion);
+                    Version newVer = null;
+                    foreach (string ver in version.Split(' '))
+                    {
+                        if (ver.Contains('.')) newVer = Version.Parse(ver);
+                    }
+                    if (oldVer < newVer)
+                    {
+                        Log.LogEvent("Update available");
+                        UpdateDialog ud = new UpdateDialog(newVer);
+                        ud.ShowDialog();
+                    }
+                }
                 pass = RandomString(6);
                 anal = new Analyzer(volumeLevel);
                 anal.Enable = true;
                 scrindex = Properties.Settings.Default.Screen;
                 port = Properties.Settings.Default.NetPort;
+                webport = Properties.Settings.Default.WebPort;
+                webapiport = Properties.Settings.Default.WebAPIPort;
+                if (Properties.Settings.Default.WebServer)
+                {
+                    webServer = new WebServer(webport, webapiport);
+                    webServer.OnItemClicked += WebServer_OnItemClicked;
+                    webServer.RunServer();
+                }
                 Screen[] sc = Screen.AllScreens;
                 if (sc.Length > 1)
                 {
@@ -108,6 +137,18 @@ namespace furMix
             }
         }
 
+        private void WebServer_OnItemClicked(object sender, ItemEventArgs e)
+        {
+            int index = e.SelectedIndex;
+            selected = index;
+            type = type1[index];
+            if (type == 1 || type == 2) filepath = filepath1[index];
+            else if (type == 3) filepath = filepath1[index];
+            else if (type == 0) color = color1[index];
+            else if (type == 4) filepath = filepath1[index];
+            button2_Click(this, new EventArgs());
+        }
+
         private void Welcome()
         {
             if (tip == 0)
@@ -121,6 +162,17 @@ namespace furMix
             }
             else if (tip == 1)
             {
+                TipBack.Location = new Point(EnableBtn.Left + EnableBtn.Width + 10, EnableBtn.Top + EnableBtn.Height + 10);
+                TipTitle.Location = new Point(TipBack.Left + 23, TipBack.Top + 19);
+                TipText.Location = new Point(TipBack.Left + 24, TipBack.Top + 43);
+                TipTitle.Text = "Enable button";
+                TipText.Text = "This button enables video engine, open new window with live screen. To start using furMix, you must click this button";
+                TipBack.BringToFront();
+                TipTitle.BringToFront();
+                TipText.BringToFront();
+            }
+            else if (tip == 2)
+            {
                 TipBack.Location = new Point(fullbtn.Left + fullbtn.Width + 10, fullbtn.Top + fullbtn.Height + 10);
                 TipTitle.Location = new Point(TipBack.Left + 23, TipBack.Top + 19);
                 TipText.Location = new Point(TipBack.Left + 24, TipBack.Top + 43);
@@ -130,31 +182,31 @@ namespace furMix
                 TipTitle.BringToFront();
                 TipText.BringToFront();
             }
-            else if (tip == 2)
+            else if (tip == 3)
             {
                 TipBack.Image.RotateFlip(RotateFlipType.Rotate180FlipX);
                 TipBack.Location = new Point(button6.Left + button6.Width - 10, button6.Top - button6.Height - TipBack.Height + 10);
                 TipTitle.Location = new Point(TipBack.Left + 23, TipBack.Top + 19);
                 TipText.Location = new Point(TipBack.Left + 24, TipBack.Top + 43);
-                TipTitle.Text = "Add input button";
+                TipTitle.Text = "Add media button";
                 TipText.Text = "This button gets content (photos, videos and color) to show on second screen";
                 TipBack.BringToFront();
                 TipTitle.BringToFront();
                 TipText.BringToFront();
             }
-            else if (tip == 3)
+            else if (tip == 4)
             {
                 TipBack.Image.RotateFlip(RotateFlipType.Rotate180FlipX);
                 TipBack.Location = new Point(listView1.Left + listView1.Width / 2 - 10, listView1.Top + listView1.Height / 2 - 10);
                 TipTitle.Location = new Point(TipBack.Left + 23, TipBack.Top + 19);
                 TipText.Location = new Point(TipBack.Left + 24, TipBack.Top + 43);
                 TipTitle.Text = "Content list";
-                TipText.Text = "This list contains photos and videos, that you added through Add input button";
+                TipText.Text = "This list contains photos and videos, that you added through Add media button";
                 TipBack.BringToFront();
                 TipTitle.BringToFront();
                 TipText.BringToFront();
             }
-            else if (tip == 4)
+            else if (tip == 5)
             {
                 TipBack.Location = new Point(Preview.Left + Preview.Width - 10, Preview.Top + Preview.Height - 10);
                 TipTitle.Location = new Point(TipBack.Left + 23, TipBack.Top + 19);
@@ -165,7 +217,7 @@ namespace furMix
                 TipTitle.BringToFront();
                 TipText.BringToFront();
             }
-            else if (tip == 5)
+            else if (tip == 6)
             {
                 TipBack.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
                 TipBack.Location = new Point(LivePic.Left - 10 - TipBack.Width, LivePic.Top + LivePic.Height + 10);
@@ -177,19 +229,19 @@ namespace furMix
                 TipTitle.BringToFront();
                 TipText.BringToFront();
             }
-            else if (tip == 6)
+            else if (tip == 7)
             {
                 TipBack.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
                 TipBack.Location = new Point(cutbtn.Left + cutbtn.Width + 10, cutbtn.Top + cutbtn.Height + 10);
                 TipTitle.Location = new Point(TipBack.Left + 23, TipBack.Top + 19);
                 TipText.Location = new Point(TipBack.Left + 24, TipBack.Top + 43);
-                TipTitle.Text = "Cut button";
-                TipText.Text = "This button shows content on second screen (Fade do the same, but with fade transition (very buggy))";
+                TipTitle.Text = "Show button";
+                TipText.Text = "This button shows content on second screen";
                 TipBack.BringToFront();
                 TipTitle.BringToFront();
                 TipText.BringToFront();
             }
-            else if (tip == 7)
+            else if (tip == 8)
             {
                 TipBack.Location = new Point(volumeLevel.Left + volumeLevel.Width, volumeLevel.Top + volumeLevel.Height);
                 TipTitle.Location = new Point(TipBack.Left + 23, TipBack.Top + 19);
@@ -200,7 +252,18 @@ namespace furMix
                 TipTitle.BringToFront();
                 TipText.BringToFront();
             }
-            else if (tip == 8)
+            else if (tip == 9)
+            {
+                TipBack.Location = new Point(511, 423);
+                TipTitle.Location = new Point(TipBack.Left + 23, TipBack.Top + 19);
+                TipText.Location = new Point(TipBack.Left + 24, TipBack.Top + 43);
+                TipTitle.Text = "How to use";
+                TipText.Text = "Click Enable, add media, click on it in content list, it begins to play in preview window. Click Show, to show it on live screen.";
+                TipBack.BringToFront();
+                TipTitle.BringToFront();
+                TipText.BringToFront();
+            }
+            else if (tip == 10)
             {
                 TipBack.Location = new Point(511, 423);
                 TipTitle.Location = new Point(TipBack.Left + 23, TipBack.Top + 19);
@@ -211,7 +274,7 @@ namespace furMix
                 TipTitle.BringToFront();
                 TipText.BringToFront();
             }
-            else if (tip == 9)
+            else if (tip == 11)
             {
                 Controls.Remove(TipBack);
                 Controls.Remove(TipText);
@@ -333,104 +396,92 @@ namespace furMix
                 Log.LogEvent("Cut button clicked");
                 Preview.Ctlcontrols.stop();
                 typeshow = type;
-                if (type == 0)
+                switch (type)
                 {
-                    pl1.Video.close();
-                    Bitmap bmp = new Bitmap(Screen.AllScreens[scrindex].Bounds.Width, Screen.AllScreens[scrindex].Bounds.Height);
-                    Graphics g = Graphics.FromImage(bmp);
-                    g.FillRectangle(new SolidBrush(color), new Rectangle(0, 0, Screen.AllScreens[scrindex].Bounds.Width, Screen.AllScreens[scrindex].Bounds.Height));
-                    bmp.Save(Path.GetTempPath() + @"\color.png");
-                    pl1.Video.URL = Path.GetTempPath() + @"\color.png";
-                    pl1.Video.Ctlcontrols.play();
-                    loop = false;
-                    loopbtn_Click(sender, e);
-                }
-                else if (type == 1 || type == 2)
-                {
-                    pl1.Video.URL = filepath;
-                    pl1.Video.Ctlcontrols.play();
-                    playing = false;
-                    button4_Click(sender, e);
-                }
-                else if (type == 3)
-                {
-                    playing = false;
-                    button4_Click(sender, e);
-                }
-                else if (type == 4)
-                {
-                    playing = false;
-                    button4_Click(sender, e);
-                }
-                if (type == 2)
-                {
-                    loop = false;
-                    loopbtn_Click(sender, e);
-                }
-                if (type == 3)
-                {
-                    loop = false;
-                    loopbtn_Click(sender, e);
-                }
-                else if (type == 4)
-                {
-                    loop = false;
-                    loopbtn_Click(sender, e);
-                }
-                if (type == 1)
-                {
-                    playbtn.Visible = true;
-                    timelineShow.Visible = true;
-                    timeShow.Visible = true;
-                    timelineShow.Maximum = Convert.ToInt32(pl1.Video.currentMedia.durationString.Substring(0, 2)) * 60 + Convert.ToInt32(pl1.Video.currentMedia.durationString.Substring(3, 2));
-                    showTimer.Enabled = true;
-                }
-                else if (type == 2 || type == 0)
-                {
-                    playbtn.Visible = false;
-                    timelineShow.Visible = false;
-                    timeShow.Visible = false;
-                }
-                else if (type == 3)
-                {
-                    FileInfo[] files = new DirectoryInfo(filepath).GetFiles("*.bmp");
-                    FileInfo[] files1 = new DirectoryInfo(filepath).GetFiles("*.jpg");
-                    FileInfo[] files2 = new DirectoryInfo(filepath).GetFiles("*.png");
-                    photoshow.Clear();
-                    foreach (FileInfo fileinfo in files)
-                    {
-                        photoshow.Add(fileinfo.FullName);
-                    }
-                    foreach (FileInfo fileinfo in files1)
-                    {
-                        photoshow.Add(fileinfo.FullName);
-                    }
-                    foreach (FileInfo fileinfo in files2)
-                    {
-                        photoshow.Add(fileinfo.FullName);
-                    }
-                    timelineShow.Value = 0;
-                    timelineShow.Maximum = photoshow.Count - 1;
-                    timeShow.Text = "1/" + (timelineShow.Maximum + 1);
-                    pl1.Video.URL = photofolder[0];
-                    pl1.Video.Ctlcontrols.play();
-                    playbtn.Visible = false;
-                    timelineShow.Visible = true;
-                    timeShow.Visible = true;
-                }
-                else if (type == 4)
-                {
-                    presshow = presfolder;
-                    timelineShow.Value = 0;
-                    timelineShow.Maximum = presshow.Count - 1;
-                    timeShow.Text = "1/" + (timelineShow.Maximum + 1);
-                    pl1.Video.URL = presshow[0];
-                    pl1.Video.Ctlcontrols.play();
-                    playbtn.Visible = false;
-                    timelineShow.Visible = true;
-                    timeShow.Visible = true;
+                    case 0:
+                        pl1.Video.close();
+                        Bitmap bmp = new Bitmap(Screen.AllScreens[scrindex].Bounds.Width, Screen.AllScreens[scrindex].Bounds.Height);
+                        Graphics g = Graphics.FromImage(bmp);
+                        g.FillRectangle(new SolidBrush(color), new Rectangle(0, 0, Screen.AllScreens[scrindex].Bounds.Width, Screen.AllScreens[scrindex].Bounds.Height));
+                        bmp.Save(Path.GetTempPath() + @"\color.png");
+                        pl1.Video.URL = Path.GetTempPath() + @"\color.png";
+                        pl1.Video.Ctlcontrols.play();
+                        loop = false;
+                        loopbtn_Click(sender, e);
+                        playbtn.Visible = false;
+                        timelineShow.Visible = false;
+                        timeShow.Visible = false;
+                        break;
+                    case 1:
+                        pl1.Video.URL = filepath;
+                        pl1.Video.Ctlcontrols.play();
+                        playing = false;
+                        button4_Click(sender, e);
+                        playbtn.Visible = true;
+                        timelineShow.Visible = true;
+                        timeShow.Visible = true;
+                        timelineShow.Maximum = Convert.ToInt32(pl1.Video.currentMedia.durationString.Substring(0, 2)) * 60 + Convert.ToInt32(pl1.Video.currentMedia.durationString.Substring(3, 2));
+                        showTimer.Enabled = true;
+                        break;
+                    case 2:
+                        pl1.Video.URL = filepath;
+                        pl1.Video.Ctlcontrols.play();
+                        playing = false;
+                        button4_Click(sender, e);
+                        loop = false;
+                        loopbtn_Click(sender, e);
+                        playbtn.Visible = false;
+                        timelineShow.Visible = false;
+                        timeShow.Visible = false;
+                        break;
+                    case 3:
+                        playing = false;
+                        button4_Click(sender, e);
+                        loop = false;
+                        loopbtn_Click(sender, e);
+                        FileInfo[] files = new DirectoryInfo(filepath).GetFiles("*.bmp");
+                        FileInfo[] files1 = new DirectoryInfo(filepath).GetFiles("*.jpg");
+                        FileInfo[] files2 = new DirectoryInfo(filepath).GetFiles("*.png");
+                        photoshow.Clear();
+                        foreach (FileInfo fileinfo in files)
+                        {
+                            photoshow.Add(fileinfo.FullName);
+                        }
+                        foreach (FileInfo fileinfo in files1)
+                        {
+                            photoshow.Add(fileinfo.FullName);
+                        }
+                        foreach (FileInfo fileinfo in files2)
+                        {
+                            photoshow.Add(fileinfo.FullName);
+                        }
+                        timelineShow.Value = 0;
+                        timelineShow.Maximum = photoshow.Count - 1;
+                        timeShow.Text = "1/" + (timelineShow.Maximum + 1);
+                        pl1.Video.URL = photofolder[0];
+                        pl1.Video.Ctlcontrols.play();
+                        playbtn.Visible = false;
+                        timelineShow.Visible = true;
+                        timeShow.Visible = true;
+                        break;
+                    case 4:
+                        playing = false;
+                        button4_Click(sender, e);
+                        loop = false;
+                        loopbtn_Click(sender, e);
+                        presshow = presfolder;
+                        timelineShow.Value = 0;
+                        timelineShow.Maximum = presshow.Count - 1;
+                        timeShow.Text = "1/" + (timelineShow.Maximum + 1);
+                        pl1.Video.URL = presshow[0];
+                        pl1.Video.Ctlcontrols.play();
+                        playbtn.Visible = false;
+                        timelineShow.Visible = true;
+                        timeShow.Visible = true;
+                        break;
                 }
                 typeshow = type;
+                webServer.SelectedIndex = selected;
             }
             catch (Exception ex)
             {
@@ -476,6 +527,7 @@ namespace furMix
 
         private void button2_Click_2(object sender, EventArgs e)
         {
+            Log.LogEvent("Enable button clicked");
             if (!enabled)
             {
                 pl1.FormBorderStyle = FormBorderStyle.Sizable;
@@ -486,8 +538,10 @@ namespace furMix
                 Screen[] sc = Screen.AllScreens;
                 if (sc.Length > 1) fullbtn.Enabled = true;
                 NetworkBtn.Enabled = true;
+                cutbtn.Enabled = true;
+                recBtn.Enabled = true;
                 enabled = true;
-                button2.BackColor = Color.Green;
+                EnableBtn.BackColor = Color.Green;
             }
             else
             {
@@ -496,11 +550,21 @@ namespace furMix
                     full = false;
                     fullbtn.BackColor = Color.FromArgb(100, 100, 100);
                 }
+                if (recording)
+                {
+                    recording = false;
+                    recorder.Dispose();
+                    recTimer.Enabled = false;
+                    recBtn.BackColor = Color.FromArgb(100, 100, 100);
+                    recTimeTxt.Visible = false;
+                }
                 pl1.Video.Ctlcontrols.stop();
-                button2.BackColor = Color.FromArgb(100, 100, 100);
+                EnableBtn.BackColor = Color.FromArgb(100, 100, 100);
                 timer1.Enabled = false;
                 fullbtn.Enabled = false;
                 NetworkBtn.Enabled = false;
+                cutbtn.Enabled = false;
+                recBtn.Enabled = false;
                 if (net) NetworkBtn_Click(this, e);
                 Bitmap bmpimg = new Bitmap(LivePic.Width, LivePic.Height);
                 var graph = Graphics.FromImage(bmpimg);
@@ -536,6 +600,7 @@ namespace furMix
         {
             try
             {
+                Log.LogEvent("Program closed");
                 Preview.Ctlcontrols.stop();
                 pl1.Video.Ctlcontrols.stop();
                 Application.Exit();
@@ -665,31 +730,39 @@ namespace furMix
                 {
                     return;
                 }
+                selected = listView1.SelectedItems[0].Index;
                 Preview.Ctlcontrols.stop();
                 type = type1[listView1.SelectedItems[0].Index];
-                if (type != 0)
+                //0 - color
+                //1 - video
+                //2 - photo
+                //3 - photos
+                //4 - presentation
+                switch (type)
                 {
-                    if (type == 1)
-                    {
+                    case 0:
+                        color = color1[listView1.SelectedItems[0].Index];
+                        Preview.Visible = false;
+                        Preview.Ctlcontrols.stop();
+                        pictureBox1.BackColor = color;
+                        break;
+                    case 1:
                         playing1 = false;
                         button2_Click_1(sender, e);
-                    }
-                    if (type == 1 || type == 2)
-                    {
                         filepath = filepath1[listView1.SelectedItems[0].Index];
                         Preview.Visible = true;
                         Preview.URL = filepath;
-                        if (type == 2)
-                        {
-                            Preview.settings.setMode("loop", true);
-                        }
-                        else
-                        {
-                            Preview.settings.setMode("loop", false);
-                        }
-                    }
-                    else if (type == 3)
-                    {
+                        Preview.settings.setMode("loop", false);
+                        break;
+                    case 2:
+                        playing1 = false;
+                        button2_Click_1(sender, e);
+                        filepath = filepath1[listView1.SelectedItems[0].Index];
+                        Preview.Visible = true;
+                        Preview.URL = filepath;
+                        Preview.settings.setMode("loop", true);
+                        break;
+                    case 3:
                         filepath = filepath1[listView1.SelectedItems[0].Index];
                         FileInfo[] files = new DirectoryInfo(filepath).GetFiles("*.bmp");
                         FileInfo[] files1 = new DirectoryInfo(filepath).GetFiles("*.jpg");
@@ -713,25 +786,17 @@ namespace furMix
                         Preview.Visible = true;
                         Preview.URL = photofolder[0];
                         Preview.settings.setMode("loop", true);
-                    }
-                    else if (type == 4)
-                    {
+                        break;
+                    case 4:
                         filepath = filepath1[listView1.SelectedItems[0].Index];
-                        presfolder = new ConvertPresentation(filepath).Convert();
+                        presfolder = Directory.GetFiles(filepath, "*.jpg").ToList();
                         timelinePrev.Value = 0;
                         timelinePrev.Maximum = presfolder.Count - 1;
                         PreviewTime.Text = "1/" + (timelinePrev.Maximum + 1);
                         Preview.Visible = true;
                         Preview.URL = presfolder[0];
                         Preview.settings.setMode("loop", true);
-                    }
-                }
-                else
-                {
-                    color = color1[listView1.SelectedItems[0].Index];
-                    Preview.Visible = false;
-                    Preview.Ctlcontrols.stop();
-                    pictureBox1.BackColor = color;
+                        break;
                 }
             }
             catch (Exception ex)
@@ -769,33 +834,32 @@ namespace furMix
                 if (Preview.openState == WMPLib.WMPOpenState.wmposMediaOpen)
                 {
                     Preview.settings.mute = true;
-                    if (type == 2)
+                    switch (type)
                     {
-                        PreviewTime.Visible = false;
-                        timelinePrev.Visible = false;
-                        playbtnprev.Visible = false;
-                    }
-                    else if (type == 1)
-                    {
-                        timelinePrev.Visible = true;
-                        PreviewTime.Visible = true;
-                        playbtnprev.Visible = true;
-                        int seconds = Convert.ToInt32(Preview.currentMedia.durationString.Substring(0, 2)) * 60 + Convert.ToInt32(Preview.currentMedia.durationString.Substring(3, 2));
-                        timelinePrev.Maximum = seconds;
-                        Console.WriteLine(seconds);
-                        previewTimer.Enabled = true;
-                    }
-                    else if (type == 3)
-                    {
-                        timelinePrev.Visible = true;
-                        PreviewTime.Visible = true;
-                        playbtnprev.Visible = false;
-                    }
-                    else if (type == 4)
-                    {
-                        timelinePrev.Visible = true;
-                        PreviewTime.Visible = true;
-                        playbtnprev.Visible = false;
+                        case 1:
+                            timelinePrev.Visible = true;
+                            PreviewTime.Visible = true;
+                            playbtnprev.Visible = true;
+                            int seconds = Convert.ToInt32(Preview.currentMedia.durationString.Substring(0, 2)) * 60 + Convert.ToInt32(Preview.currentMedia.durationString.Substring(3, 2));
+                            timelinePrev.Maximum = seconds;
+                            Console.WriteLine(seconds);
+                            previewTimer.Enabled = true;
+                            break;
+                        case 2:
+                            PreviewTime.Visible = false;
+                            timelinePrev.Visible = false;
+                            playbtnprev.Visible = false;
+                            break;
+                        case 3:
+                            timelinePrev.Visible = true;
+                            PreviewTime.Visible = true;
+                            playbtnprev.Visible = false;
+                            break;
+                        case 4:
+                            timelinePrev.Visible = true;
+                            PreviewTime.Visible = true;
+                            playbtnprev.Visible = false;
+                            break;
                     }
                 }
             }
@@ -1209,6 +1273,51 @@ namespace furMix
             }
         }
 
+        private void recTimer_Tick(object sender, EventArgs e)
+        {
+            if (recBtn.BackColor == Color.Red) recBtn.BackColor = Color.FromArgb(100, 100, 100);
+            else recBtn.BackColor = Color.Red;
+            TimeSpan duration = DateTime.Now.Subtract(recStart);
+            string time = "";
+            if (duration.Hours < 10) time += "0";
+            time += duration.Hours;
+            time += ":";
+            if (duration.Minutes < 10) time += "0";
+            time += duration.Minutes;
+            time += ":";
+            if (duration.Seconds < 10) time += "0";
+            time += duration.Seconds;
+            recTimeTxt.Text = time;
+        }
+
+        private void recBtn_Click(object sender, EventArgs e)
+        {
+            if (!recording)
+            {
+                Log.LogEvent("Started recording");
+                string filename = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + @"\furMix";
+                if (!Directory.Exists(filename)) Directory.CreateDirectory(filename);
+                filename += @"\Recording_" + DateTime.Now.ToString("MMddyyyyhhmmss") + ".avi";
+                recStart = DateTime.Now;
+                recTimeTxt.Text = "00:00:00";
+                recTimeTxt.Visible = true;
+                recorder = new Recorder(new RecorderParams(pl1.Video, filename, 15, SharpAvi.KnownFourCCs.Codecs.MotionJpeg, 70));
+                recording = true;
+                fullbtn.Enabled = false;
+                recTimer.Enabled = true;
+            }
+            else
+            {
+                Log.LogEvent("Stopped recording");
+                recorder.Dispose();
+                recording = false;
+                fullbtn.Enabled = true;
+                recTimer.Enabled = false;
+                recBtn.BackColor = Color.FromArgb(100, 100, 100);
+                recTimeTxt.Visible = false;
+            }
+        }
+
         private void volumeLevel_DoubleClick(object sender, EventArgs e)
         {
             try
@@ -1570,7 +1679,7 @@ namespace furMix
                         filepath1.Add("");
                         color = AddInput.color;
                         color1.Add(color);
-                        listView1.Items.Add("Color\n" + color.Name);
+                        listView1.Items.Add("Color \n" + color.Name);
                     }
                     else
                     {
@@ -1578,19 +1687,28 @@ namespace furMix
                         color1.Add(Color.Black);
                         if (type == 1)
                         {
-                            listView1.Items.Add("Video\n" + AddInput.filepath);
+                            listView1.Items.Add("Video \n" + AddInput.filepath);
                         }
                         else if (type == 2)
                         {
-                            listView1.Items.Add("Photo\n" + AddInput.filepath);
+                            listView1.Items.Add("Photo \n" + AddInput.filepath);
                         }
                         else if (type == 3)
                         {
-                            listView1.Items.Add("Photos collection\n" + AddInput.filepath);
+                            listView1.Items.Add("Photos collection \n" + AddInput.filepath);
                         }
                         else if (type == 4)
                         {
-                            listView1.Items.Add("Presentation\n" + AddInput.filepath);
+                            listView1.Items.Add("Presentation \n" + AddInput.filepath);
+                        }
+                    }
+                    if (webServer.IsRunning)
+                    {
+                        webServer.MediaList.Clear();
+                        for (int i = 0; i < listView1.Items.Count; i++) 
+                        {
+                            string str = listView1.Items[i].Text;
+                            webServer.MediaList.Add(str);
                         }
                     }
                 }

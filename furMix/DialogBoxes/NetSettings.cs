@@ -24,6 +24,13 @@ namespace furMix
             {
                 if (IP.ToString().Contains("192.168")) myIP = IP.ToString();
             }
+            if (myIP == "")
+            {
+                foreach (IPAddress IP in myIPs)
+                {
+                    if (IP.ToString().Contains(".")) myIP = IP.ToString();
+                }
+            }
             if (myIP == "") myIP = myIPs[0].ToString();
             return myIP;
         }

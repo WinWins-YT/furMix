@@ -65,9 +65,12 @@
             this.NetworkBtn = new System.Windows.Forms.Button();
             this.ClientNum = new System.Windows.Forms.Label();
             this.LivePic = new System.Windows.Forms.PictureBox();
+            this.EnableBtn = new System.Windows.Forms.Button();
+            this.recBtn = new System.Windows.Forms.Button();
+            this.recTimer = new System.Windows.Forms.Timer(this.components);
             this.button1 = new furMix.Controls.MenuButton();
             this.volumeLevel = new furMix.Controls.VolumeLevel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.recTimeTxt = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Preview)).BeginInit();
             this.ContentListContext.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timelinePrev)).BeginInit();
@@ -336,10 +339,33 @@
             // 
             // LivePic
             // 
-            this.LivePic.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.LivePic, "LivePic");
+            this.LivePic.BackColor = System.Drawing.Color.Black;
             this.LivePic.Name = "LivePic";
             this.LivePic.TabStop = false;
+            // 
+            // EnableBtn
+            // 
+            resources.ApplyResources(this.EnableBtn, "EnableBtn");
+            this.EnableBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.EnableBtn.ForeColor = System.Drawing.Color.White;
+            this.EnableBtn.Name = "EnableBtn";
+            this.EnableBtn.UseVisualStyleBackColor = false;
+            this.EnableBtn.Click += new System.EventHandler(this.button2_Click_2);
+            // 
+            // recBtn
+            // 
+            resources.ApplyResources(this.recBtn, "recBtn");
+            this.recBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.recBtn.ForeColor = System.Drawing.Color.White;
+            this.recBtn.Name = "recBtn";
+            this.recBtn.UseVisualStyleBackColor = false;
+            this.recBtn.Click += new System.EventHandler(this.recBtn_Click);
+            // 
+            // recTimer
+            // 
+            this.recTimer.Interval = 1000;
+            this.recTimer.Tick += new System.EventHandler(this.recTimer_Tick);
             // 
             // button1
             // 
@@ -359,21 +385,20 @@
             this.volumeLevel.RightCh = 0;
             this.volumeLevel.DoubleClick += new System.EventHandler(this.volumeLevel_DoubleClick);
             // 
-            // button2
+            // recTimeTxt
             // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click_2);
+            resources.ApplyResources(this.recTimeTxt, "recTimeTxt");
+            this.recTimeTxt.ForeColor = System.Drawing.Color.White;
+            this.recTimeTxt.Name = "recTimeTxt";
             // 
             // Main
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.recTimeTxt);
+            this.Controls.Add(this.recBtn);
+            this.Controls.Add(this.EnableBtn);
             this.Controls.Add(this.LivePic);
             this.Controls.Add(this.ClientNum);
             this.Controls.Add(this.NetworkBtn);
@@ -451,7 +476,10 @@
         private System.Windows.Forms.Button NetworkBtn;
         private System.Windows.Forms.Label ClientNum;
         private System.Windows.Forms.PictureBox LivePic;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button EnableBtn;
+        private System.Windows.Forms.Button recBtn;
+        private System.Windows.Forms.Timer recTimer;
+        private System.Windows.Forms.Label recTimeTxt;
     }
 }
 
