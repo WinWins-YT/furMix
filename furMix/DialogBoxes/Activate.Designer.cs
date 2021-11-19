@@ -36,21 +36,21 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(266, 47);
+            this.label1.Size = new System.Drawing.Size(266, 18);
             this.label1.TabIndex = 0;
-            this.label1.Text = "This program although not vMix, but also wants some money. You can buy your regis" +
-    "tration key at @top_programer or @odinokoe_4m0 in VK.";
+            this.label1.Text = "To activate furMix, get your registration key from";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 56);
+            this.label2.Location = new System.Drawing.Point(12, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 1;
@@ -58,14 +58,14 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(56, 53);
+            this.textBox1.Location = new System.Drawing.Point(56, 43);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(211, 20);
             this.textBox1.TabIndex = 2;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(192, 111);
+            this.button1.Location = new System.Drawing.Point(192, 101);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -76,7 +76,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 78);
+            this.label3.Location = new System.Drawing.Point(12, 68);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 4;
@@ -84,7 +84,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(56, 75);
+            this.textBox2.Location = new System.Drawing.Point(56, 65);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(211, 20);
             this.textBox2.TabIndex = 5;
@@ -95,7 +95,7 @@
             this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Blue;
-            this.label4.Location = new System.Drawing.Point(12, 100);
+            this.label4.Location = new System.Drawing.Point(12, 90);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 13);
             this.label4.TabIndex = 6;
@@ -108,18 +108,30 @@
             this.label5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Blue;
-            this.label5.Location = new System.Drawing.Point(12, 121);
+            this.label5.Location = new System.Drawing.Point(12, 111);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(132, 13);
             this.label5.TabIndex = 7;
             this.label5.Text = "Activate 30-day trial period";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(13, 24);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(207, 13);
+            this.linkLabel1.TabIndex = 8;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "https://danimat.ddns.net/furMix/Purchase";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // Activate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 146);
+            this.ClientSize = new System.Drawing.Size(279, 134);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox2);
@@ -148,5 +160,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

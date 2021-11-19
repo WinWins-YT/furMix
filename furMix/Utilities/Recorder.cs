@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.IO;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
+using FFMpegCore;
 
 namespace furMix.Utilities
 {
@@ -40,7 +41,8 @@ namespace furMix.Utilities
             Width = control.Width;
         }
 
-        string FileName;
+        public string FileName;
+        public string TempFileName = Path.Combine(Path.GetTempPath(), "furMix", "recording.avi");
         public int FramesPerSecond, Quality;
         FourCC Codec;
         public Control Control;
@@ -50,7 +52,8 @@ namespace furMix.Utilities
 
         public AviWriter CreateAviWriter()
         {
-            return new AviWriter(FileName)
+            if (!Directory.Exists(Path.Combine(Path.GetTempPath(), "furMix"))) Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), "furMix"));
+            return new AviWriter(TempFileName)
             {
                 FramesPerSecond = FramesPerSecond,
                 EmitIndex1 = true,
@@ -72,6 +75,36 @@ namespace furMix.Utilities
                     forceSingleThreadedAccess: true);
             }
         }
+
+        public IAviAudioStream CreateAudioStream(AviWriter writer, WaveFormat waveFormat, bool encode, int bitRate)
+        {
+            // Create encoding or simple stream based on settings
+            if (encode)
+            {
+                // LAME DLL path is set in App.OnStartup()
+                return writer.AddMp3AudioStream(waveFormat.Channels, waveFormat.SampleRate, bitRate);
+            }
+            else
+            {
+                return writer.AddAudioStream(
+                    channelCount: waveFormat.Channels,
+                    samplesPerSecond: waveFormat.SampleRate,
+                    bitsPerSample: waveFormat.BitsPerSample);
+            }
+        }
+
+        public static WaveFormat ToWaveFormat(SupportedWaveFormat waveFormat)
+        {
+            switch (waveFormat)
+            {
+                case SupportedWaveFormat.WAVE_FORMAT_44M16:
+                    return new WaveFormat(44100, 16, 1);
+                case SupportedWaveFormat.WAVE_FORMAT_44S16:
+                    return new WaveFormat(44100, 16, 2);
+                default:
+                    throw new NotSupportedException("Wave formats other than '16-bit 44.1kHz' are not currently supported.");
+            }
+        }
     }
 
     public class Recorder : IDisposable
@@ -80,29 +113,22 @@ namespace furMix.Utilities
         AviWriter writer;
         RecorderParams Params;
         IAviVideoStream videoStream;
-        IAviAudioStream audioStream;
         Thread screenThread;
         ManualResetEvent stopThread = new ManualResetEvent(false);
         MMDevice device;
         WasapiLoopbackCapture capture;
         BufferedWaveProvider bwp;
-        byte[] audioBuffer;
+        WaveFileWriter wwriter;
+        private readonly AutoResetEvent videoFrameWritten = new AutoResetEvent(false);
+        private string AudioFileName = Path.Combine(Path.GetTempPath(), "furMix", "recording.wav");
         #endregion
 
         public Recorder(RecorderParams Params)
         {
+            GlobalFFOptions.Configure(new FFOptions() { BinaryFolder = Environment.CurrentDirectory + @"\ffmpeg", TemporaryFilesFolder = Path.Combine(Path.GetTempPath(), "furMix") });
             this.Params = Params;
 
             writer = Params.CreateAviWriter();
-
-            videoStream = Params.CreateVideoStream(writer);
-            videoStream.Name = "furMix";
-            audioStream = writer.AddAudioStream(2, 44100, 16);
-            audioStream.Name = "furMix";
-
-            var audioByteRate = (audioStream.BitsPerSample / 8) * audioStream.ChannelCount * audioStream.SamplesPerSecond;
-            var audioBlockSize = (int)(audioByteRate / writer.FramesPerSecond);
-            audioBuffer = new byte[audioBlockSize];
 
             int deviceindex = Properties.Settings.Default.PlaybackDevice;
             MMDeviceEnumerator devices = new MMDeviceEnumerator();
@@ -111,8 +137,17 @@ namespace furMix.Utilities
             capture = new WasapiLoopbackCapture(device);
             capture.DataAvailable += Capture_DataAvailable;
             bwp = new BufferedWaveProvider(capture.WaveFormat);
-            bwp.BufferLength = audioBlockSize;
-            bwp.DiscardOnBufferOverflow = true;
+            if (!Directory.Exists(Path.Combine(Path.GetTempPath(), "furMix"))) Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), "furMix"));
+            wwriter = new WaveFileWriter(AudioFileName, capture.WaveFormat);
+
+            videoStream = Params.CreateVideoStream(writer);
+            videoStream.Name = "furMix";
+
+            if (capture != null)
+            {
+                videoFrameWritten.Set();
+                capture.StartRecording();
+            }
 
             screenThread = new Thread(RecordScreen)
             {
@@ -125,17 +160,24 @@ namespace furMix.Utilities
 
         private void Capture_DataAvailable(object sender, WaveInEventArgs e)
         {
-            bwp.AddSamples(e.Buffer, 0, e.BytesRecorded);
+            wwriter.Write(e.Buffer, 0, e.BytesRecorded);
         }
 
         public void Dispose()
         {
             stopThread.Set();
             screenThread.Join();
+            capture.StopRecording();
+            capture.DataAvailable -= Capture_DataAvailable;
+            wwriter.Dispose();
 
             writer.Close();
 
             stopThread.Dispose();
+
+            FFMpeg.ReplaceAudio(Params.TempFileName, AudioFileName, Params.FileName);
+            File.Delete(AudioFileName);
+            File.Delete(Params.TempFileName);
         }
 
         void RecordScreen()
@@ -143,7 +185,6 @@ namespace furMix.Utilities
             var frameInterval = TimeSpan.FromSeconds(1 / (double)writer.FramesPerSecond);
             var buffer = new byte[Params.Width * Params.Height * 4];
             Task videoWriteTask = null;
-            Task audioWriteTask = null;
             var timeTillNextFrame = TimeSpan.Zero;
 
             while (!stopThread.WaitOne(timeTillNextFrame))
@@ -151,13 +192,10 @@ namespace furMix.Utilities
                 var timestamp = DateTime.Now;
 
                 Screenshot(buffer);
-                bwp.Read(audioBuffer, 0, audioBuffer.Length);
 
                 videoWriteTask?.Wait();
-                audioWriteTask?.Wait();
 
                 videoWriteTask = videoStream.WriteFrameAsync(true, buffer, 0, buffer.Length);
-                audioWriteTask = audioStream.WriteBlockAsync(audioBuffer, 0, audioBuffer.Length);
 
                 timeTillNextFrame = timestamp + frameInterval - DateTime.Now;
                 if (timeTillNextFrame < TimeSpan.Zero)
@@ -165,7 +203,6 @@ namespace furMix.Utilities
             }
 
             videoWriteTask?.Wait();
-            audioWriteTask?.Wait();
         }
 
         public void Screenshot(byte[] Buffer)

@@ -1,6 +1,7 @@
 ﻿using FluentFTP;
 using furMix.Utilities;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading;
@@ -141,6 +142,14 @@ namespace furMix
                 textBox2.Enabled = false;
                 MessageBox.Show("Enter your name in textbox above and click Activate", "Trial period", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new Process()
+            {
+                StartInfo = new ProcessStartInfo("https://danimat.ddns.net/furMix/Purchase")
+            }.Start();
         }
     }
 }

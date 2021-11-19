@@ -13,7 +13,7 @@ namespace furMix
         public static int daysleft;
         public static bool trial;
         public static string name;
-        public static bool Store = false;
+        public static bool Store = true;
 
         public Splash()
         {

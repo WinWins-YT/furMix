@@ -122,12 +122,16 @@
 
 FluentFTP by Robin Rodricks - for server connections
 
-rtaNetworking.Streaming - for Network function
+rtaNetworking.Streaming by Ragheed Al-Tayeb - for Network function
 
 Accord.Math by Accord.NET - for FFT calculations
 
 SimpleHTTP - for remote control
 
-SharpAvi by Vasili Maslov - for recording</value>
+SharpAvi by Vasili Maslov - for recording
+
+FFMpegCore by Malte Rosenbjerg - ffmpeg wrapper
+
+ffmpeg - for post-record operations</value>
   </data>
 </root>

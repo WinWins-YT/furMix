@@ -77,15 +77,11 @@ namespace furMix
                     MessageBox.Show("Port numbers cannot be equal", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-                if (webport != Properties.Settings.Default.WebPort)
+                if (webport != Properties.Settings.Default.WebPort || webapiport != Properties.Settings.Default.WebAPIPort)
                 {
-                    WebServer.ClosePort(Properties.Settings.Default.WebPort);
-                    WebServer.OpenPort(webport);
-                }
-                if (webapiport != Properties.Settings.Default.WebAPIPort)
-                {
-                    WebServer.ClosePort(Properties.Settings.Default.WebAPIPort);
-                    WebServer.OpenPort(webapiport);
+                    MessageBox.Show("Now furMix will change ports for remote control through network. It will require administrator privileges.", "Ports warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Log.LogEvent("Opening ports...");
+                    WebServer.OpenPorts(webport, webapiport);
                 }
                 Properties.Settings.Default.NetPort = port;
                 Properties.Settings.Default.WebPort = webport;
@@ -95,6 +91,13 @@ namespace furMix
             Properties.Settings.Default.Save();
             MessageBox.Show("Restart application to save settings", "Settings saved", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Now furMix will open ports for remote control through network. It will require administrator privileges.", "Ports warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Log.LogEvent("Opening ports...");
+            WebServer.OpenPorts(Properties.Settings.Default.WebPort, Properties.Settings.Default.WebAPIPort);
         }
     }
 }

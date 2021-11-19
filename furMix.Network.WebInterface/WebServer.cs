@@ -35,52 +35,20 @@ namespace furMix.Network.WebInterface
 
         public delegate void OnItemClickedEventHandler(object sender, ItemEventArgs e);
 
-        public static void ClosePort(int port)
+        public static void OpenPorts(int port, int portapi)
         {
-            Process p1 = new Process()
+            Process p = new Process()
             {
                 StartInfo = new ProcessStartInfo()
                 {
-                    FileName = "netsh",
-                    Arguments = "http delete urlacl url = \"http://+:" + port + "/\" user = everyone",
-                    Verb = "runas"
+                    FileName = Environment.CurrentDirectory + @"\utils\ports.bat",
+                    Arguments = port + " " + portapi + " " + Environment.UserDomainName + @"\" + Environment.UserName,
+                    Verb = "runas",
+                    UseShellExecute = true
                 }
             };
-            Process p2 = new Process()
-            {
-                StartInfo = new ProcessStartInfo()
-                {
-                    FileName = "netsh",
-                    Arguments = "http delete urlacl url = \"http://*:" + port + "/\" user = everyone",
-                    Verb = "runas"
-                }
-            };
-            p1.Start();
-            p2.Start();
-        }
-
-        public static void OpenPort(int port)
-        {
-            Process p1 = new Process()
-            {
-                StartInfo = new ProcessStartInfo()
-                {
-                    FileName = "netsh",
-                    Arguments = "http add urlacl url = \"http://+:" + port + "/\" user = everyone",
-                    Verb = "runas"
-                }
-            };
-            Process p2 = new Process()
-            {
-                StartInfo = new ProcessStartInfo()
-                {
-                    FileName = "netsh",
-                    Arguments = "http add urlacl url = \"http://*:" + port + "/\" user = everyone",
-                    Verb = "runas"
-                }
-            };
-            p1.Start();
-            p2.Start();
+            p.Start();
+            p.WaitForExit();
         }
 
         public void RunServer()
@@ -101,6 +69,7 @@ namespace furMix.Network.WebInterface
                 int index = Convert.ToInt32(arguments["id"].Substring(0, arguments["id"].Length - 1));
                 ItemEventArgs args = new ItemEventArgs(index, MediaList[index]);
                 OnItemClicked.Invoke(this, args);
+                response.AsRedirect("http://" + GetLocalIPAddress() + ":" + Port + "/");
             });
             HttpServer.ListenAsync(PortAPI, CancellationToken.None, Route.OnHttpRequestAsync).Wait();
         }

@@ -21,6 +21,7 @@ namespace furMix
 {
     public partial class Main : Form
     {
+        #region Fields
         string filepath;
         bool full, playing, playing1, loop, mute, net, enabled, recording;
         int type;
@@ -46,6 +47,7 @@ namespace furMix
         ImageStreamingServer server;
         WebServer webServer;
         Recorder recorder;
+        #endregion
 
         public Main()
         {
@@ -56,11 +58,11 @@ namespace furMix
                 pl1.Video.settings.mute = true;
                 if (!Splash.trial)
                 {
-                    VerTxt.Text = "furMix 2021. Build " + Properties.Settings.Default.Version + ". Beta 3.\n For testing purposes only.";
+                    VerTxt.Text = "furMix 2021. Build " + Properties.Settings.Default.Version + ". Beta 4.\n For testing purposes only.";
                 }
                 else
                 {
-                    VerTxt.Text = "furMix 2021 Trial. Build " + Properties.Settings.Default.Version + ". Beta 3.\n For testing purposes only.";
+                    VerTxt.Text = "furMix 2021 Trial. Build " + Properties.Settings.Default.Version + ". Beta 4.\n For testing purposes only.";
                 }
                 if (!Splash.Store && Properties.Settings.Default.CheckUpdates)
                 {
@@ -88,6 +90,12 @@ namespace furMix
                 port = Properties.Settings.Default.NetPort;
                 webport = Properties.Settings.Default.WebPort;
                 webapiport = Properties.Settings.Default.WebAPIPort;
+                if (!Properties.Settings.Default.Welcome)
+                {
+                    MessageBox.Show("Now furMix will open ports for remote control through network. It will require administrator privileges.", "Ports warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Log.LogEvent("Opening ports...");
+                    WebServer.OpenPorts(webport, webapiport);
+                }
                 if (Properties.Settings.Default.WebServer)
                 {
                     webServer = new WebServer(webport, webapiport);
@@ -127,6 +135,7 @@ namespace furMix
                 }
                 CheckForIllegalCrossThreadCalls = false;
                 Log.LogEvent("furMix started");
+                Log.LogEvent("furMix v." + Properties.Settings.Default.Version);
             }
             catch (Exception ex)
             {
@@ -1309,12 +1318,18 @@ namespace furMix
             else
             {
                 Log.LogEvent("Stopped recording");
-                recorder.Dispose();
                 recording = false;
                 fullbtn.Enabled = true;
                 recTimer.Enabled = false;
                 recBtn.BackColor = Color.FromArgb(100, 100, 100);
-                recTimeTxt.Visible = false;
+                recTimeTxt.Text = "Saving...";
+                Log.LogEvent("Saving recording...");
+                new Thread(() =>
+                {
+                    recorder.Dispose();
+                    recTimeTxt.Visible = false;
+                    Log.LogEvent("Recording saved");
+                }).Start();
             }
         }
 

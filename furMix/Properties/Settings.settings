@@ -9,7 +9,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0.10.2000</Value>
+      <Value Profile="(Default)">0.10.2108</Value>
     </Setting>
     <Setting Name="Edition" Type="System.String" Scope="User">
       <Value Profile="(Default)">Basic Edition</Value>
