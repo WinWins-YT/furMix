@@ -56,7 +56,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>4B23FBF407614209D3942A484DA2E307EB8D4F86</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>0218C78E6B4133399C2D74721164C970F28F839E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>furMix_TemporaryKey.pfx</ManifestKeyFile>
@@ -318,6 +318,7 @@
     </Compile>
     <Compile Include="Utilities\Log.cs" />
     <Compile Include="Utilities\Recorder.cs" />
+    <Compile Include="Utilities\SQLWrapper.cs" />
     <Compile Include="Utilities\User32.cs" />
     <EmbeddedResource Include="Controls\MenuButton.resx">
       <DependentUpon>MenuButton.cs</DependentUpon>
@@ -383,6 +384,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="utils\ports.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

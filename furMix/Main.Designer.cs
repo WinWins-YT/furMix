@@ -35,7 +35,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.playbtn = new System.Windows.Forms.Button();
             this.infobtn = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.AddMediaBtn = new System.Windows.Forms.Button();
             this.fadebtn = new System.Windows.Forms.Button();
             this.Preview = new AxWMPLib.AxWindowsMediaPlayer();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -68,7 +68,7 @@
             this.EnableBtn = new System.Windows.Forms.Button();
             this.recBtn = new System.Windows.Forms.Button();
             this.recTimer = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new furMix.Controls.MenuButton();
+            this.FileBtn = new furMix.Controls.MenuButton();
             this.volumeLevel = new furMix.Controls.VolumeLevel();
             this.recTimeTxt = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Preview)).BeginInit();
@@ -88,7 +88,7 @@
             this.cutbtn.ForeColor = System.Drawing.Color.White;
             this.cutbtn.Name = "cutbtn";
             this.cutbtn.UseVisualStyleBackColor = false;
-            this.cutbtn.Click += new System.EventHandler(this.button2_Click);
+            this.cutbtn.Click += new System.EventHandler(this.ShowBtn_Click);
             // 
             // fullbtn
             // 
@@ -97,7 +97,7 @@
             this.fullbtn.ForeColor = System.Drawing.Color.White;
             this.fullbtn.Name = "fullbtn";
             this.fullbtn.UseVisualStyleBackColor = false;
-            this.fullbtn.Click += new System.EventHandler(this.button3_Click);
+            this.fullbtn.Click += new System.EventHandler(this.FullBtn_Click);
             // 
             // timer1
             // 
@@ -120,16 +120,16 @@
             this.infobtn.ForeColor = System.Drawing.Color.White;
             this.infobtn.Name = "infobtn";
             this.infobtn.UseVisualStyleBackColor = false;
-            this.infobtn.Click += new System.EventHandler(this.button5_Click);
+            this.infobtn.Click += new System.EventHandler(this.Info_Click);
             // 
-            // button6
+            // AddMediaBtn
             // 
-            resources.ApplyResources(this.button6, "button6");
-            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Name = "button6";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            resources.ApplyResources(this.AddMediaBtn, "AddMediaBtn");
+            this.AddMediaBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.AddMediaBtn.ForeColor = System.Drawing.Color.White;
+            this.AddMediaBtn.Name = "AddMediaBtn";
+            this.AddMediaBtn.UseVisualStyleBackColor = false;
+            this.AddMediaBtn.Click += new System.EventHandler(this.AddMedia_Click);
             // 
             // fadebtn
             // 
@@ -205,7 +205,7 @@
             this.playbtnprev.ForeColor = System.Drawing.Color.White;
             this.playbtnprev.Name = "playbtnprev";
             this.playbtnprev.UseVisualStyleBackColor = false;
-            this.playbtnprev.Click += new System.EventHandler(this.button2_Click_1);
+            this.playbtnprev.Click += new System.EventHandler(this.PrevPlay_Click);
             // 
             // timelinePrev
             // 
@@ -351,7 +351,7 @@
             this.EnableBtn.ForeColor = System.Drawing.Color.White;
             this.EnableBtn.Name = "EnableBtn";
             this.EnableBtn.UseVisualStyleBackColor = false;
-            this.EnableBtn.Click += new System.EventHandler(this.button2_Click_2);
+            this.EnableBtn.Click += new System.EventHandler(this.Enable_Click);
             // 
             // recBtn
             // 
@@ -367,14 +367,14 @@
             this.recTimer.Interval = 1000;
             this.recTimer.Tick += new System.EventHandler(this.recTimer_Tick);
             // 
-            // button1
+            // FileBtn
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Menu = this.FileContext;
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = false;
+            resources.ApplyResources(this.FileBtn, "FileBtn");
+            this.FileBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.FileBtn.ForeColor = System.Drawing.Color.White;
+            this.FileBtn.Menu = this.FileContext;
+            this.FileBtn.Name = "FileBtn";
+            this.FileBtn.UseVisualStyleBackColor = false;
             // 
             // volumeLevel
             // 
@@ -402,7 +402,7 @@
             this.Controls.Add(this.LivePic);
             this.Controls.Add(this.ClientNum);
             this.Controls.Add(this.NetworkBtn);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.FileBtn);
             this.Controls.Add(this.volumeLevel);
             this.Controls.Add(this.SetBtn);
             this.Controls.Add(this.timeShow);
@@ -414,7 +414,7 @@
             this.Controls.Add(this.loopbtn);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.fadebtn);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.AddMediaBtn);
             this.Controls.Add(this.infobtn);
             this.Controls.Add(this.playbtn);
             this.Controls.Add(this.Preview);
@@ -445,7 +445,7 @@
         private AxWMPLib.AxWindowsMediaPlayer Preview;
         private System.Windows.Forms.Button playbtn;
         private System.Windows.Forms.Button infobtn;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button AddMediaBtn;
         private System.Windows.Forms.Button fadebtn;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button mutebtn;
@@ -468,7 +468,7 @@
         private System.Windows.Forms.Label TipText;
         private System.Windows.Forms.ContextMenuStrip ContentListContext;
         private System.Windows.Forms.ToolStripMenuItem DeleteContext;
-        private furMix.Controls.MenuButton button1;
+        private furMix.Controls.MenuButton FileBtn;
         private System.Windows.Forms.ContextMenuStrip FileContext;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;

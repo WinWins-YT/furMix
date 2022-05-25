@@ -1,8 +1,11 @@
-﻿using furMix.Utilities;
+﻿using furMix.DialogBoxes;
+using furMix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Windows.Forms;
 
 namespace furMix
@@ -13,7 +16,7 @@ namespace furMix
         public static int daysleft;
         public static bool trial;
         public static string name;
-        public static bool Store = true;
+        public static bool Store = false;
 
         public Splash()
         {
@@ -47,6 +50,33 @@ namespace furMix
                 Properties.Settings.Default.Save();
             }*/
             Log.LogEvent("Loading assemblies...");
+            if (!Splash.Store && Properties.Settings.Default.CheckUpdates)
+            {
+                Log.LogEvent("Checking for updates...");
+                try
+                {
+                    string version = new StreamReader(WebRequest.Create("https://danimat.org/furMix/version.txt").GetResponse().GetResponseStream()).ReadToEnd();
+
+                    System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+                    FileVersionInfo fileVer = FileVersionInfo.GetVersionInfo(executingAssembly.Location);
+                    Version oldVer = Version.Parse(fileVer.FileVersion);
+                    Version newVer = null;
+                    foreach (string ver in version.Split(' '))
+                    {
+                        if (ver.Contains(".")) newVer = Version.Parse(ver);
+                    }
+                    if (oldVer < newVer)
+                    {
+                        Log.LogEvent("Update available");
+                        UpdateDialog ud = new UpdateDialog(newVer);
+                        ud.ShowDialog();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.LogEvent("Error occurred while checking for updates. Error: " + ex.Message);
+                }
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)

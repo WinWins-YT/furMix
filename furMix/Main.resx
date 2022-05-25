@@ -261,37 +261,37 @@
   <data name="&gt;&gt;infobtn.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
-  <data name="button6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="AddMediaBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="button6.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="AddMediaBtn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="button6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="AddMediaBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="button6.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="AddMediaBtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 503</value>
   </data>
-  <data name="button6.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="AddMediaBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 31</value>
   </data>
-  <data name="button6.TabIndex" type="System.Int32, mscorlib">
+  <data name="AddMediaBtn.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="button6.Text" xml:space="preserve">
+  <data name="AddMediaBtn.Text" xml:space="preserve">
     <value>Add media</value>
   </data>
-  <data name="&gt;&gt;button6.Name" xml:space="preserve">
-    <value>button6</value>
+  <data name="&gt;&gt;AddMediaBtn.Name" xml:space="preserve">
+    <value>AddMediaBtn</value>
   </data>
-  <data name="&gt;&gt;button6.Type" xml:space="preserve">
+  <data name="&gt;&gt;AddMediaBtn.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button6.Parent" xml:space="preserve">
+  <data name="&gt;&gt;AddMediaBtn.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;button6.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;AddMediaBtn.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
   <data name="fadebtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -1017,37 +1017,37 @@ For testing purposes only.</value>
   <metadata name="recTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>707, 13</value>
   </metadata>
-  <data name="button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="FileBtn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="button1.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="FileBtn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="FileBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="FileBtn.Location" type="System.Drawing.Point, System.Drawing">
     <value>846, 503</value>
   </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="FileBtn.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 31</value>
   </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+  <data name="FileBtn.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
-  <data name="button1.Text" xml:space="preserve">
+  <data name="FileBtn.Text" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
+  <data name="&gt;&gt;FileBtn.Name" xml:space="preserve">
+    <value>FileBtn</value>
   </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>furMix.Controls.MenuButton, furMix, Version=0.9.1921.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;FileBtn.Type" xml:space="preserve">
+    <value>furMix.Controls.MenuButton, furMix, Version=0.10.2108.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;FileBtn.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;FileBtn.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="volumeLevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -1066,7 +1066,7 @@ For testing purposes only.</value>
     <value>volumeLevel</value>
   </data>
   <data name="&gt;&gt;volumeLevel.Type" xml:space="preserve">
-    <value>furMix.Controls.VolumeLevel, furMix, Version=0.9.1921.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>furMix.Controls.VolumeLevel, furMix, Version=0.10.2108.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;volumeLevel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1105,7 +1105,7 @@ For testing purposes only.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;recTimeTxt.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

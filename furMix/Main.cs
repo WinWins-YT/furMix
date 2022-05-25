@@ -26,7 +26,7 @@ namespace furMix
         bool full, playing, playing1, loop, mute, net, enabled, recording;
         int type;
         int port, scrindex, tip = 0;
-        int webport, webapiport;
+        int webport;
         int typeshow;
         int selected;
         DateTime recStart;
@@ -64,41 +64,21 @@ namespace furMix
                 {
                     VerTxt.Text = "furMix 2021 Trial. Build " + Properties.Settings.Default.Version + ". Beta 4.\n For testing purposes only.";
                 }
-                if (!Splash.Store && Properties.Settings.Default.CheckUpdates)
-                {
-                    Log.LogEvent("Checking for updates...");
-                    string version = new StreamReader(WebRequest.Create("https://danimat.ddns.net/furMix/version.txt").GetResponse().GetResponseStream()).ReadToEnd();
-                    System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
-                    FileVersionInfo fileVer = FileVersionInfo.GetVersionInfo(executingAssembly.Location);
-                    Version oldVer = Version.Parse(fileVer.FileVersion);
-                    Version newVer = null;
-                    foreach (string ver in version.Split(' '))
-                    {
-                        if (ver.Contains('.')) newVer = Version.Parse(ver);
-                    }
-                    if (oldVer < newVer)
-                    {
-                        Log.LogEvent("Update available");
-                        UpdateDialog ud = new UpdateDialog(newVer);
-                        ud.ShowDialog();
-                    }
-                }
                 pass = RandomString(6);
                 anal = new Analyzer(volumeLevel);
                 anal.Enable = true;
                 scrindex = Properties.Settings.Default.Screen;
                 port = Properties.Settings.Default.NetPort;
                 webport = Properties.Settings.Default.WebPort;
-                webapiport = Properties.Settings.Default.WebAPIPort;
                 if (!Properties.Settings.Default.Welcome)
                 {
                     MessageBox.Show("Now furMix will open ports for remote control through network. It will require administrator privileges.", "Ports warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Log.LogEvent("Opening ports...");
-                    WebServer.OpenPorts(webport, webapiport);
+                    WebServer.OpenPorts(webport);
                 }
                 if (Properties.Settings.Default.WebServer)
                 {
-                    webServer = new WebServer(webport, webapiport);
+                    webServer = new WebServer(webport);
                     webServer.OnItemClicked += WebServer_OnItemClicked;
                     webServer.RunServer();
                 }
@@ -110,10 +90,9 @@ namespace furMix
                 }
                 else
                 {
-                    Log.LogEvent("Warning thrown");
-                    Log.LogEvent("Only 1 monitor found");
+                    Log.LogEvent("Only 1 monitor found", Log.LogType.WARNING);
                     fullbtn.Enabled = false;
-                    MessageBox.Show("Only 1 monitor found. To completely use furMix you need at least 2 monitors", "furMix Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //MessageBox.Show("Only 1 monitor found. To completely use furMix you need at least 2 monitors", "furMix Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 if (Environment.GetCommandLineArgs().Length > 1)
                 {
@@ -155,7 +134,7 @@ namespace furMix
             else if (type == 3) filepath = filepath1[index];
             else if (type == 0) color = color1[index];
             else if (type == 4) filepath = filepath1[index];
-            button2_Click(this, new EventArgs());
+            ShowBtn_Click(this, new EventArgs());
         }
 
         private void Welcome()
@@ -194,7 +173,7 @@ namespace furMix
             else if (tip == 3)
             {
                 TipBack.Image.RotateFlip(RotateFlipType.Rotate180FlipX);
-                TipBack.Location = new Point(button6.Left + button6.Width - 10, button6.Top - button6.Height - TipBack.Height + 10);
+                TipBack.Location = new Point(AddMediaBtn.Left + AddMediaBtn.Width - 10, AddMediaBtn.Top - AddMediaBtn.Height - TipBack.Height + 10);
                 TipTitle.Location = new Point(TipBack.Left + 23, TipBack.Top + 19);
                 TipText.Location = new Point(TipBack.Left + 24, TipBack.Top + 43);
                 TipTitle.Text = "Add media button";
@@ -398,7 +377,7 @@ namespace furMix
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ShowBtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -501,7 +480,7 @@ namespace furMix
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void FullBtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -534,7 +513,7 @@ namespace furMix
             }
         }
 
-        private void button2_Click_2(object sender, EventArgs e)
+        private void Enable_Click(object sender, EventArgs e)
         {
             Log.LogEvent("Enable button clicked");
             if (!enabled)
@@ -650,7 +629,7 @@ namespace furMix
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void Info_Click(object sender, EventArgs e)
         {
             try
             {
@@ -757,7 +736,7 @@ namespace furMix
                         break;
                     case 1:
                         playing1 = false;
-                        button2_Click_1(sender, e);
+                        PrevPlay_Click(sender, e);
                         filepath = filepath1[listView1.SelectedItems[0].Index];
                         Preview.Visible = true;
                         Preview.URL = filepath;
@@ -765,7 +744,7 @@ namespace furMix
                         break;
                     case 2:
                         playing1 = false;
-                        button2_Click_1(sender, e);
+                        PrevPlay_Click(sender, e);
                         filepath = filepath1[listView1.SelectedItems[0].Index];
                         Preview.Visible = true;
                         Preview.URL = filepath;
@@ -1299,6 +1278,11 @@ namespace furMix
             recTimeTxt.Text = time;
         }
 
+        private void button2_Click_3(object sender, EventArgs e)
+        {
+            throw new Exception("Test exception");
+        }
+
         private void recBtn_Click(object sender, EventArgs e)
         {
             if (!recording)
@@ -1310,7 +1294,7 @@ namespace furMix
                 recStart = DateTime.Now;
                 recTimeTxt.Text = "00:00:00";
                 recTimeTxt.Visible = true;
-                recorder = new Recorder(new RecorderParams(pl1.Video, filename, 15, SharpAvi.KnownFourCCs.Codecs.MotionJpeg, 70));
+                recorder = new Recorder(new RecorderParams(pl1, filename, 15, SharpAvi.KnownFourCCs.Codecs.MotionJpeg, 70));
                 recording = true;
                 fullbtn.Enabled = false;
                 recTimer.Enabled = true;
@@ -1412,7 +1396,7 @@ namespace furMix
             }
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void PrevPlay_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1674,7 +1658,7 @@ namespace furMix
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void AddMedia_Click(object sender, EventArgs e)
         {
             try
             {

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DaniMat Corp")]
 [assembly: AssemblyProduct("furMix")]
-[assembly: AssemblyCopyright("Copyright © 2020-2021 DaniMat Corp.")]
+[assembly: AssemblyCopyright("Copyright © 2020-2022 DaniMat Corp.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.10.2108")]
-[assembly: AssemblyFileVersion("0.10.2108")]
+[assembly: AssemblyVersion("0.10.2158")]
+[assembly: AssemblyFileVersion("0.10.2158")]

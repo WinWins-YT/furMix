@@ -32,12 +32,11 @@ namespace furMix
                 ErrorVideo.URL = Path.GetTempPath() + @"\error.mp4";
             }
             if (!Log.isCreated) Log.CreateLog();
-            Log.LogEvent("Error thrown");
         }
 
         public void ShowError(Exception ex)
         {
-            Log.LogEvent(ex.ToString());
+            Log.LogEvent(ex.ToString(), Log.LogType.ERROR);
             ErrorInfo.Text = ex.ToString();
             if (Properties.Settings.Default.VideoError)
             {

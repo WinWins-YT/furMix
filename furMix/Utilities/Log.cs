@@ -3,6 +3,7 @@ using furMix.DialogBoxes;
 using System;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace furMix.Utilities
@@ -11,11 +12,11 @@ namespace furMix.Utilities
     {
         private static string FileName;
 
-        public static void LogEvent(string contents)
+        public static void LogEvent(string contents, LogType type = LogType.INFO)
         {
             string date = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
             string log = File.ReadAllText(FileName);
-            string log1 = "[" + date + "] " + contents + "\n";
+            string log1 = string.Format("[{0}] [{1}] {2}\n", date, type.ToString(), contents);
             File.WriteAllText(FileName, log + log1);
         }
 
@@ -35,50 +36,28 @@ namespace furMix.Utilities
 
         public static bool isCreated => FileName != null;
 
+        public enum LogType
+        {
+            DEBUG,
+            INFO,
+            WARNING,
+            ERROR
+        }
+
         public static void SendBug()
         {
             SendBug sb = new SendBug();
             sb.Show();
-            Thread.Sleep(500);
-            sb.Status.Text = "Creating FTP object...";
-            FtpClient ftp = new FtpClient();
-            ftp.Host = "danimat.ddns.net";
-            ftp.Credentials = new System.Net.NetworkCredential("furMix", "furMix");
-            Thread.Sleep(200);
-            sb.Status.Text = "Trying to connect...";
-            Thread.Sleep(500);
-            try
-            {
-                ftp.Connect();
-            }
-            catch
-            {
-                sb.Status.Text = "Error connecting to server";
-                Thread.Sleep(1000);
-                sb.Close();
-                sb.Dispose();
-                return;
-            }
-            sb.Status.Text = "Successfully connected";
-            Thread.Sleep(1000);
-            sb.Status.Text = "Sending bug report...";
-            Thread.Sleep(1000);
-            string date = DateTime.Now.ToString("yyyyMMddHHmmss");
-            try
-            {
-                ftp.UploadFile(FileName, "/bugreports/" + Properties.Settings.Default.Name + "_" + date + ".log", FtpRemoteExists.Overwrite);
-            }
-            catch
-            {
-                sb.Status.Text = "Error sending bug report";
-                Thread.Sleep(1000);
-                sb.Close();
-                sb.Dispose();
-                return;
-            }
-            sb.Status.Text = "Successfully uploaded!";
-            Thread.Sleep(1000);
-            MessageBox.Show("Thank you for helping make furMix even better");
+            Task.Delay(1000).Wait();
+            sb.Status.Text = "Connecting to server...";
+            Task t = new Task(() => SQLWrapper.Connect());
+            t.Start();
+            t.Wait();
+            sb.Status.Text = "Sending report...";
+            t = new Task(() => SQLWrapper.WriteLogFile(Properties.Settings.Default.Name, new FileStream(FileName, FileMode.Open, FileAccess.Read)));
+            t.Start();
+            t.Wait();
+            MessageBox.Show("Thank you for helping make furMix even better", "Bug report", MessageBoxButtons.OK, MessageBoxIcon.Information);
             sb.Close();
             sb.Dispose();
         }

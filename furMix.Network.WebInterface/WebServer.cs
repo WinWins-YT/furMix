@@ -13,21 +13,16 @@ namespace furMix.Network.WebInterface
     public class WebServer
     {
         HttpListener listener = new HttpListener();
-        BackgroundWorker server = new BackgroundWorker();
         BackgroundWorker api = new BackgroundWorker();
-        public bool IsRunning { get => server.IsBusy; }
+        public bool IsRunning { get => api.IsBusy; }
         public int Port { get; }
-        public int PortAPI { get; }
         public List<string> MediaList { get; } = new List<string>();
         public int SelectedIndex { get; set; }
         public event OnItemClickedEventHandler OnItemClicked;
 
-        public WebServer(int port, int portapi)
+        public WebServer(int port)
         {
             Port = port;
-            PortAPI = portapi;
-            server.DoWork += Server_DoWork;
-            server.WorkerSupportsCancellation = true;
             api.DoWork += Api_DoWork;
             api.WorkerSupportsCancellation = true;
             listener.Prefixes.Add("http://+:" + Port + "/");
@@ -35,14 +30,14 @@ namespace furMix.Network.WebInterface
 
         public delegate void OnItemClickedEventHandler(object sender, ItemEventArgs e);
 
-        public static void OpenPorts(int port, int portapi)
+        public static void OpenPorts(int port)
         {
             Process p = new Process()
             {
                 StartInfo = new ProcessStartInfo()
                 {
                     FileName = Environment.CurrentDirectory + @"\utils\ports.bat",
-                    Arguments = port + " " + portapi + " " + Environment.UserDomainName + @"\" + Environment.UserName,
+                    Arguments = port  + " " + Environment.UserDomainName + @"\" + Environment.UserName,
                     Verb = "runas",
                     UseShellExecute = true
                 }
@@ -53,13 +48,7 @@ namespace furMix.Network.WebInterface
 
         public void RunServer()
         {
-            server.RunWorkerAsync();
             api.RunWorkerAsync();
-        }
-
-        public void StopServer()
-        {
-            server.CancelAsync();
         }
 
         private void Api_DoWork(object sender, DoWorkEventArgs e)
@@ -71,45 +60,32 @@ namespace furMix.Network.WebInterface
                 OnItemClicked.Invoke(this, args);
                 response.AsRedirect("http://" + GetLocalIPAddress() + ":" + Port + "/");
             });
-            HttpServer.ListenAsync(PortAPI, CancellationToken.None, Route.OnHttpRequestAsync).Wait();
-        }
-
-        private void Server_DoWork(object sender, DoWorkEventArgs e)
-        {
-            listener.Start();
-            while (!server.CancellationPending)
+            Route.Add("/", (request, response, arguments) =>
             {
-                var context = listener.GetContext();
+                response.StatusCode = 200;
                 string ending = "   </div>\n</body>\n</html>";
-                string response = Properties.Resources.WebPage;
+                string page = Properties.Resources.WebPage;
                 for (int i = 0; i < MediaList.Count; i++)
                 {
                     if (i == SelectedIndex)
                     {
                         string str = MediaList[i];
-                        response += "   <form action =\"http://" + GetLocalIPAddress() + ":" + PortAPI + "/api/" + i.ToString() + "\" method=\"get\">\n" +
+                        page += "   <form action =\"http://" + GetLocalIPAddress() + ":" + Port + "/api/" + i.ToString() + "\" method=\"get\">\n" +
                         "       <input type=\"submit\" value=\"" + str + "\" style=\"background-color: green\" />\n" +
                         "   </form>\n<br/>\n";
                     }
                     else
                     {
                         string str = MediaList[i];
-                        response += "   <form action =\"http://" + GetLocalIPAddress() + ":" + PortAPI + "/api/" + i.ToString() + "\" method=\"get\">\n" +
+                        page += "   <form action =\"http://" + GetLocalIPAddress() + ":" + Port + "/api/" + i.ToString() + "\" method=\"get\">\n" +
                         "       <input type=\"submit\" value=\"" + str + "\" />\n" +
                         "   </form>\n<br/>\n";
                     }
                 }
-                response += ending;
-                context.Response.ContentLength64 = Encoding.UTF8.GetByteCount(response);
-                context.Response.StatusCode = 200;
-                using (Stream output = context.Response.OutputStream) {
-                    using (StreamWriter sw = new StreamWriter(output))
-                    {
-                        sw.Write(response);
-                    }
-                }
-            }
-            listener.Stop();
+                page += ending;
+                response.AsText(page);
+            });
+            HttpServer.ListenAsync(Port, CancellationToken.None, Route.OnHttpRequestAsync).Wait();
         }
 
         public static string GetLocalIPAddress()

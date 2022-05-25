@@ -1,74 +1,52 @@
-﻿using FluentFTP;
-using furMix.Utilities;
+﻿using furMix.Utilities;
 using System;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace furMix
 {
     public partial class Activate : Form
     {
-        FtpClient ftp = new FtpClient();
+        DataTable dt = null;
         bool offline;
-        bool connected;
         bool trial = false;
-        IniFile myIni;
         public Activate()
         {
             InitializeComponent();
             Log.LogEvent("Activate dialog opened");
             var connect = new Connect();
             connect.Show();
-            ftp.Host = "danimat.ddns.net";
-            ftp.Credentials = new System.Net.NetworkCredential("furMix", "furMix");
             try
             {
-                ftp.Connect();
-                while (!ftp.IsConnected)
+                Task t = Task.Run(() => SQLWrapper.Connect());
+                //t.Start();
+                t.Wait();
+                dt = SQLWrapper.GetActivationData();
+                connect.Close();
+                connect.Dispose();
+                if (Properties.Settings.Default.Trial)
                 {
-
+                    label5.ForeColor = Color.Gray;
+                    label5.Cursor = Cursors.Default;
                 }
-                Thread.Sleep(2000);
-                if (ftp.IsConnected)
-                {
-                    connected = true;
-                    try
-                    {
-                        ftp.DownloadFileAsync(Path.GetTempPath() + @"\activation.ini", "/activation.ini", FtpLocalExists.Overwrite);
-                        Thread.Sleep(2000);
-                        myIni = new IniFile(Path.GetTempPath() + @"\activation.ini");
-                    }
-                    catch
-                    {
-                        Log.LogEvent("Connection error");
-                        connect.Close();
-                        connect.Dispose();
-                        offline = true;
-                        MessageBox.Show("Server error. Try enter only offline product key, that you were supplied after buying, without name", "Offline activation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        textBox1.Enabled = false;
-                    }
-                }
+                Log.LogEvent("Connected to server");
             }
-            catch
+            catch (Exception ex)
             {
                 Log.LogEvent("Connection error");
+                Log.LogEvent(ex.Message);
                 connect.Close();
                 connect.Dispose();
                 offline = true;
                 MessageBox.Show("Server error. Try enter only offline product key, that you were supplied after buying, without name", "Offline activation", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 textBox1.Enabled = false;
             }
-            connect.Close();
-            connect.Dispose();
-            if (Properties.Settings.Default.Trial)
-            {
-                label5.ForeColor = Color.Gray;
-                label5.Cursor = Cursors.Default;
-            }
-            Log.LogEvent("Connected to server");
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -82,7 +60,6 @@ namespace furMix
                     Properties.Settings.Default.Trial = false;
                     Properties.Settings.Default.Edition = "Basic Edition";
                     Properties.Settings.Default.Save();
-                    File.Delete(Path.GetTempPath() + @"\activation.ini");
                     Close();
                 }
                 else
@@ -105,16 +82,16 @@ namespace furMix
                     Application.Restart();
                 }
             }
-            else if (connected)
+            else if (dt != null)
             {
-                if (textBox2.Text == myIni.Read("Key", textBox1.Text) && textBox1.Text != "" && textBox2.Text != "")
+                if (IsExists(textBox2.Text, "Key") && IsExists(textBox1.Text, "Login") && textBox1.Text != "" && textBox2.Text != "")
                 {
+                    int row = GetRowID(textBox2.Text, "Key");
                     Properties.Settings.Default.Name = textBox1.Text;
                     Properties.Settings.Default.Activated = true;
                     Properties.Settings.Default.Trial = false;
-                    Properties.Settings.Default.Edition = myIni.Read("Edition", textBox1.Text);
+                    Properties.Settings.Default.Edition = dt.Rows[row]["Edition"].ToString();
                     Properties.Settings.Default.Save();
-                    File.Delete(Path.GetTempPath() + @"\activation.ini");
                     Close();
                 }
                 else
@@ -122,6 +99,21 @@ namespace furMix
                     MessageBox.Show("This product key is not valid. Try again.", "Activation error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private int GetRowID(string text, string column)
+        {
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                if (dt.Rows[i][column].ToString() == text) return i;
+            }
+            return -1;
+        }
+
+        private bool IsExists(string text, string column)
+        {
+            foreach (DataRow row in dt.Rows) if (row[column].ToString() == text) return true;
+            return false;
         }
 
         private void label4_Click(object sender, EventArgs e)

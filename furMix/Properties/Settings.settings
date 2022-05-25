@@ -9,7 +9,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0.10.2108</Value>
+      <Value Profile="(Default)">0.10.2158</Value>
     </Setting>
     <Setting Name="Edition" Type="System.String" Scope="User">
       <Value Profile="(Default)">Basic Edition</Value>
@@ -40,9 +40,6 @@
     </Setting>
     <Setting Name="WebPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1551</Value>
-    </Setting>
-    <Setting Name="WebAPIPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1552</Value>
     </Setting>
     <Setting Name="WebServer" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

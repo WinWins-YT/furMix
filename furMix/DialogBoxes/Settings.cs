@@ -32,14 +32,11 @@ namespace furMix
             {
                 NetLabel.Visible = true;
                 NetPortTxt.Visible = true;
-                WebAPIPortTxt.Visible = true;
-                WebAPIPortLabel.Visible = true;
                 WebPortLabel.Visible = true;
                 WebPortTxt.Visible = true;
                 WebInterfaceChk.Visible = true;
                 NetPortTxt.Text = Properties.Settings.Default.NetPort.ToString();
                 WebPortTxt.Text = Properties.Settings.Default.WebPort.ToString();
-                WebAPIPortTxt.Text = Properties.Settings.Default.WebAPIPort.ToString();
                 WebInterfaceChk.Checked = Properties.Settings.Default.WebServer;
             }
             Log.LogEvent("Settings dialog opened");
@@ -67,25 +64,19 @@ namespace furMix
                     MessageBox.Show("Web interface port is invalid", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-                if (!int.TryParse(WebAPIPortTxt.Text, out int webapiport))
-                {
-                    MessageBox.Show("Web API port is invalid", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-                if (port == webport || webport == webapiport || port == webapiport)
+                if (port == webport)
                 {
                     MessageBox.Show("Port numbers cannot be equal", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-                if (webport != Properties.Settings.Default.WebPort || webapiport != Properties.Settings.Default.WebAPIPort)
+                if (webport != Properties.Settings.Default.WebPort)
                 {
                     MessageBox.Show("Now furMix will change ports for remote control through network. It will require administrator privileges.", "Ports warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Log.LogEvent("Opening ports...");
-                    WebServer.OpenPorts(webport, webapiport);
+                    WebServer.OpenPorts(webport);
                 }
                 Properties.Settings.Default.NetPort = port;
                 Properties.Settings.Default.WebPort = webport;
-                Properties.Settings.Default.WebAPIPort = webapiport;
                 Properties.Settings.Default.WebServer = WebInterfaceChk.Checked;
             }
             Properties.Settings.Default.Save();
@@ -97,7 +88,7 @@ namespace furMix
         {
             MessageBox.Show("Now furMix will open ports for remote control through network. It will require administrator privileges.", "Ports warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Log.LogEvent("Opening ports...");
-            WebServer.OpenPorts(Properties.Settings.Default.WebPort, Properties.Settings.Default.WebAPIPort);
+            WebServer.OpenPorts(Properties.Settings.Default.WebPort);
         }
     }
 }
