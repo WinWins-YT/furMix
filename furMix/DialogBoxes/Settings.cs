@@ -9,7 +9,7 @@ namespace furMix
     public partial class Settings : Form
     {
         List<string> devs = new List<string>();
-        int scrindex;
+        //int scrindex;
         public Settings()
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace furMix
                 scrlist.Items.Add(string.Format("{0} - {1}", i, sc.DeviceName));
             }
             //scrlist.SelectedIndex = scr.Length - 1;
-            scrlist.SelectedIndexChanged += scrlist_SelectedDisplayChanged;
+            //scrlist.SelectedIndexChanged += scrlist_SelectedDisplayChanged;
             if (Properties.Settings.Default.Edition == "Professional Edition" || Properties.Settings.Default.Edition == "Misha Ter Edition" || Properties.Settings.Default.Edition == "Misha Pidor Edition")
             {
                 NetLabel.Visible = true;
@@ -52,6 +52,7 @@ namespace furMix
             int devindex = Convert.ToInt32(array[0]);
             array = (scrlist.Items[scrlist.SelectedIndex] as string).Split(' ');
             //int scrindex = Convert.ToInt32(array[0]);
+            int scrindex = scrlist.SelectedIndex;
             Properties.Settings.Default.PlaybackDevice = devindex;
             Properties.Settings.Default.Screen = scrindex;
             if (Properties.Settings.Default.Edition == "Professional Edition" || Properties.Settings.Default.Edition == "Misha Ter Edition" || Properties.Settings.Default.Edition == "Misha Pidor Edition")
@@ -91,10 +92,6 @@ namespace furMix
             MessageBox.Show("Now furMix will open ports for remote control through network. It will require administrator privileges.", "Ports warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Log.LogEvent("Opening ports...");
             WebServer.OpenPorts(Properties.Settings.Default.WebPort);
-        }
-        private void scrlist_SelectedDisplayChanged(object sender, EventArgs e)
-        {
-            scrindex = scrlist.SelectedIndex;
         }
     }
 }
