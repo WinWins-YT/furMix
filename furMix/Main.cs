@@ -443,10 +443,10 @@ namespace furMix
                         {
                             photoshow.Add(fileinfo.FullName);
                         }
-                        timelineShow.Value = 0;
                         timelineShow.Maximum = photoshow.Count - 1;
-                        timeShow.Text = "1/" + (timelineShow.Maximum + 1);
-                        pl1.Video.URL = photofolder[0];
+                        timelineShow.Value = timelinePrev.Value;
+                        timeShow.Text = (timelineShow.Value + 1) + "/" + (timelineShow.Maximum + 1);
+                        pl1.Video.URL = photofolder[timelineShow.Value];
                         pl1.Video.Ctlcontrols.play();
                         playbtn.Visible = false;
                         timelineShow.Visible = true;
@@ -458,10 +458,10 @@ namespace furMix
                         loop = false;
                         loopbtn_Click(sender, e);
                         presshow = presfolder;
-                        timelineShow.Value = 0;
                         timelineShow.Maximum = presshow.Count - 1;
-                        timeShow.Text = "1/" + (timelineShow.Maximum + 1);
-                        pl1.Video.URL = presshow[0];
+                        timelineShow.Value = timelinePrev.Value;
+                        timeShow.Text = (timelineShow.Value + 1) + "/" + (timelineShow.Maximum + 1);
+                        pl1.Video.URL = presshow[timelineShow.Value];
                         pl1.Video.Ctlcontrols.play();
                         playbtn.Visible = false;
                         timelineShow.Visible = true;
