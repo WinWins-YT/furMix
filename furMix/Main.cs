@@ -458,10 +458,10 @@ namespace furMix
                         loop = false;
                         loopbtn_Click(sender, e);
                         presshow = presfolder;
-                        timelineShow.Value = 0;
+                        timelineShow.Value = timelinePrev.Value;
                         timelineShow.Maximum = presshow.Count - 1;
                         timeShow.Text = "1/" + (timelineShow.Maximum + 1);
-                        pl1.Video.URL = presshow[0];
+                        pl1.Video.URL = presshow[timelineShow.Value];
                         pl1.Video.Ctlcontrols.play();
                         playbtn.Visible = false;
                         timelineShow.Visible = true;
